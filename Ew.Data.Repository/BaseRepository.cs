@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Data.Entitys;
 using Data.Repository.Interface;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repository
@@ -14,7 +15,7 @@ namespace Data.Repository
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     public class BaseRepository<TEntity> : IBaseRepository<TEntity>
-        where TEntity : EntityBase
+        where TEntity : EntityBase, new()
     {
         private readonly DbSet<TEntity> _dbSet;
         private readonly DbContext _context;
@@ -124,7 +125,33 @@ namespace Data.Repository
             }
             return _context.SaveChanges();
         }
-
+        /// <summary>
+        /// JsonPatch方式更新实体
+        /// </summary>
+        /// <param name="id">实体Id</param>
+        /// <param name="doc">Jsonpatch对象</param>
+        /// <returns>更新的Entity</returns>
+        public virtual TEntity Update(Guid id, JsonPatchDocument<TEntity> doc)
+        {
+            var model = GetByKey(id);
+            doc.ApplyTo(model, p => { });
+            _context.SaveChanges();
+            return model;
+        }
+        /// <summary>
+        /// JsonPatch方式创建实体
+        /// </summary>
+        /// <param name="id">实体Id</param>
+        /// <param name="doc">Jsonpatch对象</param>
+        /// <returns>创建的Entity</returns>
+        public virtual TEntity Add(JsonPatchDocument<TEntity> doc)
+        {
+            var model = new TEntity();
+            doc.ApplyTo(model, p => { });
+            _context.Set<TEntity>().Add(model);
+            _context.SaveChanges();
+            return model;
+        }
         /// <summary>
         /// 检查实体是否存在
         /// </summary>

@@ -26,7 +26,7 @@ namespace Ew.Api
             services.AddMvcCore()
                     .AddAuthorization()
                     .AddJsonFormatters();
-
+            services.AddCors();
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
@@ -43,6 +43,11 @@ namespace Ew.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(police => {
+                police.AllowAnyOrigin();
+                police.AllowAnyMethod();
+                police.AllowAnyHeader();
+            });
             app.UseAuthentication();
             app.UseMvc();
         }

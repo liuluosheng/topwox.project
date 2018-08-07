@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>ebadf845-c695-48c9-b84c-56f04d01b37b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,12 +10,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsToTs" Version="1.2.2" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core.IRepository\Core.IServices.csproj" />
+    <ProjectReference Include="..\Core.Services\Core.Services.csproj" />
+    <ProjectReference Include="..\Data.Dto\Data.Dto.csproj" />
+    <ProjectReference Include="..\Data.Enum\Data.Utility.csproj" />
+    <ProjectReference Include="..\Ew.Data.Entitys\Data.Entitys.csproj" />
+    <ProjectReference Include="..\Ew.Data.Repository\Data.Repository.csproj" />
+    <ProjectReference Include="..\Ew.IdentityServer\Ew.IdentityServer.csproj" />
   </ItemGroup>
 
 </Project>
