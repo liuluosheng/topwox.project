@@ -26,7 +26,7 @@ namespace Client
 
             // request token 资源密码模式
             var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "secret");
-            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("346642458@qq.com", "asdf-123", "api");
+            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "Pass123$", "api");
 
             if (tokenResponse.IsError)
             {

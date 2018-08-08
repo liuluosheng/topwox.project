@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Core.IServices
 {
-    public interface IBaseService<T> : IBaseRepository<T> where T : EntityBase
+    public interface IBaseService<T> where T : EntityBase
     {
-
         IQueryable<T> GetPaging();
     }
 

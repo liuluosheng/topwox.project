@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Data.Entitys
 {
-    public class User : IdentityUser
+    public class User : EntityBase
     {
 
     }

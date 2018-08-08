@@ -12,7 +12,7 @@ namespace Ew.Api.Controllers
     {
         // GET api/values
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

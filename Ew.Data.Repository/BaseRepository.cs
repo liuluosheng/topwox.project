@@ -15,7 +15,7 @@ namespace Data.Repository
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     public class BaseRepository<TEntity> : IBaseRepository<TEntity>
-        where TEntity : EntityBase, new()
+        where TEntity : EntityBase
     {
         private readonly DbSet<TEntity> _dbSet;
         private readonly DbContext _context;
@@ -144,11 +144,11 @@ namespace Data.Repository
         /// <param name="id">实体Id</param>
         /// <param name="doc">Jsonpatch对象</param>
         /// <returns>创建的Entity</returns>
-        public virtual TEntity Add(JsonPatchDocument<TEntity> doc)
+        public virtual TEntity Add<T>(JsonPatchDocument<T> doc) where T : TEntity, new()
         {
-            var model = new TEntity();
+            var model = new T();
             doc.ApplyTo(model, p => { });
-            _context.Set<TEntity>().Add(model);
+            _context.Set<T>().Add(model);
             _context.SaveChanges();
             return model;
         }
