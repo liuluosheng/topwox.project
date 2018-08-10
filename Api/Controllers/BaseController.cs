@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ew.Api.Controllers
 {
-    public abstract class BaseController<T, K> : ODataController
+    public abstract class BaseController<T> : ODataController
         where T : EntityBase
     {
         protected IBaseService<T> _service;

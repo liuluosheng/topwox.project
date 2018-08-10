@@ -16,6 +16,7 @@ namespace Ew.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Data.Entitys.User", b =>
@@ -23,13 +24,17 @@ namespace Ew.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Area");
+
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<string>("Name");
 
                     b.Property<byte[]>("Timestamp")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("position");
 
                     b.HasKey("Id");
 

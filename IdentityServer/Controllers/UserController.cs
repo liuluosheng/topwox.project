@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ew.IdentityServer.Controllers
 {
     [Produces("application/json")]
-    [Route("api/user")]
+    [Route("api/identity")]
     public class UserController : Controller
     {
         [HttpGet]

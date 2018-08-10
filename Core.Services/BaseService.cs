@@ -19,7 +19,7 @@ namespace Core.Service
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : EntityBase
     {
         protected readonly IBaseRepository _repository;
-        public BaseService(BaseRepository repository)
+        public BaseService(IBaseRepository repository)
         {
             _repository = repository;
         }
