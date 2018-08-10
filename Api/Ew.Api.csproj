@@ -30,7 +30,6 @@
     <ProjectReference Include="..\Core.Services\Core.Services.csproj" />
     <ProjectReference Include="..\Data.Entitys\Data.Entitys.csproj" />
     <ProjectReference Include="..\Data.Enum\Data.Utility.csproj" />
-    <ProjectReference Include="..\Data.Repository\Data.Repository.csproj" />
     <ProjectReference Include="..\IdentityServer\Ew.IdentityServer.csproj" />
   </ItemGroup>
 

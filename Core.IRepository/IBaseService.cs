@@ -8,9 +8,17 @@ using System.Threading.Tasks;
 
 namespace Core.IServices
 {
-    public interface IBaseService<T> where T : EntityBase
+    public interface IBaseService<TEntity> where TEntity : EntityBase
     {
-        IQueryable<T> GetPaging();
+        IQueryable<TEntity> GetPaging();
+        Task<TEntity> Update(TEntity entity, bool isCommit);
+        Task<T> Update<T>(T entity, bool isCommit = true) where T : EntityBase;
+        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
+        IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : EntityBase;
+        Task<int> Delete<T>(Expression<Func<T, bool>> predicate) where T : EntityBase;
+        Task<int> Delete(Expression<Func<TEntity, bool>> predicate);
+        Task<T> Put<T>(T entity, bool isCommit = true) where T : EntityBase;
+        Task<TEntity> Put(TEntity entity, bool isCommit = true);
     }
 
 
