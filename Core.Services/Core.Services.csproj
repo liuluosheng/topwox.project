@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core.IRepository\Core.IServices.csproj" />
   </ItemGroup>
 
