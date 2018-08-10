@@ -18,7 +18,7 @@ namespace Ew.Api.Config
         public static void Config(IServiceCollection services)
         {
             services.AddScoped<DbContext, EwApiDBContext>();
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IBaseRepository), typeof(BaseRepository));
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
         }
     }

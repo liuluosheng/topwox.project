@@ -13,6 +13,7 @@ namespace Core.IServices
         IQueryable<TEntity> GetPaging();
         Task<TEntity> Update(TEntity entity, bool isCommit);
         Task<T> Update<T>(T entity, bool isCommit = true) where T : EntityBase;
+        IQueryable<TEntity> Get();
         IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
         IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : EntityBase;
         Task<int> Delete<T>(Expression<Func<T, bool>> predicate) where T : EntityBase;

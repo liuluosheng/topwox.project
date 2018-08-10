@@ -13,22 +13,14 @@ namespace Data.Repository
     /// <summary>
     /// EntityFramework的仓储实现
     /// </summary>
-    /// <typeparam name="TEntity">实体类型</typeparam>
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity>
-        where TEntity : EntityBase
+    public class BaseRepository : IBaseRepository
+
     {
-        private readonly DbSet<TEntity> _dbSet;
         private readonly DbContext _context;
 
         public BaseRepository(DbContext context)
         {
             _context = context;
-            _dbSet = context.Set<TEntity>();
-        }
-
-        public async Task<TEntity> Update(TEntity entity, bool isCommit)
-        {
-            return await Update<TEntity>(entity, isCommit);
         }
         public async Task<T> Update<T>(T entity, bool isCommit = true) where T : EntityBase
         {
@@ -37,9 +29,9 @@ namespace Data.Repository
                 await Commit();
             return entity;
         }
-        public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<T> Get<T>() where T : EntityBase
         {
-            return Get<TEntity>(predicate);
+            return _context.Set<T>();
         }
         public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
         {
@@ -51,10 +43,6 @@ namespace Data.Repository
             _context.Set<T>().RemoveRange(entitys);
             return await Commit();
         }
-        public async Task<int> Delete(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await Delete<TEntity>(predicate);
-        }
         public async Task<T> Put<T>(T entity, bool isCommit = true) where T : EntityBase
         {
             entity.Id = entity.Id == Guid.Empty
@@ -65,16 +53,10 @@ namespace Data.Repository
                 await Commit();
             return entity;
         }
-        public async Task<TEntity> Put(TEntity entity, bool isCommit = true)
-        {
-            return await Put<TEntity>(entity, isCommit);
-        }
         public async Task<int> Commit()
         {
             return await _context.SaveChangesAsync();
         }
-
-
 
     }
 }

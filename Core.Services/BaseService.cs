@@ -18,8 +18,8 @@ namespace Core.Service
     /// <typeparam name="T"></typeparam>
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : EntityBase
     {
-        protected readonly IBaseRepository<TEntity> _repository;
-        public BaseService(BaseRepository<TEntity> repository)
+        protected readonly IBaseRepository _repository;
+        public BaseService(BaseRepository repository)
         {
             _repository = repository;
         }
@@ -34,11 +34,14 @@ namespace Core.Service
             return await Delete<TEntity>(predicate);
         }
 
+        public IQueryable<TEntity> Get()
+        {
+            return _repository.Get<TEntity>();
+        }
         public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
         {
             return Get<TEntity>(predicate);
         }
-
         public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
         {
             return _repository.Get<T>(predicate);
