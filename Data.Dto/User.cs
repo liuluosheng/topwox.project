@@ -1,4 +1,4 @@
-﻿using Data.Enum;
+﻿using Data.Enums;
 using Data.Utility.Attributes;
 using System;
 using System.ComponentModel;

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ew.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class ValuesController : Controller
     {
         // GET api/values
@@ -17,14 +17,12 @@ namespace Ew.Api.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+ 
+        public string Apis()
         {
-            return "value";
+            return "api";
         }
-
+  
         // POST api/values
         [HttpPost]
         public void Post([FromBody]string value)

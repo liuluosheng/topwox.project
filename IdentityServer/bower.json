@@ -2,6 +2,8 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "jquery-validation-unobtrusive": "v3.2.10"
+    "jquery-validation-unobtrusive": "v3.2.10",
+    "angular": "*",
+    "angular-bootstrap": "*"
   }
 }

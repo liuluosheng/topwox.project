@@ -62,11 +62,16 @@ namespace Ew.Api
                 police.AllowAnyHeader();
             });
             app.UseAuthentication();
+            app.UseMvcWithDefaultRoute();
             app.UseMvc(b =>
             {
                 b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
                 b.MapODataServiceRoute("odata", "api", ODataConfig.GetEdmModel());
+                b.MapRoute(
+                   name: "default",
+                   template: "api/{controller}/{action}/{id?}");
             });
+
         }
     }
 }

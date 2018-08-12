@@ -9,10 +9,10 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 namespace Ew.Api.Controllers
 {
-    [Description("用户信息")]
-    public class UsersController : BaseController<User>
+    [Description("订单信息")]
+    public class OrdersController : BaseController<User>
     {
-        public UsersController(IBaseService<User> userService) : base(userService)
+        public OrdersController(IBaseService<User> userService) : base(userService)
         {
         }
         [EnableQuery]

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data.Enum
+namespace Data.Enums
 {
     public enum Color
     {
