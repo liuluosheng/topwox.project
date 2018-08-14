@@ -12,9 +12,11 @@ namespace Ew.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    Timestamp = table.Column<byte[]>(rowVersion: true, nullable: true)
+                    Timestamp = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Area = table.Column<string>(nullable: true),
+                    position = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

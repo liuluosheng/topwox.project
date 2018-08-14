@@ -38,7 +38,11 @@ namespace Ew.IdentityServer
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
             services.AddDbContext<EwIdentityDBContext>(options =>
             {
-                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b => b.MigrationsAssembly(assemblyName));
+                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b =>
+                {
+                    b.MigrationsAssembly(assemblyName);
+                    b.UseRowNumberForPaging();
+                });
             });
             services.AddIdentity<User, Role>(options =>
             {
@@ -81,8 +85,12 @@ namespace Ew.IdentityServer
             app.UseCors(police => police.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());//生产环境应该指定源
             app.UseIdentityServer();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             //创建种子数据
             SeedData.EnsureSeedData(app.ApplicationServices);

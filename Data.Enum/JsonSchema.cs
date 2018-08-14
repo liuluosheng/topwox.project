@@ -1,24 +1,21 @@
-﻿using System;
+﻿using Data.Utility.Attributes;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Serialization;
 using System.Reflection;
-using Newtonsoft.Json;
-using Data.Utility.Attributes;
+using System.Text;
 
-namespace Ew.Api
+namespace Data.Utility
 {
 
     /// <summary>
     /// 构建 ngAlain 适用的Schema
     /// </summary>
-    public class Schema
+    public class JsonSchema
     {
-        public Schema(Type type)
+        public JsonSchema(Type type)
         {
             Properties = new Dictionary<string, object>();
             var prop = type.GetProperties();
@@ -99,8 +96,8 @@ namespace Ew.Api
                 var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
                 bool isDate = p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTime?);
                 if (datatypeAtt != null || isDate)
-                {                   
-                        value.Add("format", datatypeAtt?.DataType == DataType.DateTime || isDate ? "date-time" : datatypeAtt?.DataType.ToString().ToLower());
+                {
+                    value.Add("format", datatypeAtt?.DataType == DataType.DateTime || isDate ? "date-time" : datatypeAtt?.DataType.ToString().ToLower());
                 }
                 //枚举
                 if (p.PropertyType.IsEnum)

@@ -15,6 +15,9 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
@@ -28,8 +31,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Core.IRepository\Core.IServices.csproj" />
     <ProjectReference Include="..\Core.Services\Core.Services.csproj" />
+    <ProjectReference Include="..\Data.Dto\Data.Dto.csproj" />
     <ProjectReference Include="..\Data.Entitys\Data.Entitys.csproj" />
     <ProjectReference Include="..\Data.Enum\Data.Utility.csproj" />
+    <ProjectReference Include="..\Data.Repository\Data.Repository.csproj" />
     <ProjectReference Include="..\IdentityServer\Ew.IdentityServer.csproj" />
   </ItemGroup>
 

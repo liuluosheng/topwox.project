@@ -20,7 +20,6 @@ namespace Data.Entitys
         {
             if (Guid.Empty == Id)
                 Id = NewId();
-            IsDeleted = false;
             CreatedDate = DateTime.Now;
 
         }
@@ -34,10 +33,6 @@ namespace Data.Entitys
         /// </summary>
         [Key, Column(Order = 1)]
         public virtual Guid Id { get; set; }
-        /// <summary>
-        /// 获取或设置 是否删除，逻辑上的删除，非物理删除
-        /// </summary>
-        public bool IsDeleted { get; set; }
 
         /// <summary>
         /// 获取或设置 创建时间

@@ -1,6 +1,7 @@
 ﻿using Core.IServices;
 using Core.Service;
 using Data;
+using Data.Entitys;
 using Data.Repository;
 using Data.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace Ew.Api.Config
         public static void Config(IServiceCollection services)
         {
             services.AddScoped<DbContext, EwApiDBContext>();
-            services.AddScoped(typeof(IBaseRepository), typeof(BaseRepository));
+            services.AddScoped<IBaseRepository, BaseRepository>();
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
         }
     }

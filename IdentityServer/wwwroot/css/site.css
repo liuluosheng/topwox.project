@@ -1,6 +1,14 @@
 ﻿body {
   margin-top: 65px;
 }
+a {
+  cursor: pointer;
+  color: midnightblue;
+  text-decoration: none !important;
+}
+[ng-cloak] {
+  display: none;
+}
 .navbar-header {
   position: relative;
   top: -4px;
@@ -79,4 +87,26 @@
 }
 .grants .grant li:last-child:after {
   content: '';
+}
+.userManager table {
+  width: 100%;
+}
+.userManager table tr {
+  line-height: 35px;
+}
+.authManager [type='checkbox'] {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-top: 0;
+}
+.authManager [type='checkbox'] + span {
+  vertical-align: middle;
+  height: 15px;
+  line-height: 15px;
+  display: inline-block;
+}
+.alert.no-margin-bottom {
+  margin-bottom: 0;
 }
