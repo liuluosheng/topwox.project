@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data.Repository.Interface;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Core.Service
 {
@@ -60,6 +61,13 @@ namespace Core.Service
         public async Task<TEntity> Put(TEntity entity, bool isCommit = true)
         {
             return await Put<TEntity>(entity, isCommit);
+        }
+
+        public async Task<TEntity> Put(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true)
+        {
+            var model = await Get(p => p.Id == id).FirstOrDefaultAsync();
+            doc.ApplyTo(model, p => { });
+            return await Put(model, isCommit);
         }
 
         public async Task<TEntity> Update(TEntity entity, bool isCommit)

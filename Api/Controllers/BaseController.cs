@@ -12,7 +12,7 @@ namespace Ew.Api.Controllers
     public abstract class BaseController<T, K> : ODataController
         where T : EntityBase
     {
-        protected IBaseService<T> _service;
+        protected readonly IBaseService<T> _service;
         public BaseController(IBaseService<T> service)
         {
             _service = service;
