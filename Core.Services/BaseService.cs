@@ -16,7 +16,6 @@ namespace Core.Service
     /// <summary>
     /// Service基类
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : EntityBase
     {
         protected readonly IBaseRepository _repository;

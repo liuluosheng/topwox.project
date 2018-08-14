@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using Ew.Core.Config;
 using Ew.IdentityServer.Data;
-using Ew.IdentityServer.Data.Model;
+using Ew.IdentityServer.Model;
 using IdentityModel;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;

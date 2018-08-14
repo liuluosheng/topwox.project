@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ew.IdentityServer.Data.Model
+namespace Ew.IdentityServer.Model
 {
-    public class Role: IdentityRole<Guid>
+    public class Role : IdentityRole<Guid>
     {
+        public string Description { get; set; }
     }
 }

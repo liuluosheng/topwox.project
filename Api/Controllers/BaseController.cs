@@ -20,14 +20,12 @@ namespace Ew.Api.Controllers
         }
         [EnableQuery]
         [HttpGet]
-        [Description("查询")]
         public virtual IActionResult Get()
         {
             return Ok(_service.Get());
         }
         [EnableQuery]
         [HttpPost]
-        [Description("新建")]
         public virtual async Task<IActionResult> Post(T model)
         {
             return Ok(await _service.Put(model, true));
@@ -35,7 +33,6 @@ namespace Ew.Api.Controllers
 
         [EnableQuery]
         [HttpDelete]
-        [Description("删除")]
         public virtual async Task<IActionResult> Delete([FromODataUri] Guid key)
         {
             return Ok((await _service.Delete(p => p.Id == key)) > 0);

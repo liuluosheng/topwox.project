@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
-using Ew.IdentityServer.Data.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Data.Utility;
 using System.Security.Claims;
+using Ew.IdentityServer.Model;
 
 namespace Ew.IdentityServer.Controllers
 {
@@ -16,9 +18,11 @@ namespace Ew.IdentityServer.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
-        public UserController(UserManager<User> userManager)
+        private readonly RoleManager<Role> _roleManager;
+        public UserController(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -42,23 +46,53 @@ namespace Ew.IdentityServer.Controllers
             });
         }
 
-        public async Task<ActionResult> UpdateClaim([FromBody]UpdateClaimData param)
+        public async Task<IActionResult> SaveUser(User user)
         {
-            var user = await _userManager.FindByIdAsync(param.UserId);
-            var claim = new Claim(param.Action.ClaimType ?? "api_authorize", param.Action.Name);
-            if (param.Checked)
-                await _userManager.AddClaimAsync(user, claim);
-            else
+
+            if (_userManager.Users.Any(p => p.UserName == user.UserName))
             {
-                await _userManager.RemoveClaimAsync(user, claim);
+                return BadRequest("user already exists！");
             }
+            if (TryValidateModel(user))
+            {
+                await _userManager.CreateAsync(user);
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        public async Task<ActionResult> SaveUserRole(UserRoleParam param)
+        {
+            var role = await _roleManager.FindByNameAsync(param.RoleName);
+            if (role == null)
+            {
+                if (Enum.TryParse(param.RoleName, out SystemRole _))
+                {
+                    var desc = typeof(SystemRole).GetProperty(param.RoleName).GetCustomAttribute<DescriptionAttribute>()?.Description;
+                    await _roleManager.CreateAsync(new Role { Id = Guid.NewGuid(), Name = param.RoleName, Description = desc });
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
+            var user = await _userManager.FindByIdAsync(param.UserId);
+            if (param.Checked)
+                await _userManager.AddToRoleAsync(user, param.RoleName);
+            else
+                await _userManager.RemoveFromRoleAsync(user, param.RoleName);
+
             return Ok();
         }
-        public class UpdateClaimData
+
+
+        public class UserRoleParam
         {
             public string UserId { get; set; }
             public bool Checked { get; set; }
-            public ApiShemaAction Action { get; set; }
+            public string RoleName { get; set; }
         }
 
 
