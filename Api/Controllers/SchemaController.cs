@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using X.Data.Utility;
-
+using CsToTs;
 namespace Ew.Api.Controllers
 {
     public class SchemaController : Controller
@@ -24,7 +24,15 @@ namespace Ew.Api.Controllers
             if (targetType == null) return NotFound();
             return Json(new JsonSchema(targetType));
         }
-
+        [HttpGet("api/ts/{type}")]
+        public ActionResult GetTS(string type = "")
+        {
+            var types = Assembly.Load("Data.Dto").GetTypes();
+            var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
+            if (targetType == null) return NotFound();
+            return Content(Generator.GenerateTypeScript(targetType,
+                new TypeScriptOptions { UseInterfaceForClasses = p => true }));
+        }
     }
 
 }
