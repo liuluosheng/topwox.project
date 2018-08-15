@@ -5,8 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Data;
 using Ew.Core.Config;
-using Ew.IdentityServer.Data;
-using Ew.IdentityServer.Data.Model;
+using Ew.IdentityServer.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -53,6 +52,10 @@ namespace Ew.IdentityServer
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
+
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+
             })
               .AddEntityFrameworkStores<EwIdentityDBContext>()
               .AddDefaultTokenProviders();
@@ -82,7 +85,7 @@ namespace Ew.IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(police => police.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());//生产环境应该指定源
+            app.UseCors(police => police.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseIdentityServer();
             app.UseStaticFiles();
             app.UseMvc(routes =>
@@ -91,9 +94,6 @@ namespace Ew.IdentityServer
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            //创建种子数据
-            SeedData.EnsureSeedData(app.ApplicationServices);
         }
     }
 }

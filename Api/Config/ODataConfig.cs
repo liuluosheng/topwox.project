@@ -1,5 +1,5 @@
 ﻿
-using Data.Entitys;
+using X.Data.Entitys;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.OData.Edm;
 using System;

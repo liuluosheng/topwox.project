@@ -4,13 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Data.Utility;
 using System.Security.Claims;
 using Ew.IdentityServer.Model;
+using X.Data.Utility;
 
 namespace Ew.IdentityServer.Controllers
 {
@@ -24,7 +22,6 @@ namespace Ew.IdentityServer.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -48,13 +45,12 @@ namespace Ew.IdentityServer.Controllers
 
         public async Task<IActionResult> SaveUser(User user)
         {
-
-            if (_userManager.Users.Any(p => p.UserName == user.UserName))
-            {
-                return BadRequest("user already exists！");
-            }
             if (TryValidateModel(user))
             {
+                if (_userManager.Users.Any(p => p.UserName == user.UserName))
+                {
+                    return BadRequest("user already exists！");
+                }
                 await _userManager.CreateAsync(user);
                 return Ok();
             }

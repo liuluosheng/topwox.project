@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Data.Entitys;
-using Data.Repository.Interface;
-using Microsoft.AspNetCore.JsonPatch;
+using X.Data.Entitys;
+using X.Data.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repository

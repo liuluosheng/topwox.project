@@ -11,8 +11,8 @@ using System;
 namespace Ew.IdentityServer.Migrations
 {
     [DbContext(typeof(EwIdentityDBContext))]
-    [Migration("20180808133529_create")]
-    partial class create
+    [Migration("20180815031041_update20180815")]
+    partial class update20180815
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,13 +21,15 @@ namespace Ew.IdentityServer.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Ew.IdentityServer.Data.Model.Role", b =>
+            modelBuilder.Entity("Ew.IdentityServer.Model.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256);
@@ -45,7 +47,7 @@ namespace Ew.IdentityServer.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Ew.IdentityServer.Data.Model.User", b =>
+            modelBuilder.Entity("Ew.IdentityServer.Model.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -54,6 +56,8 @@ namespace Ew.IdentityServer.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Department");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -179,7 +183,7 @@ namespace Ew.IdentityServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Ew.IdentityServer.Data.Model.Role")
+                    b.HasOne("Ew.IdentityServer.Model.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -187,7 +191,7 @@ namespace Ew.IdentityServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Ew.IdentityServer.Data.Model.User")
+                    b.HasOne("Ew.IdentityServer.Model.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -195,7 +199,7 @@ namespace Ew.IdentityServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Ew.IdentityServer.Data.Model.User")
+                    b.HasOne("Ew.IdentityServer.Model.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -203,12 +207,12 @@ namespace Ew.IdentityServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Ew.IdentityServer.Data.Model.Role")
+                    b.HasOne("Ew.IdentityServer.Model.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Ew.IdentityServer.Data.Model.User")
+                    b.HasOne("Ew.IdentityServer.Model.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -216,7 +220,7 @@ namespace Ew.IdentityServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Ew.IdentityServer.Data.Model.User")
+                    b.HasOne("Ew.IdentityServer.Model.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
