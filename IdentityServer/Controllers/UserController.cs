@@ -69,6 +69,7 @@ namespace Ew.IdentityServer.Controllers
             {
                 if (Enum.TryParse(param.RoleName, out SystemRole _))
                 {
+                    
                     var desc = typeof(SystemRole).GetProperty(param.RoleName).GetCustomAttribute<DescriptionAttribute>()?.Description;
                     await _roleManager.CreateAsync(new Role { Id = Guid.NewGuid(), Name = param.RoleName, Description = desc });
                 }
