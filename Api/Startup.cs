@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Data;
+using X.Data;
 using Ew.Api.Config;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;

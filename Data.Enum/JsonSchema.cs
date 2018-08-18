@@ -1,4 +1,4 @@
-﻿using Data.Utility.Attributes;
+﻿using X.Data.Utility.Attributes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
 
-namespace Data.Utility
+namespace X.Data.Utility
 {
 
     /// <summary>

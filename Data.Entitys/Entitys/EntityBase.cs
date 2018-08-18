@@ -1,13 +1,10 @@
 ﻿
-
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-namespace Data.Entitys
+namespace X.Data.Entitys
 {
     /// <summary>
     /// 可持久化到数据库的数据模型基类

@@ -1,10 +1,10 @@
 ﻿using Data.Enums;
-using Data.Utility.Attributes;
+using X.Data.Utility.Attributes;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Dto
+namespace X.Data.Dto
 {
     public class User
     {

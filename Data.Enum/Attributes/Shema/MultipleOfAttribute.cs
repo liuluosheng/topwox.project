@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Utility.Attributes
+namespace X.Data.Utility.Attributes
 {
     /// <summary>
     /// JSON Schena 设置限定倍数

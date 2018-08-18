@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Ew.IdentityServer.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +15,17 @@ namespace Ew.IdentityServer
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var seed = args.Any(x => x == "/seed");
+            if (seed) args = args.Except(new[] { "/seed" }).ToArray();
+
+            var host = BuildWebHost(args);
+
+            if (seed)
+            {
+                SeedData.EnsureSeedData(host.Services);
+                return;
+            }
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

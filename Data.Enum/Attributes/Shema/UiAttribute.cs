@@ -8,7 +8,7 @@ using Newtonsoft.Json.Serialization;
 using System.ComponentModel;
 using Newtonsoft.Json.Converters;
 
-namespace Data.Utility.Attributes
+namespace X.Data.Utility.Attributes
 {
 
   
