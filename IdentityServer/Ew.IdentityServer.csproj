@@ -146,7 +146,7 @@
     <None Include="wwwroot\lib\jquery-validation\src\localization\methods_pt.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data.Enum\Data.Utility.csproj" />
+    <ProjectReference Include="..\Data.Enum\X.Data.Utility.csproj" />
   </ItemGroup>
 
 </Project>

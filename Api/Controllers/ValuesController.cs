@@ -12,17 +12,17 @@ namespace Ew.Api.Controllers
     {
         // GET api/values
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles ="administroator")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
- 
+        [Authorize(Roles ="Admin")]
         public string Apis()
         {
             return "api";
         }
-  
+
         // POST api/values
         [HttpPost]
         public void Post([FromBody]string value)

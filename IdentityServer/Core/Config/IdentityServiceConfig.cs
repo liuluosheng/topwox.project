@@ -1,14 +1,10 @@
-﻿using IdentityModel;
+﻿using System.Collections.Generic;
+using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
-namespace Ew.Core.Config
+namespace Ew.IdentityServer.Core.Config
 {
     public class IdentityServiceConfig
     {
@@ -47,7 +43,12 @@ namespace Ew.Core.Config
                 new Secret("secret".Sha256())
             },
             // scopes that client has access to
-            AllowedScopes = { "share" }
+            AllowedScopes =
+            {
+                "api",
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile
+            }
         },
 
         // resource owner password grant client
@@ -59,7 +60,12 @@ namespace Ew.Core.Config
                     {
                         new Secret("secret".Sha256())
                     },
-                    AllowedScopes = { "api" }
+                    AllowedScopes =
+                    {
+                        "api",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 },
            // OpenID Connect hybrid flow and client credentials client (MVC)
                 new Client
@@ -87,24 +93,7 @@ namespace Ew.Core.Config
     };
 
         }
-        public static List<TestUser> GetUsers()
-        {
-            return new List<TestUser>
-            {
-                new TestUser
-                {
-                    SubjectId = "1",
-                    Username = "alice",
-                    Password = "password"
-                },
-                new TestUser
-                {
-                    SubjectId = "2",
-                    Username = "bob",
-                    Password = "password"
-                }
-            };
-        }
+
 
     }
 }

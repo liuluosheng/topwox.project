@@ -5,13 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="2.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data.Entitys\Data.Entitys.csproj" />
-    <ProjectReference Include="..\Data.Enum\Data.Utility.csproj" />
-    <ProjectReference Include="..\Data.Repository\Data.Repository.csproj" />
+    <ProjectReference Include="..\Data.Entitys\X.Data.Entitys.csproj" />
+    <ProjectReference Include="..\Data.Enum\X.Data.Utility.csproj" />
+    <ProjectReference Include="..\Data.Repository\X.Data.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

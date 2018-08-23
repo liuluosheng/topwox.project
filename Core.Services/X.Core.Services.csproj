@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core.IRepository\Core.IServices.csproj" />
+    <ProjectReference Include="..\Core.IRepository\X.Core.IServices.csproj" />
   </ItemGroup>
 
 </Project>

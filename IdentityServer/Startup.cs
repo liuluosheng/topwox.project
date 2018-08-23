@@ -4,8 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Data;
-using Ew.Core.Config;
+using Ew.IdentityServer.Core.Config;
 using Ew.IdentityServer.Model;
+using IdentityServer4.AspNetIdentity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -40,7 +41,7 @@ namespace Ew.IdentityServer
                 options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b =>
                 {
                     b.MigrationsAssembly(assemblyName);
-                    b.UseRowNumberForPaging();
+                    b.UseRowNumberForPaging(); //server 2008  
                 });
             });
             services.AddIdentity<User, Role>(options =>
@@ -71,6 +72,7 @@ namespace Ew.IdentityServer
              .AddInMemoryIdentityResources(IdentityServiceConfig.GetIdentityResources())
              .AddInMemoryApiResources(IdentityServiceConfig.GetApiResources())
              .AddInMemoryClients(IdentityServiceConfig.GetClients())
+             .AddProfileService<ProfileService<User>>()
              .AddAspNetIdentity<User>();
 
 

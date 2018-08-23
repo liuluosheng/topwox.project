@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data.Enum\Data.Utility.csproj" />
+    <ProjectReference Include="..\Data.Enum\X.Data.Utility.csproj" />
   </ItemGroup>
 
 </Project>

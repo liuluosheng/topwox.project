@@ -21,12 +21,12 @@ namespace Client
             }
 
             // request token 客户端模式
-           // var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "secret");
-           // var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api");
+            // var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "secret");
+            // var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api");
 
             // request token 资源密码模式
             var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "secret");
-            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "Pass123$", "api");
+            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "Pass123$", "openid profile api");
 
             if (tokenResponse.IsError)
             {
@@ -40,8 +40,9 @@ namespace Client
             // call api
             var client = new HttpClient();
             client.SetBearerToken(tokenResponse.AccessToken);
-
-            var response = await client.GetAsync("http://localhost:8000/api/values");
+            var userinfoClient = new UserInfoClient("http://localhost:5000/connect/userinfo");
+            var user = await userinfoClient.GetAsync(tokenResponse.AccessToken);
+            var response = await client.GetAsync("http://localhost:8000/api/values/apis");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
@@ -49,7 +50,7 @@ namespace Client
             else
             {
                 var content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(JArray.Parse(content));
+                Console.WriteLine(content);
             }
         }
     }

@@ -32,12 +32,12 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.IRepository\Core.IServices.csproj" />
-    <ProjectReference Include="..\Core.Services\Core.Services.csproj" />
-    <ProjectReference Include="..\Data.Dto\Data.Dto.csproj" />
-    <ProjectReference Include="..\Data.Entitys\Data.Entitys.csproj" />
-    <ProjectReference Include="..\Data.Enum\Data.Utility.csproj" />
-    <ProjectReference Include="..\Data.Repository\Data.Repository.csproj" />
+    <ProjectReference Include="..\Core.IRepository\X.Core.IServices.csproj" />
+    <ProjectReference Include="..\Core.Services\X.Core.Services.csproj" />
+    <ProjectReference Include="..\Data.Dto\X.Data.Dto.csproj" />
+    <ProjectReference Include="..\Data.Entitys\X.Data.Entitys.csproj" />
+    <ProjectReference Include="..\Data.Enum\X.Data.Utility.csproj" />
+    <ProjectReference Include="..\Data.Repository\X.Data.Repository.csproj" />
     <ProjectReference Include="..\IdentityServer\Ew.IdentityServer.csproj" />
   </ItemGroup>
 
