@@ -47,7 +47,7 @@ namespace Ew.Core.Config
                 new Secret("secret".Sha256())
             },
             // scopes that client has access to
-            AllowedScopes = { "share" }
+            AllowedScopes = { "api" }
         },
 
         // resource owner password grant client
@@ -59,7 +59,12 @@ namespace Ew.Core.Config
                     {
                         new Secret("secret".Sha256())
                     },
-                    AllowedScopes = { "api" }
+                     AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api"
+                    }
                 },
            // OpenID Connect hybrid flow and client credentials client (MVC)
                 new Client
