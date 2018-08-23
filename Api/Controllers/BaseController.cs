@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using X.Core.IServices;
 using X.Data.Entitys;
 using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ew.Api.Controllers
@@ -18,6 +19,12 @@ namespace Ew.Api.Controllers
         {
             _service = service;
         }
+        [EnableQuery]
+        public virtual IActionResult Get(Guid key)
+        {
+            return Ok(_service.Get(p => p.Id == key));
+        }
+
         [EnableQuery]
         [HttpGet]
         public virtual IActionResult Get()

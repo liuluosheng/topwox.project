@@ -19,7 +19,7 @@ namespace Ew.Api.Controllers
         [HttpGet("api/jsonschema/{type}")]
         public ActionResult Get(string type = "")
         {
-            var types = Assembly.Load("Data.Dto").GetTypes();
+            var types = Assembly.Load("X.Data.Dto").GetTypes();
             var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
             if (targetType == null) return NotFound();
             return Json(new JsonSchema(targetType));
@@ -27,7 +27,7 @@ namespace Ew.Api.Controllers
         [HttpGet("api/ts/{type}")]
         public ActionResult GetTS(string type = "")
         {
-            var types = Assembly.Load("Data.Dto").GetTypes();
+            var types = Assembly.Load("X.Data.Dto").GetTypes();
             var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
             if (targetType == null) return NotFound();
             return Content(Generator.GenerateTypeScript(targetType,
