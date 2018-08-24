@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using X.Data;
 using Ew.Api.Config;
 using Microsoft.AspNet.OData.Extensions;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using X.Data.Entitys;
 
 namespace Ew.Api
 {
@@ -39,6 +41,7 @@ namespace Ew.Api
             DependencyConfig.Config(services);
             services.AddCors();
             services.AddOData();
+            services.AddAutoMapper();
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
@@ -72,7 +75,7 @@ namespace Ew.Api
                    name: "default",
                    template: "api/{controller}/{action}/{id?}");
             });
-
+            AutoMapperConfig.InitAutoMapperConfig();
         }
     }
 }

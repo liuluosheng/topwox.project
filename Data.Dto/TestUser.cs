@@ -5,7 +5,7 @@ using System.Text;
 
 namespace X.Data.Dto
 {
-    class TestUser
+    public class TestUser
     {
         [Display(Name = "姓名")]
         [Required]

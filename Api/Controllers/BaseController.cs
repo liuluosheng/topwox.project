@@ -8,6 +8,7 @@ using X.Data.Entitys;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
+using X.Data.Dto;
 
 namespace Ew.Api.Controllers
 {
@@ -35,7 +36,9 @@ namespace Ew.Api.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Post([FromBody]T model)
         {
-            return Ok(await _service.Put(model, true));
+
+            return Ok(await _service.Put(model));
+
         }
 
         [EnableQuery]
