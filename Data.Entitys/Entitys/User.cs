@@ -17,6 +17,6 @@ namespace X.Data.Entitys
         /// <summary>
         /// 职位
         /// </summary>
-        public string position { get; set; }
+        public string Position { get; set; }
     }
 }

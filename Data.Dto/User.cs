@@ -24,6 +24,9 @@ namespace X.Data.Dto
         [Display(Name = "联系电话")]
         public string PhoneNumber { get; set; }
 
+        [Display(Name = "区域")]
+        public string Area { get; set; }
+
         [Display(Name = "年龄")]
         public int Age { get; set; }
 
