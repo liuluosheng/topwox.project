@@ -33,7 +33,7 @@ namespace Ew.Api.Controllers
         }
         [EnableQuery]
         [HttpPost]
-        public virtual async Task<IActionResult> Post(T model)
+        public virtual async Task<IActionResult> Post([FromBody]T model)
         {
             return Ok(await _service.Put(model, true));
         }

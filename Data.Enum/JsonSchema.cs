@@ -91,7 +91,7 @@ namespace X.Data.Utility
                 if (requiredAtt != null)
                 {
                     if (Required == null) Required = new List<string>();
-                    Required.Add(p.Name.ToLower());
+                    Required.Add(p.Name);
                 }
                 var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
                 bool isDate = p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTime?);
@@ -109,7 +109,7 @@ namespace X.Data.Utility
                 {
                     value.Add("ui", uiAtt);
                 }
-                Properties.Add(p.Name.ToLower(), value);
+                Properties.Add(p.Name, value);
             }
         }
         [JsonProperty(PropertyName = "properties", Order = 3)]

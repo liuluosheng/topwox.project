@@ -66,7 +66,8 @@ namespace Ew.Api
             app.UseMvc(b =>
             {
                 b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
-                b.MapODataServiceRoute("odata", "api", ODataConfig.GetEdmModel());
+                b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel());
+                b.EnableDependencyInjection();
                 b.MapRoute(
                    name: "default",
                    template: "api/{controller}/{action}/{id?}");

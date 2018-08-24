@@ -10,7 +10,7 @@ namespace X.Data.Dto
     {
         [Display(Name = "用户名")]
         [Required]
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "密码")]
         [Ui(Type = "password")]
@@ -32,7 +32,7 @@ namespace X.Data.Dto
 
         [Display(Name = "注册日期")]
         [Ui(Autofocus = true)]
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Display(Name = "Color")]
         public Color UserColor { get; set; }

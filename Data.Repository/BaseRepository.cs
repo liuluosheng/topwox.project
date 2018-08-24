@@ -23,7 +23,7 @@ namespace Data.Repository
         }
         public async Task<T> Update<T>(T entity, bool isCommit = true) where T : EntityBase
         {
-            await _context.Set<T>().AddAsync(entity);
+             _context.Entry(entity).State = EntityState.Modified;
             if (isCommit)
                 await Commit();
             return entity;
@@ -47,7 +47,7 @@ namespace Data.Repository
             entity.Id = entity.Id == Guid.Empty
                ? EntityBase.NewId()
                : entity.Id;
-            _context.Set<T>().Add(entity);
+            await _context.Set<T>().AddAsync(entity);
             if (isCommit)
                 await Commit();
             return entity;
