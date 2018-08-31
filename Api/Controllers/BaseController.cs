@@ -9,6 +9,7 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using X.Data.Dto;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Ew.Api.Controllers
 {
@@ -21,31 +22,26 @@ namespace Ew.Api.Controllers
             _service = service;
         }
         [EnableQuery]
-        public virtual IActionResult Get(Guid key)
-        {
-            return Ok(_service.Get(p => p.Id == key));
-        }
+        public virtual IActionResult Get(Guid key) => Ok(_service.Get(p => p.Id == key));
 
         [EnableQuery]
         [HttpGet]
-        public virtual IActionResult Get()
-        {
-            return Ok(_service.Get());
-        }
+        public virtual IActionResult Get() => Ok(_service.Get());
+
         [EnableQuery]
         [HttpPost]
-        public virtual async Task<IActionResult> Post([FromBody]T model)
-        {
+        public virtual async Task<IActionResult> Post([FromBody]T model) => Ok(await _service.Create(model));
 
-            return Ok(await _service.Put(model));
-
-        }
+        [EnableQuery]
+        [HttpPut]
+        public virtual async Task<IActionResult> Put([FromBody]T model) => Ok(await _service.Update(model));
 
         [EnableQuery]
         [HttpDelete]
-        public virtual async Task<IActionResult> Delete([FromODataUri] Guid key)
-        {
-            return Ok((await _service.Delete(p => p.Id == key)) > 0);
-        }
+        public virtual async Task<IActionResult> Delete([FromODataUri] Guid key) => Ok((await _service.Delete(p => p.Id == key)) > 0);
+
+        [EnableQuery]
+        [HttpPatch]
+        public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok( await _service.Patch(key, doc));
     }
 }

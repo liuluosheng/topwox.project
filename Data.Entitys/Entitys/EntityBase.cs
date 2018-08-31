@@ -29,11 +29,13 @@ namespace X.Data.Entitys
         /// 获取或设置 实体唯一标识，主键
         /// </summary>
         [Key, Column(Order = 1)]
+        [Display(Name = "ID")]
         public virtual Guid Id { get; set; }
 
         /// <summary>
         /// 获取或设置 创建时间
         /// </summary>
+        [Display(Name = "创建日期")]
         public DateTime CreatedDate { get; set; }
 
         /// <summary>
@@ -41,6 +43,7 @@ namespace X.Data.Entitys
         /// </summary>
         [ConcurrencyCheck]
         [Timestamp]
+        [Display(Name = "版本号")]
         public byte[] Timestamp { get; set; }
         #endregion
 

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
+using System.Linq;
 
 namespace X.Data.Utility
 {
@@ -18,7 +19,7 @@ namespace X.Data.Utility
         public JsonSchema(Type type)
         {
             Properties = new Dictionary<string, object>();
-            var prop = type.GetProperties();
+            var prop = type.GetProperties().Where(p => !new[] { "Timestamp","Id" }.Contains(p.Name));
             foreach (var p in prop)
             {
                 var value = new Dictionary<string, object> { { "type", SchemaType(p.PropertyType) } };
@@ -136,7 +137,7 @@ namespace X.Data.Utility
             {
                 return "number";
             }
-            if (t.IsEnum || t == typeof(string) || t == typeof(DateTime) || t == typeof(DateTime?))
+            if (t.IsEnum || t == typeof(string) || t == typeof(DateTime) || t == typeof(DateTime?) || t==typeof(Guid))
             {
                 return "string";
             }

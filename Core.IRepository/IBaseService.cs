@@ -19,9 +19,9 @@ namespace X.Core.IServices
         IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : EntityBase;
         Task<int> Delete<T>(Expression<Func<T, bool>> predicate) where T : EntityBase;
         Task<int> Delete(Expression<Func<TEntity, bool>> predicate);
-        Task<T> Put<T>(T entity, bool isCommit = true) where T : EntityBase;
-        Task<TEntity> Put(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true);
-        Task<TEntity> Put(TEntity entity, bool isCommit = true);
+        Task<T> Create<T>(T entity, bool isCommit = true) where T : EntityBase;
+        Task<TEntity> Patch(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true);
+        Task<TEntity> Create(TEntity entity, bool isCommit = true);
     }
 
 

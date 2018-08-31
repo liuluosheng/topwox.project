@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using X.Data.Entitys;
 
-namespace Data.Entitys.Entitys
+namespace X.Data.Entitys
 {
     public class Employees : EntityBase
     {

@@ -51,21 +51,21 @@ namespace X.Core.Service
             throw new NotImplementedException();
         }
 
-        public async Task<T> Put<T>(T entity, bool isCommit = true) where T : EntityBase
+        public async Task<T> Create<T>(T entity, bool isCommit = true) where T : EntityBase
         {
             return await _repository.Put<T>(entity, isCommit);
         }
 
-        public async Task<TEntity> Put(TEntity entity, bool isCommit = true)
+        public async Task<TEntity> Create(TEntity entity, bool isCommit = true)
         {
-            return await Put<TEntity>(entity, isCommit);
+            return await Create<TEntity>(entity, isCommit);
         }
 
-        public async Task<TEntity> Put(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true)
+        public async Task<TEntity> Patch(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true)
         {
             var model = await Get(p => p.Id == id).FirstOrDefaultAsync();
             doc.ApplyTo(model, p => { });
-            return await Put(model, isCommit);
+            return await Update(model, isCommit);
         }
 
         public async Task<TEntity> Update(TEntity entity, bool isCommit)
@@ -75,7 +75,7 @@ namespace X.Core.Service
 
         public async Task<T> Update<T>(T entity, bool isCommit = true) where T : EntityBase
         {
-            return await _repository.Update<T>(entity, isCommit);
+            return await _repository.Update(entity, isCommit);
         }
     }
 }
