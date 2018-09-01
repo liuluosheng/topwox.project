@@ -19,9 +19,10 @@ namespace X.Data.Utility
         public JsonSchema(Type type)
         {
             Properties = new Dictionary<string, object>();
-            var prop = type.GetProperties().Where(p => !new[] { "Timestamp","Id" }.Contains(p.Name));
+            var prop = type.GetProperties();
             foreach (var p in prop)
             {
+                if (p.GetCustomAttribute<SchemaIgnoreAttribute>() != null) continue;
                 var value = new Dictionary<string, object> { { "type", SchemaType(p.PropertyType) } };
                 //标题与描述
                 var displayAtt = p.GetCustomAttribute<DisplayAttribute>();
@@ -95,7 +96,11 @@ namespace X.Data.Utility
                     Required.Add(p.Name);
                 }
                 var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
-                bool isDate = p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTime?);
+                bool isDate =
+                    p.PropertyType == typeof(DateTime) ||
+                    p.PropertyType == typeof(DateTime?) ||
+                    p.PropertyType == typeof(DateTimeOffset) ||
+                    p.PropertyType == typeof(DateTimeOffset?);
                 if (datatypeAtt != null || isDate)
                 {
                     value.Add("format", datatypeAtt?.DataType == DataType.DateTime || isDate ? "date-time" : datatypeAtt?.DataType.ToString().ToLower());
@@ -128,7 +133,17 @@ namespace X.Data.Utility
         private bool IsNumericType(Type t)
         {
             var tc = Type.GetTypeCode(t);
-            return (t.IsPrimitive && t.IsValueType && !t.IsEnum && tc != TypeCode.Char && tc != TypeCode.Boolean) || tc == TypeCode.Decimal;
+            return (
+                t.IsPrimitive &&
+                t.IsValueType &&
+                !t.IsEnum &&
+                tc != TypeCode.Char &&
+                tc != TypeCode.Boolean) ||
+                tc == TypeCode.Decimal ||
+                t == typeof(int?) ||
+                t == typeof(decimal?) ||
+                t == typeof(double?);
+
         }
 
         private string SchemaType(Type t)
@@ -137,7 +152,14 @@ namespace X.Data.Utility
             {
                 return "number";
             }
-            if (t.IsEnum || t == typeof(string) || t == typeof(DateTime) || t == typeof(DateTime?) || t==typeof(Guid))
+            if (t.IsEnum ||
+                t == typeof(string) ||
+                t == typeof(DateTime) ||
+                t == typeof(DateTime?) ||
+                t == typeof(Guid?) ||
+                t == typeof(Guid) ||
+                t == typeof(DateTimeOffset) ||
+                t == typeof(DateTimeOffset?))
             {
                 return "string";
             }

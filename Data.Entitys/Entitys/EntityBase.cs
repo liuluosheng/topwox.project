@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using X.Data.Utility.Attributes;
 
 namespace X.Data.Entitys
 {
@@ -28,14 +29,14 @@ namespace X.Data.Entitys
         /// <summary>
         /// 获取或设置 实体唯一标识，主键
         /// </summary>
-        [Key, Column(Order = 1)]
+        [Key, Column(Order = 1), SchemaIgnore]
         [Display(Name = "ID")]
         public virtual Guid Id { get; set; }
 
         /// <summary>
         /// 获取或设置 创建时间
         /// </summary>
-        [Display(Name = "创建日期")]
+        [Display(Name = "创建日期"), Column(Order = 99), SchemaIgnore]
         public DateTime CreatedDate { get; set; }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace X.Data.Entitys
         /// </summary>
         [ConcurrencyCheck]
         [Timestamp]
-        [Display(Name = "版本号")]
+        [Display(Name = "版本号"), Column(Order = 100), SchemaIgnore]
         public byte[] Timestamp { get; set; }
         #endregion
 

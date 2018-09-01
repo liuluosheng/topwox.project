@@ -34,7 +34,6 @@ namespace X.Data.Dto
         [Ui(Autofocus = true)]
         public DateTime CreatedDate { get; set; }
 
-        [Display(Name = "Color")]
-        public Color UserColor { get; set; }
+      
     }
 }

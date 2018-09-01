@@ -10,5 +10,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.8.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data.Enum\X.Data.Utility.csproj" />
+  </ItemGroup>
 
 </Project>
