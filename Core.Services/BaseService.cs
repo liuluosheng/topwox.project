@@ -46,11 +46,6 @@ namespace X.Core.Service
             return _repository.Get<T>(predicate);
         }
 
-        public IQueryable<TEntity> GetPaging()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<T> Create<T>(T entity, bool isCommit = true) where T : EntityBase
         {
             return await _repository.Put<T>(entity, isCommit);

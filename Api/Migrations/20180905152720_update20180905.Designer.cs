@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using X.Data;
 
 namespace Ew.Api.Migrations
 {
     [DbContext(typeof(EwApiDBContext))]
-    partial class EwApiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180905152720_update20180905")]
+    partial class update20180905
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

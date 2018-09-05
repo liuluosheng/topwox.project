@@ -11,7 +11,6 @@ namespace X.Core.IServices
 {
     public interface IBaseService<TEntity> where TEntity : EntityBase
     {
-        IQueryable<TEntity> GetPaging();
         Task<TEntity> Update(TEntity entity, bool isCommit);
         Task<T> Update<T>(T entity, bool isCommit = true) where T : EntityBase;
         IQueryable<TEntity> Get();

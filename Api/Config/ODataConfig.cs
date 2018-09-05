@@ -15,6 +15,8 @@ namespace Ew.Api.Config
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<User>("Users");
+            builder.EntitySet<Supplier>("Suppliers");
+            builder.EntitySet<Product>("Products");
             builder.EntitySet<Employees>("Employees");
 
             var user= builder.EntityType<User>();

@@ -10,6 +10,10 @@ using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using X.Data.Dto;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.Data.Edm;
+using ODataPath = Microsoft.AspNet.OData.Routing.ODataPath;
+using Microsoft.OData.UriParser;
 
 namespace Ew.Api.Controllers
 {
@@ -43,6 +47,42 @@ namespace Ew.Api.Controllers
         [EnableQuery]
         [HttpPatch]
         public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok( await _service.Patch(key, doc));
-         
+
+        public IActionResult GetNavigation(string key, string navigation)
+        {
+            ODataPath path = Request.ODataFeature().Path;
+
+            if (path.PathTemplate != "~/entityset/key/navigation")
+            {
+                return BadRequest("Not the correct navigation property access request!");
+            }
+
+            if (!(path.Segments.Last() is NavigationPropertySegment property))
+            {
+                return BadRequest("Not the correct navigation property access request!");
+            }
+
+            //IEdmEntityType entityType = property.NavigationProperty.DeclaringType as IEdmEntityType;
+
+            //EdmEntityObject entity = new EdmEntityObject(entityType);
+
+            //string sourceString = Request.GetDataSource();
+            //DataSourceProvider.Get(sourceString, key, entity);
+
+            //object value = DataSourceProvider.GetProperty(sourceString, navigation, entity);
+
+            //if (value == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //IEdmEntityObject nav = value as IEdmEntityObject;
+            //if (nav == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return Ok(navigation+key.ToString());
+        }
     }
 }

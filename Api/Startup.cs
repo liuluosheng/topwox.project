@@ -12,9 +12,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using X.Data.Entitys;
+using Microsoft.AspNet.OData.Routing.Conventions;
+using Microsoft.AspNet.OData.Routing;
 
 namespace Ew.Api
 {
@@ -69,7 +68,11 @@ namespace Ew.Api
             app.UseMvc(b =>
             {
                 b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
-                b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel());
+                IList<IODataRoutingConvention> conventions = ODataRoutingConventions.CreateDefault();
+                conventions.Insert(0, new CustomPropertyRoutingConvention());
+                b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel(), new DefaultODataPathHandler(), conventions);
+
+                //b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel());
                 b.EnableDependencyInjection();
                 b.MapRoute(
                    name: "default",
