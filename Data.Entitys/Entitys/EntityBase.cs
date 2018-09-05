@@ -1,10 +1,8 @@
 ﻿
 using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using X.Data.Utility.Attributes;
-
 namespace X.Data.Entitys
 {
     /// <summary>
