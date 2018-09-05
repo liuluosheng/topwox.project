@@ -43,5 +43,6 @@ namespace Ew.Api.Controllers
         [EnableQuery]
         [HttpPatch]
         public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok( await _service.Patch(key, doc));
+
     }
 }
