@@ -27,15 +27,4 @@ namespace Ew.Api.Config
             return builder.GetEdmModel();
         }
     }
-
-    public class CustomPropertyRoutingConvention : NavigationSourceRoutingConvention
-    {
-        private const string ActionName = "GetProperty";
-
-        public override string SelectAction(RouteContext routeContext, SelectControllerResult controllerResult, IEnumerable<ControllerActionDescriptor> actionDescriptors)
-        {
-            //throw new NotImplementedException();
-            return null;
-        }
-    }
 }
