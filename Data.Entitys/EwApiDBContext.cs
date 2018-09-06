@@ -14,6 +14,10 @@ namespace X.Data
 
         public DbSet<Employees> Employees { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
