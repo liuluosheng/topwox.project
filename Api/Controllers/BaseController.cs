@@ -10,6 +10,7 @@ using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using X.Data.Dto;
 using Microsoft.AspNetCore.JsonPatch;
+using System.Reflection;
 
 namespace Ew.Api.Controllers
 {
@@ -42,7 +43,19 @@ namespace Ew.Api.Controllers
 
         [EnableQuery]
         [HttpPatch]
-        public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok( await _service.Patch(key, doc));
+        public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok(await _service.Patch(key, doc));
 
+        [HttpGet]
+        public IActionResult GetProperty(Guid key, string propertyName)
+        {
+            T model = _service.Get(c => c.Id == key).FirstOrDefault();
+            if (model == null)
+            {
+                return NotFound();
+            }
+            PropertyInfo info = typeof(T).GetProperty(propertyName);
+            object value = info.GetValue(model);
+            return Ok(value);
+        }
     }
 }
