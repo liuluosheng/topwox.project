@@ -22,7 +22,6 @@ namespace Ew.Api.Config
             builder.EntitySet<Supplier>("Suppliers");
             builder.EntitySet<Product>("Products");
             builder.EntitySet<Employees>("Employees");
-
             var user= builder.EntityType<User>();
             return builder.GetEdmModel();
         }

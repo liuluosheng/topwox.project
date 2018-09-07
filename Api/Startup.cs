@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNet.OData.Routing;
 
+
 namespace Ew.Api
 {
     public class Startup
@@ -69,10 +70,11 @@ namespace Ew.Api
             {
                 b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
                 IList<IODataRoutingConvention> conventions = ODataRoutingConventions.CreateDefault();
-                conventions.Insert(0, new CustomPropertyRoutingConvention());
+                conventions.Insert(0, new MatchRoutingConvention());
                 b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel(), new DefaultODataPathHandler(), conventions);
 
                 //b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel());
+
                 b.EnableDependencyInjection();
                 b.MapRoute(
                    name: "default",
