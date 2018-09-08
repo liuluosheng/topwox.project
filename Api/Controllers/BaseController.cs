@@ -14,10 +14,11 @@ using Microsoft.AspNet.OData.Extensions;
 using Microsoft.Data.Edm;
 using ODataPath = Microsoft.AspNet.OData.Routing.ODataPath;
 using Microsoft.OData.UriParser;
+using System.Reflection;
 
 namespace Ew.Api.Controllers
 {
-    public  class BaseController<T> : ODataController
+    public class BaseController<T> : ODataController
         where T : EntityBase
     {
         protected readonly IBaseService<T> _service;
@@ -46,12 +47,11 @@ namespace Ew.Api.Controllers
 
         [EnableQuery]
         [HttpPatch]
-        public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok( await _service.Patch(key, doc));
+        public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok(await _service.Patch(key, doc));
 
-        public IActionResult GetNavigation(string key, string navigation)
+        public IActionResult GetNavigation(Guid key, string navigation)
         {
             ODataPath path = Request.ODataFeature().Path;
-
             if (path.PathTemplate != "~/entityset/key/navigation")
             {
                 return BadRequest("Not the correct navigation property access request!");
@@ -62,27 +62,14 @@ namespace Ew.Api.Controllers
                 return BadRequest("Not the correct navigation property access request!");
             }
 
-            //IEdmEntityType entityType = property.NavigationProperty.DeclaringType as IEdmEntityType;
-
-            //EdmEntityObject entity = new EdmEntityObject(entityType);
-
-            //string sourceString = Request.GetDataSource();
-            //DataSourceProvider.Get(sourceString, key, entity);
-
-            //object value = DataSourceProvider.GetProperty(sourceString, navigation, entity);
-
-            //if (value == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //IEdmEntityObject nav = value as IEdmEntityObject;
-            //if (nav == null)
-            //{
-            //    return NotFound();
-            //}
-
-            return Ok(navigation+key.ToString());
+            T model = _service.Get(c => c.Id == key).First();
+            if (model == null)
+            {
+                return BadRequest("Not find the model!");
+            }
+            PropertyInfo info = typeof(T).GetProperty(navigation);
+            object value = info.GetValue(model);
+            return Ok(value);
         }
     }
 }
