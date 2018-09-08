@@ -17,7 +17,7 @@ using Microsoft.OData.UriParser;
 
 namespace Ew.Api.Controllers
 {
-    public abstract class BaseController<T> : ODataController
+    public  class BaseController<T> : ODataController
         where T : EntityBase
     {
         protected readonly IBaseService<T> _service;

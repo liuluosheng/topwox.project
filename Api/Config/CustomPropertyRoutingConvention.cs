@@ -46,19 +46,20 @@ namespace Ew.Api.Config
     }
     public class MatchRoutingConvention : IODataRoutingConvention
     {
-        private readonly string ControllerName = "BaseMatch";
+        private string ControllerName = "";
 
         public IEnumerable<ControllerActionDescriptor> SelectAction(RouteContext routeContext)
         {
+
             var odataPath = routeContext.HttpContext.ODataFeature().Path;
-            EdmCollectionType collectionType = (EdmCollectionType)odataPath.EdmType;
-            Microsoft.OData.Edm.IEdmEntityTypeReference entityType = collectionType.ElementType.AsEntity();
-            routeContext.RouteData.DataTokens.Add("type", entityType.Definition.ToString());
             if (!(odataPath.Segments.FirstOrDefault() is EntitySetSegment))
             {
                 return Enumerable.Empty<ControllerActionDescriptor>();
             }
-
+            EdmCollectionType collectionType = (EdmCollectionType)odataPath.EdmType;
+            Microsoft.OData.Edm.IEdmEntityTypeReference entityType = collectionType.ElementType.AsEntity();
+            var type = Assembly.Load("X.Data.Entitys").CreateInstance(entityType.Definition.ToString()).GetType();
+            ControllerName = type.Name;
             // Get a IActionDescriptorCollectionProvider from the global service provider.
             IActionDescriptorCollectionProvider actionCollectionProvider =
                 routeContext.HttpContext.RequestServices.GetRequiredService<IActionDescriptorCollectionProvider>();

@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNet.OData.Routing;
-
+using Ew.Api.GenericController;
 
 namespace Ew.Api
 {
@@ -30,7 +30,8 @@ namespace Ew.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvcCore()
+            services.AddMvcCore(o => o.Conventions.Add(new GenericControllerRouteConvention()))
+                    .ConfigureApplicationPartManager(m => m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider()))
                     .AddAuthorization()
                     .AddJsonFormatters();
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
