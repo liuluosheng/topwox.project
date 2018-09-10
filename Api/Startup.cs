@@ -30,7 +30,7 @@ namespace Ew.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvcCore(o => o.Conventions.Add(new GenericControllerRouteConvention()))
+            services.AddMvcCore()
                     .ConfigureApplicationPartManager(m => m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider()))
                     .AddAuthorization()
                     .AddJsonFormatters();

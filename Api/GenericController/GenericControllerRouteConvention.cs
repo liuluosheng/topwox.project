@@ -9,6 +9,7 @@ using X.Data.Utility.Attributes;
 
 namespace Ew.Api.GenericController
 {
+
     public class GenericControllerRouteConvention : IControllerModelConvention
     {
         public void Apply(ControllerModel controller)
