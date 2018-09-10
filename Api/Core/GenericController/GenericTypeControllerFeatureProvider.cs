@@ -9,7 +9,7 @@ using X.Data.Entitys;
 using System.Reflection;
 using X.Data.Utility.Attributes;
 
-namespace Ew.Api.GenericController
+namespace Ew.Api.Core
 {
     public class GenericTypeControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {

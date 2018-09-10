@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.Data;
 
-namespace Ew.Api.Config
+namespace Ew.Api.Core
 {
     public static class DependencyConfig
     {

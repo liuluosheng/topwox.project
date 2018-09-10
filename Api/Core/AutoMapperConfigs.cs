@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using X.Data.Dto;
 
-namespace Ew.Api.Config
+namespace Ew.Api.Core
 {
     public static class AutoMapperConfig
     {

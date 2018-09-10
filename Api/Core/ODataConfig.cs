@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNet.OData.Routing;
 using System.Reflection;
 
-namespace Ew.Api.Config
+namespace Ew.Api.Core
 {
     public static class ODataConfig
     {

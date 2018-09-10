@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using X.Data.Utility.Attributes;
 
-namespace Ew.Api.GenericController
+namespace Ew.Api.Core
 {
 
     public class GenericControllerRouteConvention : IControllerModelConvention

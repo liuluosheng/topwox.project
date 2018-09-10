@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using X.Data;
-using Ew.Api.Config;
+using Ew.Api.Core;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNet.OData.Routing;
-using Ew.Api.GenericController;
 
 namespace Ew.Api
 {
