@@ -24,6 +24,7 @@ namespace X.Data.Utility
             {
                 if (p.GetCustomAttribute<SchemaIgnoreAttribute>() != null) continue;
                 var value = new Dictionary<string, object> { { "type", SchemaType(p.PropertyType) } };
+                value.Add("name", p.Name);
                 //标题与描述
                 var displayAtt = p.GetCustomAttribute<DisplayAttribute>();
                 if (displayAtt != null)
@@ -94,6 +95,7 @@ namespace X.Data.Utility
                 {
                     if (Required == null) Required = new List<string>();
                     Required.Add(p.Name);
+                    value.Add("required", true);
                 }
                 var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
                 bool isDate =
@@ -109,12 +111,9 @@ namespace X.Data.Utility
                 if (p.PropertyType.IsEnum)
                 {
                     value.Add("enum", Enum.GetNames(p.PropertyType));
+                    value.Add("format", "enum");
                 }
-                var uiAtt = p.GetCustomAttribute<UiAttribute>();
-                if (uiAtt != null)
-                {
-                    value.Add("ui", uiAtt);
-                }
+                
                 Properties.Add(p.Name, value);
             }
         }
