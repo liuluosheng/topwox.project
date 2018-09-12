@@ -36,7 +36,12 @@ namespace Ew.Api
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
             services.AddDbContext<EwApiDBContext>(options =>
             {
-                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b => b.MigrationsAssembly(assemblyName));
+                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b => 
+                {
+                    b.MigrationsAssembly(assemblyName);
+                    b.UseRowNumberForPaging(); //兼容 server 2008 分页  
+                });
+                
             });
             DependencyConfig.Config(services);
             services.AddCors();
