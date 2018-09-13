@@ -32,15 +32,20 @@ namespace X.Data.Utility
                     if (!string.IsNullOrEmpty(displayAtt.Name)) value.Add("title", displayAtt.Name);
                     if (!string.IsNullOrEmpty(displayAtt.Description)) value.Add("description", displayAtt.Description);
                 }
-                else
+
+                if (value.All(k => k.Key != "description"))
                 {
                     var descriptionAtt = p.GetCustomAttribute<DescriptionAttribute>();
                     if (descriptionAtt != null && !string.IsNullOrEmpty(descriptionAtt.Description))
                     {
                         value.Add("description", descriptionAtt.Description);
                     }
+                }
+
+                if (value.All(k => k.Key != "title"))
+                {
                     var desplayNameAtt = p.GetCustomAttribute<DisplayNameAttribute>();
-                    if (descriptionAtt != null && !string.IsNullOrEmpty(desplayNameAtt.DisplayName))
+                    if (desplayNameAtt != null && !string.IsNullOrEmpty(desplayNameAtt.DisplayName))
                     {
                         value.Add("title", desplayNameAtt.DisplayName);
                     }
@@ -49,13 +54,9 @@ namespace X.Data.Utility
                         value.Add("title", p.Name);
                     }
                 }
-                //默认值
-                var defaultAtt = p.GetCustomAttribute<DefaultValueAttribute>();
-                if (defaultAtt != null && defaultAtt.Value != null)
-                {
-                    value.Add("default", defaultAtt.Value);
-                }
 
+
+   
                 //最小值，最大值
                 var rangeAtt = p.GetCustomAttribute<RangeAttribute>();
                 if (rangeAtt != null)
@@ -73,7 +74,7 @@ namespace X.Data.Utility
 
                 //最大长度
                 var maxLengthAtt = p.GetCustomAttribute<MaxLengthAttribute>();
-                if (minLengthAtt != null)
+                if (maxLengthAtt != null)
                 {
                     value.Add("maxLength", maxLengthAtt.Length);
                 }
@@ -113,7 +114,7 @@ namespace X.Data.Utility
                     value.Add("enum", Enum.GetNames(p.PropertyType));
                     value.Add("format", "enum");
                 }
-                
+
                 Properties.Add(p.Name, value);
             }
         }

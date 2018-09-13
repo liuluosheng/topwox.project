@@ -1,6 +1,7 @@
 ﻿using Data.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using X.Data.Entitys;
@@ -14,6 +15,7 @@ namespace X.Data.Entitys
 
         [Display(Name = "姓名")]
         [Required]
+        [MaxLength(10),MinLength(5)]
         public string Name { get; set; }
 
         [Display(Name = "联系电话")]
@@ -33,7 +35,8 @@ namespace X.Data.Entitys
         [RegularExpression(@"^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$", ErrorMessage = "Email格式不正确")]
         public string Email { get; set; }
 
-        [Display(Name = "年龄")]
+        [Display(Name = "年龄", Description = "请输入10到60的范围")]
+        [Range(10, 60)]
         public int Age { get; set; }
 
         [Display(Name = "性别")]
