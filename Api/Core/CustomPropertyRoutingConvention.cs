@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using Microsoft.OData.UriParser;
 using X.Data.Attributes;
+using X.Data.Entitys;
 
 namespace Ew.Api.Core
 {
@@ -57,7 +58,7 @@ namespace Ew.Api.Core
                 return Enumerable.Empty<ControllerActionDescriptor>();
             }
             EdmCollectionType collectionType = odataPath.EdmType as EdmCollectionType;
-            var type =   Assembly.Load("X.Data.Entitys").CreateInstance(
+            var type = typeof(EntityBase).Assembly.CreateInstance(
                 collectionType != null
                 ? collectionType.ElementType.Definition.ToString()
                 : odataPath.EdmType.ToString()

@@ -19,7 +19,7 @@ namespace Ew.Api.Core
         public static IEdmModel GetEdmModel()
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            var types = Assembly.Load("X.Data.Entitys").GetTypes();
+            var types = typeof(EntityBase).Assembly.GetTypes();
             foreach (var type in types)
             {
                 if (!type.IsAbstract && type.BaseType == typeof(EntityBase))

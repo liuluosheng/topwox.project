@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CsToTs;
 using X.Data.Model;
+using X.Data.Entitys;
 
 namespace Ew.Api.Controllers
 {
@@ -20,7 +21,7 @@ namespace Ew.Api.Controllers
         [HttpGet("api/jsonschema/{type}")]
         public ActionResult Get(string type = "")
         {
-            var types = Assembly.Load("X.Data.Entitys").GetTypes();
+            var types = typeof(EntityBase).Assembly.GetTypes();
             var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
             if (targetType == null) return NotFound();
             return Json(new JsonSchema(targetType));
@@ -28,7 +29,7 @@ namespace Ew.Api.Controllers
         [HttpGet("api/ts/{type}")]
         public ActionResult GetTS(string type = "")
         {
-            var types = Assembly.Load("X.Data.Entitys").GetTypes();
+            var types = typeof(EntityBase).Assembly.GetTypes();
             var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
             if (targetType == null) return NotFound();
             return Content(Generator.GenerateTypeScript(targetType,
