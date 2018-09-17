@@ -1,14 +1,14 @@
 ﻿using X.Core.IServices;
-using X.Data.Entitys;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using X.Data.Repository.Interface;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.JsonPatch;
+using X.Data.Repository.Interface;
+using X.Data.Entitys;
+using Microsoft.EntityFrameworkCore;
 
 namespace X.Core.Service
 {
