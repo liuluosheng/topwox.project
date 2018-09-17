@@ -1,5 +1,4 @@
 ﻿using X.Data.Entitys;
-using X.Data.Repository.Interface;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;

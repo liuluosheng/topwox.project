@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace X.Data.Repository.Interface
+namespace X.Repository
 {
     /// <summary>
     /// 实体仓储模型的数据标准操作

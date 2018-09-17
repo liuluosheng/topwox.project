@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.JsonPatch;
-using X.Data.Repository.Interface;
 using X.Data.Entitys;
 using Microsoft.EntityFrameworkCore;
+using X.Repository;
 
 namespace X.Core.Service
 {

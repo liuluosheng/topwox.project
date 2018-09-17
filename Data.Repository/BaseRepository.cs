@@ -4,10 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using X.Data.Entitys;
-using X.Data.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Repository
+namespace X.Repository
 {
     /// <summary>
     /// EntityFramework的仓储实现
