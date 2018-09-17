@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace X.Data.Utility.Attributes
+namespace X.Data.Attributes
 {
     /// <summary>
     /// 动态构建OData的Controller

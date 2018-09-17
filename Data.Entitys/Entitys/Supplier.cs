@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using X.Data.Utility.Attributes;
+using X.Data.Attributes;
 
 namespace X.Data.Entitys
 {

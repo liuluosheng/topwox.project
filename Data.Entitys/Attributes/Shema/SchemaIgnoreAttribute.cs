@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace X.Data.Utility.Attributes
+namespace X.Data.Attributes
 {
     /// <summary>
     /// 添加到实体属性上，标识排除该属性生成JSON Schema

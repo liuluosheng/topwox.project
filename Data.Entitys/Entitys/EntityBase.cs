@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using X.Data.Utility.Attributes;
+using X.Data.Attributes;
 namespace X.Data.Entitys
 {
     /// <summary>

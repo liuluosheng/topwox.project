@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using X.Data.Utility.Attributes;
+using X.Data.Attributes;
 
 namespace X.Data.Entitys
 {

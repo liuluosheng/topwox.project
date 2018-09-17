@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ew.Api", "Api\Ew.Api.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ew.IdentityServer", "IdentityServer\Ew.IdentityServer.csproj", "{807672A6-724F-46A5-86B0-2B393D044EE2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Data.Entitys", "Data.Entitys\X.Data.Entitys.csproj", "{4E62760C-4339-4E4D-AE55-3D09BAC98967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Data", "Data.Entitys\X.Data.csproj", "{4E62760C-4339-4E4D-AE55-3D09BAC98967}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Data.Repository", "Data.Repository\X.Data.Repository.csproj", "{19090AA0-298F-4483-9248-904B3AB74036}"
 EndProject

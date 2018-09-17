@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using X.Data.Attributes;
 using X.Data.Entitys;
-using X.Data.Utility.Attributes;
 
 namespace X.Data.Entitys
 {

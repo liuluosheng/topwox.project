@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.Data.Entitys;
 using System.Reflection;
-using X.Data.Utility.Attributes;
+using X.Data.Attributes;
 
 namespace Ew.Api.Core
 {

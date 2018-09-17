@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Ew.IdentityServer.Model;
-using X.Data.Utility;
+using X.Data.Model;
+
 
 namespace Ew.IdentityServer.Controllers
 {

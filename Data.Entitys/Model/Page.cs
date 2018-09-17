@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace X.Data.Utility
+namespace X.Data.Model
 {
     public class Page
     {

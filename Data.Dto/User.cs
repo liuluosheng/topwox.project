@@ -1,8 +1,8 @@
 ﻿using Data.Enums;
-using X.Data.Utility.Attributes;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using X.Data.Attributes;
 
 namespace X.Data.Dto
 {

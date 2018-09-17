@@ -5,8 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using X.Data.Utility;
 using CsToTs;
+using X.Data.Model;
+
 namespace Ew.Api.Controllers
 {
     public class SchemaController : Controller
