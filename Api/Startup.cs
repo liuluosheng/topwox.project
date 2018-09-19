@@ -19,9 +19,14 @@ namespace Ew.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+             .SetBasePath(env.ContentRootPath)
+            .AddEnvironmentVariables()
+            .AddJsonFile("appsettings.json")
+            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -36,21 +41,21 @@ namespace Ew.Api
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
             services.AddDbContext<EwApiDBContext>(options =>
             {
-                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b => 
+                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b =>
                 {
                     b.MigrationsAssembly(assemblyName);
                     b.UseRowNumberForPaging(); //兼容 server 2008 分页  
                 });
-                
+
             });
-            DependencyConfig.Config(services);
+            DependencyConfig.Config(services, Configuration);
             services.AddCors();
             services.AddOData();
             services.AddAutoMapper();
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "http://localhost:5000";
+                    options.Authority = Configuration["AppSettings:IdentityServer"];
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "api";
                 });

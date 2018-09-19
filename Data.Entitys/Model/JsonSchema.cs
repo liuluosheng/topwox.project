@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 using X.Data.Attributes;
-
+using Microsoft.Extensions.Configuration;
 namespace X.Data.Model
 {
 
@@ -17,14 +17,15 @@ namespace X.Data.Model
     /// </summary>
     public class JsonSchema
     {
-        public JsonSchema(Type type)
+        public JsonSchema(Type type, IConfiguration configuration)
         {
             Properties = new Dictionary<string, object>();
             var prop = type.GetProperties();
             foreach (var p in prop)
             {
                 if (p.GetCustomAttribute<SchemaIgnoreAttribute>() != null) continue;
-                var value = new Dictionary<string, object> { { "type", SchemaType(p.PropertyType) } };
+                var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
+                var value = new Dictionary<string, object> { { "type", SchemaType(p) } };
                 value.Add("name", p.Name);
                 //标题与描述
                 var displayAtt = p.GetCustomAttribute<DisplayAttribute>();
@@ -55,20 +56,15 @@ namespace X.Data.Model
                         value.Add("title", p.Name);
                     }
                 }
-
-
-   
                 //最小值，最大值
-                var rangeAtt = p.GetCustomAttribute<RangeAttribute>();
-                if (rangeAtt != null)
+                if (p.GetCustomAttribute<RangeAttribute>() is RangeAttribute rangeAtt)
                 {
                     value.Add("minimum", rangeAtt.Minimum);
                     value.Add("maximum", rangeAtt.Maximum);
                 }
 
-                //最小长度
-                var minLengthAtt = p.GetCustomAttribute<MinLengthAttribute>();
-                if (minLengthAtt != null)
+                //最小长度      
+                if (p.GetCustomAttribute<MinLengthAttribute>() is MinLengthAttribute minLengthAtt)
                 {
                     value.Add("minLength", minLengthAtt.Length);
                 }
@@ -95,25 +91,21 @@ namespace X.Data.Model
                 var requiredAtt = p.GetCustomAttribute<RequiredAttribute>();
                 if (requiredAtt != null)
                 {
-                    if (Required == null) Required = new List<string>();
-                    Required.Add(p.Name);
                     value.Add("required", true);
                 }
-                var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
-                bool isDate =
-                    p.PropertyType == typeof(DateTime) ||
-                    p.PropertyType == typeof(DateTime?) ||
-                    p.PropertyType == typeof(DateTimeOffset) ||
-                    p.PropertyType == typeof(DateTimeOffset?);
-                if (datatypeAtt != null || isDate)
+
+                if (datatypeAtt?.DataType == DataType.Upload)
                 {
-                    value.Add("format", datatypeAtt?.DataType == DataType.DateTime || isDate ? "date-time" : datatypeAtt?.DataType.ToString().ToLower());
+                    if (p.GetCustomAttribute<UploadAttribute>() is UploadAttribute upload)
+                    {
+                        upload.Action = upload.Action ?? configuration["AppSettings:FileUploadUrl"];
+                        value.Add("upload", upload);
+                    }
                 }
                 //枚举
                 if (p.PropertyType.IsEnum)
                 {
                     value.Add("enum", Enum.GetNames(p.PropertyType));
-                    value.Add("format", "enum");
                 }
 
                 Properties.Add(p.Name, value);
@@ -121,10 +113,6 @@ namespace X.Data.Model
         }
         [JsonProperty(PropertyName = "properties", Order = 3)]
         public Dictionary<string, object> Properties { get; set; }
-
-
-        [JsonProperty(PropertyName = "required", Order = 10, NullValueHandling = NullValueHandling.Ignore)]
-        public List<string> Required { get; set; }
 
         /// <summary>
         /// 判断是否为数值类型。
@@ -147,20 +135,37 @@ namespace X.Data.Model
 
         }
 
-        private string SchemaType(Type t)
+        private string SchemaType(PropertyInfo p)
         {
+            Type t = p.PropertyType;
+            if (t.IsEnum)
+            {
+                return "enum";
+            }
+
+            var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
+            if (datatypeAtt?.DataType == DataType.Upload)
+            {
+                return "upload";
+            }
+
             if (IsNumericType(t))
             {
                 return "number";
             }
-            if (t.IsEnum ||
-                t == typeof(string) ||
+            if (
+                datatypeAtt?.DataType == DataType.DateTime ||
                 t == typeof(DateTime) ||
                 t == typeof(DateTime?) ||
-                t == typeof(Guid?) ||
-                t == typeof(Guid) ||
                 t == typeof(DateTimeOffset) ||
                 t == typeof(DateTimeOffset?))
+            {
+                return "datetime";
+            }
+            if (
+                t == typeof(string) ||
+                t == typeof(Guid?) ||
+                t == typeof(Guid))
             {
                 return "string";
             }

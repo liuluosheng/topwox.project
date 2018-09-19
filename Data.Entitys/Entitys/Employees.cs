@@ -15,7 +15,7 @@ namespace X.Data.Entitys
 
         [Display(Name = "姓名")]
         [Required]
-        [MaxLength(10),MinLength(5)]
+        [MaxLength(10), MinLength(5)]
         public string Name { get; set; }
 
         [Display(Name = "联系电话")]
@@ -24,6 +24,8 @@ namespace X.Data.Entitys
 
         [Display(Name = "区域")]
         [Required]
+        [DataType(DataType.Upload), Upload]
+
         public string Area { get; set; }
 
         [Display(Name = "职位")]

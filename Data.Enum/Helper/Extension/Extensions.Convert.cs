@@ -24,7 +24,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static bool ToBool(this string obj)
         {
-            return YTConvert.ToBool(obj);
+            return ObjectConvert.ToBool(obj);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static bool? ToBoolOrNull(this string obj)
         {
-            return YTConvert.ToBoolOrNull(obj);
+            return ObjectConvert.ToBoolOrNull(obj);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static int ToInt(this string obj)
         {
-            return YTConvert.ToInt(obj);
+            return ObjectConvert.ToInt(obj);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static int? ToIntOrNull(this string obj)
         {
-            return YTConvert.ToIntOrNull(obj);
+            return ObjectConvert.ToIntOrNull(obj);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static long ToLong(this string obj)
         {
-            return YTConvert.ToLong(obj);
+            return ObjectConvert.ToLong(obj);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static long? ToLongOrNull(this string obj)
         {
-            return YTConvert.ToLongOrNull(obj);
+            return ObjectConvert.ToLongOrNull(obj);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static double ToDouble(this string obj)
         {
-            return YTConvert.ToDouble(obj);
+            return ObjectConvert.ToDouble(obj);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static double? ToDoubleOrNull(this string obj)
         {
-            return YTConvert.ToDoubleOrNull(obj);
+            return ObjectConvert.ToDoubleOrNull(obj);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static decimal ToDecimal(this string obj)
         {
-            return YTConvert.ToDecimal(obj);
+            return ObjectConvert.ToDecimal(obj);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static decimal? ToDecimalOrNull(this string obj)
         {
-            return YTConvert.ToDecimalOrNull(obj);
+            return ObjectConvert.ToDecimalOrNull(obj);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static DateTime ToDate(this string obj)
         {
-            return YTConvert.ToDate(obj);
+            return ObjectConvert.ToDate(obj);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static DateTime? ToDateOrNull(this string obj)
         {
-            return YTConvert.ToDateOrNull(obj);
+            return ObjectConvert.ToDateOrNull(obj);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static Guid ToGuid(this string obj)
         {
-            return YTConvert.ToGuid(obj);
+            return ObjectConvert.ToGuid(obj);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace X.Utility
         /// <param name="obj">数据</param>
         public static Guid? ToGuidOrNull(this string obj)
         {
-            return YTConvert.ToGuidOrNull(obj);
+            return ObjectConvert.ToGuidOrNull(obj);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace X.Utility
         /// <param name="obj">数据,范例: "83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A"</param>
         public static List<Guid> ToGuidList(this string obj)
         {
-            return YTConvert.ToGuidList(obj);
+            return ObjectConvert.ToGuidList(obj);
         }
 
         /// <summary>

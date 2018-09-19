@@ -7,7 +7,7 @@ namespace X.Utility
     /// <summary>
     /// 类型转换
     /// </summary>
-    public static class NumberConvert
+    public static class ObjectConvert
     {
         /// <summary>
         /// 转换为32位整型

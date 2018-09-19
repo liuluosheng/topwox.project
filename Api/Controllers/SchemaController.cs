@@ -8,11 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 using CsToTs;
 using X.Data.Model;
 using X.Data.Entitys;
+using Microsoft.Extensions.Configuration;
 
 namespace Ew.Api.Controllers
 {
     public class SchemaController : Controller
     {
+        private IConfiguration _configuration; 
+        public SchemaController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         /// <summary>
         /// 构建一个JSON Schema 供前端调用生成Form
         /// </summary>
@@ -24,7 +30,7 @@ namespace Ew.Api.Controllers
             var types = typeof(EntityBase).Assembly.GetTypes();
             var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
             if (targetType == null) return NotFound();
-            return Json(new JsonSchema(targetType));
+            return Json(new JsonSchema(targetType, _configuration));
         }
         [HttpGet("api/ts/{type}")]
         public ActionResult GetTS(string type = "")
