@@ -81,12 +81,7 @@ namespace X.Data.Model
                 {
                     value.Add("pattern", regExpressAtt.Pattern);
                 }
-                //限定倍数
-                var multipleOfAtt = p.GetCustomAttribute<MultipleOfAttribute>();
-                if (multipleOfAtt != null)
-                {
-                    value.Add("multipleOf", multipleOfAtt.Value);
-                }
+     
                 //必需项
                 var requiredAtt = p.GetCustomAttribute<RequiredAttribute>();
                 if (requiredAtt != null)
@@ -94,14 +89,13 @@ namespace X.Data.Model
                     value.Add("required", true);
                 }
 
-                if (datatypeAtt?.DataType == DataType.Upload)
+
+                if (p.GetCustomAttribute<UploadAttribute>() is UploadAttribute upload)
                 {
-                    if (p.GetCustomAttribute<UploadAttribute>() is UploadAttribute upload)
-                    {
-                        upload.Action = upload.Action ?? configuration["AppSettings:FileUploadUrl"];
-                        value.Add("upload", upload);
-                    }
+                    upload.Action = upload.Action ?? configuration["AppSettings:FileUploadUrl"];
+                    value.Add("upload", upload);
                 }
+
                 //枚举
                 if (p.PropertyType.IsEnum)
                 {
@@ -137,14 +131,18 @@ namespace X.Data.Model
 
         private string SchemaType(PropertyInfo p)
         {
+          
             Type t = p.PropertyType;
-            if (t.IsEnum)
+            if (t.IsGenericType)
+            {
+                t = t.GenericTypeArguments.FirstOrDefault();
+            }
+                if (t.IsEnum)
             {
                 return "enum";
             }
 
-            var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
-            if (datatypeAtt?.DataType == DataType.Upload)
+            if (p.GetCustomAttribute<UploadAttribute>() != null)
             {
                 return "upload";
             }
@@ -154,7 +152,6 @@ namespace X.Data.Model
                 return "number";
             }
             if (
-                datatypeAtt?.DataType == DataType.DateTime ||
                 t == typeof(DateTime) ||
                 t == typeof(DateTime?) ||
                 t == typeof(DateTimeOffset) ||

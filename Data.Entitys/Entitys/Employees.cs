@@ -24,10 +24,9 @@ namespace X.Data.Entitys
 
         [Display(Name = "区域")]
         [Required]
-        [DataType(DataType.Upload), Upload]
-
+        [Upload]
         public string Area { get; set; }
-
+        [Upload]
         [Display(Name = "职位")]
         [Required]
         public string Position { get; set; }
@@ -43,6 +42,9 @@ namespace X.Data.Entitys
 
         [Display(Name = "性别")]
         public Gender Gender { get; set; }
+
+        [Display(Name = "是否党员")]
+        public bool? IsPartyMember { get; set; }
 
         [Display(Name = "入职日期")]
         public DateTimeOffset? EntryDate { get; set; }

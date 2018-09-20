@@ -36,7 +36,7 @@ namespace Ew.Api.Controllers
             {
                 var bytes = new byte[file.Length];
                 file.OpenReadStream().Read(bytes, 0, bytes.Length);
-                result.Add($"files/{g.UploadFromBytes(file.FileName, bytes)}?name={file.FileName}");
+                result.Add($"api/files/{g.UploadFromBytes(file.FileName, bytes)}?name={file.FileName}");
             }
             return Ok( new { result= string.Join(",", result)});
         }
