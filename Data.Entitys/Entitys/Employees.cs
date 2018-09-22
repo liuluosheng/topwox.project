@@ -26,7 +26,6 @@ namespace X.Data.Entitys
         [Required]
         [Upload]
         public string Area { get; set; }
-        [Upload]
         [Display(Name = "职位")]
         [Required]
         public string Position { get; set; }

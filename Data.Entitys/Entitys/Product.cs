@@ -23,6 +23,7 @@ namespace X.Data.Entitys
 
         [Display(Name = "采购人员")]
         [ForeignKey("PurchasingId")]
+        [AutoComplete(Search = "Name,PhoneNumber",Label ="Name",PlaceHolder ="搜索名称，联系电话")]
         public Employees Purchasing { get; set; }
     }
 }

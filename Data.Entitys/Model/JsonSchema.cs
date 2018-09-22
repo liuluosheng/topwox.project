@@ -9,6 +9,9 @@ using System.Text;
 using System.Linq;
 using X.Data.Attributes;
 using Microsoft.Extensions.Configuration;
+using System.ComponentModel.DataAnnotations.Schema;
+using X.Data.Entitys;
+
 namespace X.Data.Model
 {
 
@@ -21,12 +24,16 @@ namespace X.Data.Model
         {
             Properties = new Dictionary<string, object>();
             var prop = type.GetProperties();
+            var foreignKeyProps = prop.Where(p => p.GetCustomAttribute<ForeignKeyAttribute>() != null);
             foreach (var p in prop)
             {
                 if (p.GetCustomAttribute<SchemaIgnoreAttribute>() != null) continue;
-                var datatypeAtt = p.GetCustomAttribute<DataTypeAttribute>();
-                var value = new Dictionary<string, object> { { "type", SchemaType(p) } };
-                value.Add("name", p.Name);
+                if (p.PropertyType == typeof(Guid) || p.PropertyType == typeof(Guid?)) continue;
+
+                var schematype = SchemaType(p);
+                var value = new Dictionary<string, object> { };
+                string name = p.Name;
+             
                 //标题与描述
                 var displayAtt = p.GetCustomAttribute<DisplayAttribute>();
                 if (displayAtt != null)
@@ -81,19 +88,28 @@ namespace X.Data.Model
                 {
                     value.Add("pattern", regExpressAtt.Pattern);
                 }
-     
+
                 //必需项
                 var requiredAtt = p.GetCustomAttribute<RequiredAttribute>();
                 if (requiredAtt != null)
                 {
                     value.Add("required", true);
                 }
-
-
                 if (p.GetCustomAttribute<UploadAttribute>() is UploadAttribute upload)
                 {
                     upload.Action = upload.Action ?? configuration["AppSettings:FileUploadUrl"];
                     value.Add("upload", upload);
+                    schematype = "upload";
+                }
+                if (p.GetCustomAttribute<AutoCompleteAttribute>() is AutoCompleteAttribute autoComplete)
+                {
+                    if (p.GetCustomAttribute<ForeignKeyAttribute>() is ForeignKeyAttribute foreignKey)
+                    {
+                        name = foreignKey.Name;
+                    }
+                    value.Add("autocomplete", autoComplete);
+                    value.Add("dataType", p.PropertyType.Name.ToLower());
+                    schematype = "autocomplete";          
                 }
 
                 //枚举
@@ -101,9 +117,14 @@ namespace X.Data.Model
                 {
                     value.Add("enum", Enum.GetNames(p.PropertyType));
                 }
-
-                Properties.Add(p.Name, value);
+                value.Add("name", name);
+                if (schematype != null)
+                {
+                    value.Add("type", schematype);
+                    Properties.Add(p.Name, value);
+                }
             }
+
         }
         [JsonProperty(PropertyName = "properties", Order = 3)]
         public Dictionary<string, object> Properties { get; set; }
@@ -131,22 +152,16 @@ namespace X.Data.Model
 
         private string SchemaType(PropertyInfo p)
         {
-          
+
             Type t = p.PropertyType;
             if (t.IsGenericType)
             {
                 t = t.GenericTypeArguments.FirstOrDefault();
             }
-                if (t.IsEnum)
+            if (t.IsEnum)
             {
                 return "enum";
             }
-
-            if (p.GetCustomAttribute<UploadAttribute>() != null)
-            {
-                return "upload";
-            }
-
             if (IsNumericType(t))
             {
                 return "number";
@@ -166,7 +181,7 @@ namespace X.Data.Model
             {
                 return "string";
             }
-            return t.Name.ToLower();
+            return null;
         }
     }
 
