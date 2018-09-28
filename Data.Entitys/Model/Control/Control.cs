@@ -37,8 +37,9 @@ namespace X.Data.Model.Control
     /// </summary>
     public class Number : Control
     {
-        public int Minimum { get; set; }
-        public int Maximum { get; set; }
+
+        public object Minimum { get; set; }
+        public object Maximum { get; set; }
     }
     /// <summary>
     /// 自动提示选择

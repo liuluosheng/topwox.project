@@ -27,8 +27,10 @@ namespace X.Data.Model.Control
             {
                 if (p.GetCustomAttribute<SchemaIgnoreAttribute>() == null)
                 {
-                    controls.Add(Create(p));
+                    if (Create(p) is Control control)
+                        controls.Add(control);
                 }
+
             }
             return controls;
         }
@@ -45,8 +47,8 @@ namespace X.Data.Model.Control
                         control = new Number
                         {
                             Type = controlType,
-                            Maximum = (int)rangeAtt?.Maximum,
-                            Minimum = (int)rangeAtt?.Minimum
+                            Maximum = rangeAtt?.Maximum,
+                            Minimum = rangeAtt?.Minimum
                         };
                         break;
                     case ControlType.Text:
@@ -86,12 +88,11 @@ namespace X.Data.Model.Control
             }
             if (prop.GetCustomAttribute<AutoCompleteAttribute>() is AutoCompleteAttribute autoCompleteAttribute)
             {
-                var foreignKey = prop.GetCustomAttribute<ForeignKeyAttribute>();
                 control = new Autocomplete
                 {
                     Type = ControlType.Autocomplete,
-                    Name = foreignKey?.Name,
-                    DataType = prop.PropertyType.Name.ToLower(),
+                    Name = prop.Name,
+                    DataType = autoCompleteAttribute.DataType.ToLower(),
                     Label = autoCompleteAttribute.Label,
                     Search = autoCompleteAttribute.Search
                 };
@@ -102,15 +103,18 @@ namespace X.Data.Model.Control
                 var displayAttribute = prop.GetCustomAttribute<DisplayAttribute>();
                 control.Title = displayAttribute?.Name ?? null;
                 control.Description = displayAttribute?.Description ?? null;
-
-                var descriptionAttribute = prop.GetCustomAttribute<DescriptionAttribute>();
-                control.Description = descriptionAttribute?.Description ?? null;
-
-                var displayNameAttribute = prop.GetCustomAttribute<DisplayNameAttribute>();
-                control.Description = displayNameAttribute?.DisplayName ?? null;
-
+                if (control.Description == null)
+                {
+                    var descriptionAttribute = prop.GetCustomAttribute<DescriptionAttribute>();
+                    control.Description = descriptionAttribute?.Description ?? null;
+                }
+                if (control.Title == null)
+                {
+                    var displayNameAttribute = prop.GetCustomAttribute<DisplayNameAttribute>();
+                    control.Title = displayNameAttribute?.DisplayName ?? null;
+                }
                 var placeHolderAttribute = prop.GetCustomAttribute<PlaceHolderAttribute>();
-                control.Description = placeHolderAttribute?.Value ?? null;
+                control.PlaceHolder = placeHolderAttribute?.Value ?? null;
 
                 if (prop.GetCustomAttribute<RequiredAttribute>() is RequiredAttribute)
                 {

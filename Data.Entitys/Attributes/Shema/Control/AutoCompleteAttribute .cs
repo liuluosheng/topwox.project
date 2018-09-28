@@ -30,7 +30,11 @@ namespace X.Data.Attributes.Shema
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Label { get; set; }
 
-       
+        /// <summary>
+        /// 查询的类别
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string DataType { get; set; }
     }
 
 }
