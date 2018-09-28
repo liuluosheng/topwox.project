@@ -9,12 +9,13 @@ using CsToTs;
 using X.Data.Model;
 using X.Data.Entitys;
 using Microsoft.Extensions.Configuration;
+using X.Data.Model.Control;
 
 namespace Ew.Api.Controllers
 {
     public class SchemaController : Controller
     {
-        private IConfiguration _configuration; 
+        private IConfiguration _configuration;
         public SchemaController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -30,7 +31,8 @@ namespace Ew.Api.Controllers
             var types = typeof(EntityBase).Assembly.GetTypes();
             var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
             if (targetType == null) return NotFound();
-            return Json(new JsonSchema(targetType, _configuration));
+            return Json(new ControlFactory(_configuration).Create(targetType));
+            //  return Json(new JsonSchema(targetType, _configuration));
         }
         [HttpGet("api/ts/{type}")]
         public ActionResult GetTS(string type = "")

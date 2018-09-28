@@ -12,7 +12,7 @@ namespace Ew.Api.Core
         //添加你的实体映射关系.
         public static void InitAutoMapperConfig()
         {
-            Mapper.Initialize(cfg => { cfg.CreateMap<TestUser, User>().ReverseMap(); });
+           // Mapper.Initialize(cfg => { cfg.CreateMap<TestUser, User>().ReverseMap(); });
         }
     }
 }

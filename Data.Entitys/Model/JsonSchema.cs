@@ -11,6 +11,7 @@ using X.Data.Attributes;
 using Microsoft.Extensions.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using X.Data.Entitys;
+using X.Data.Attributes.Shema;
 
 namespace X.Data.Model
 {
@@ -109,7 +110,8 @@ namespace X.Data.Model
                     }
                     value.Add("autocomplete", autoComplete);
                     value.Add("dataType", p.PropertyType.Name.ToLower());
-                    schematype = "autocomplete";          
+                    schematype = "autocomplete";   
+                    
                 }
 
                 //枚举

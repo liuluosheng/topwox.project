@@ -8,36 +8,41 @@ using Newtonsoft.Json.Serialization;
 using System.ComponentModel;
 using Newtonsoft.Json.Converters;
 
-namespace X.Data.Attributes
+namespace X.Data.Attributes.Shema
 {
 
     /// <summary>
-    /// Autocoplete设定
-    /// 与ForeignKey 属性配合使用
+    /// 上传控件UI设定
     /// </summary>
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class AutoCompleteAttribute : Attribute
+    public class UploadAttribute : Attribute
     {
-        public AutoCompleteAttribute()
+        public UploadAttribute()
         {
-           
+            ButtonText = "选择文件";
         }
-        /// <summary>
-        /// 按指定的属性来搜索,多项以逗号分隔
-        /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Search { get; set; }
 
         /// <summary>
-        /// 选择后显示的属性
+        /// 按钮文本
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Label { get; set; }
+        public string ButtonText { get; set; }
         /// <summary>
-        /// PlaceHolder
+        /// 允许上传的文件类型，如：image/png,image/jpeg
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string PlaceHolder { get; set; }
+        public string FileType { get; set; }
+        /// <summary>
+        /// 服务端路径
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string Action { get; set; }
+
+        /// <summary>
+        /// 是否可上传多文件
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public bool Multiple { get; set; }
 
     }
 

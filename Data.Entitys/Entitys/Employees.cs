@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using X.Data.Attributes;
+using X.Data.Attributes.Shema;
 using X.Data.Entitys;
 
 namespace X.Data.Entitys
