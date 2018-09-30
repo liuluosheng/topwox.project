@@ -120,6 +120,7 @@ namespace X.Data.Model.Control
                 {
                     control.Required = true;
                 }
+            
                 control.Name = prop.Name;
             }
             return control;
