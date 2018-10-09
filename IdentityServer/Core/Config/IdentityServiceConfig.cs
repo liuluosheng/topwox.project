@@ -22,7 +22,11 @@ namespace Ew.IdentityServer.Core.Config
         {
             return new List<ApiResource>
             {
-                new ApiResource("api",new List<string>{ JwtClaimTypes.Role}),
+                new ApiResource("api",new List<string>
+                {
+                    JwtClaimTypes.Role,
+                    JwtClaimTypes.Email
+                }),
                 new ApiResource("share")
             };
         }
