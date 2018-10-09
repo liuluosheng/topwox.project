@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using X.Data.Attributes;
 
@@ -10,7 +11,6 @@ namespace X.Data.Model.Control
 {
     [JsonObject(
         NamingStrategyType = typeof(CamelCaseNamingStrategy),
-
         ItemNullValueHandling = NullValueHandling.Ignore)
      ]
     public class Control
@@ -23,6 +23,8 @@ namespace X.Data.Model.Control
         public string PlaceHolder { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public bool Required { get; set; }
+        [JsonProperty( NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public SchemaColumnAttribute ColumnSetting { get; set; }
     }
     /// <summary>
     /// 文本框

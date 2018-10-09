@@ -20,21 +20,36 @@ namespace X.Data.Model.Control
         {
             _configuration = configuration;
         }
-        public List<Control> Create(Type type)
+        public Schema CreateSchema(Type type)
+        {
+            var create = Create(type);
+            return new Schema
+            {
+                Properties = create.Item1,
+                Expand = create.Item2,
+                Type = type.Name
+            };
+        }
+        private Tuple<List<Control>, List<string>> Create(Type type)
         {
             var controls = new List<Control>();
-            foreach (var p in type.GetProperties())
+            var expands = new List<string>();
+            var schemaProps = type.GetProperties().Where(p => p.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute);
+            foreach (var p in (schemaProps.Any() ? schemaProps : type.GetProperties().Where(p => p.GetCustomAttribute<SchemaIgnoreAttribute>() == null)))
             {
-                if (p.GetCustomAttribute<SchemaIgnoreAttribute>() == null)
+                if (Create(p) is Control control)
                 {
-                    if (Create(p) is Control control)
-                        controls.Add(control);
+                    controls.Add(control);
+                    if (control.ColumnSetting?.DisplayExpression != null)
+                    {
+                        expands.Add(control.ColumnSetting?.DisplayExpression.Split('.').First());
+                    }
                 }
-
             }
-            return controls;
+            return Tuple.Create(controls, expands);
         }
-        public Control Create(PropertyInfo prop)
+
+        private Control Create(PropertyInfo prop)
         {
             Control control = null;
             if (GetPropType(prop) is ControlType controlType)
@@ -120,7 +135,13 @@ namespace X.Data.Model.Control
                 {
                     control.Required = true;
                 }
-            
+                if (prop.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute schemaColumnAttribute)
+                {
+
+                    if (!new SchemaColumnAttribute().Equals(schemaColumnAttribute))
+                        control.ColumnSetting = schemaColumnAttribute;
+                }
+
                 control.Name = prop.Name;
             }
             return control;
