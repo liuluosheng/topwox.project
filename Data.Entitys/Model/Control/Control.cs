@@ -4,6 +4,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using X.Data.Attributes;
 
 namespace X.Data.Model.Control
 {

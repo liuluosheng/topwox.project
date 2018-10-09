@@ -22,10 +22,12 @@ namespace X.Data.Entitys
 
         [Display(Name = "采购人员")]
         [AutoComplete(DataType = "Employees", Search = "Name,PhoneNumber", Label = "Name"), PlaceHolder("搜索名称，联系电话")]
+        [ODataProperty("Purchasing.Name")]
         public Guid? PurchasingId { get; set; }
 
        
         [ForeignKey("PurchasingId")]
+        [Odata(ExpandNames = "Name")]
         public Employees Purchasing { get; set; }
     }
 }

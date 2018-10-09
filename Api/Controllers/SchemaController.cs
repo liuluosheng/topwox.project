@@ -32,9 +32,8 @@ namespace Ew.Api.Controllers
             var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
             if (targetType == null) return NotFound();
             return Json(new { type, properties = new ControlFactory(_configuration).Create(targetType) });
-
-            
-        }
+        } 
+                
         [HttpGet("api/ts/{type}")]
         public ActionResult GetTS(string type = "")
         {
