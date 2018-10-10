@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace X.Data.Attributes
@@ -19,5 +20,26 @@ namespace X.Data.Attributes
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string DisplayExpression  { get; set; }
+
+        /// <summary>
+        ///指定列是否可搜索
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [DefaultValue(true)]
+        public bool Searchable { get; set; } = true;
+
+        /// <summary>
+        ///指定列是否可排序
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [DefaultValue(true)]
+        public bool Sortable { get; set; } = true;
+
+        /// <summary>
+        ///指定列是否可排序
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [DefaultValue(true)]
+        public bool Editable { get; set; } = true;
     }
 }

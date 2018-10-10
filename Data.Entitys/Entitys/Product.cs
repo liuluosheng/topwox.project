@@ -14,7 +14,7 @@ namespace X.Data.Entitys
         [Display(Name = "产品名称"), SchemaColumn]
         [Required]
         public string Name { get; set; }
-        [Display(Name = "单重"), SchemaColumn]
+        [Display(Name = "单重"), SchemaColumn(Searchable = false)]
         [Required]
         public decimal Weight { get; set; }
         [Display(Name = "产品描述")]
