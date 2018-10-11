@@ -34,12 +34,17 @@ namespace X.Data.Model.Control
         {
             var controls = new List<Control>();
             var expands = new List<string>();
-            var schemaProps = type.GetProperties().Where(p => p.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute);
-            foreach (var p in (schemaProps.Any() ? schemaProps : type.GetProperties().Where(p => p.GetCustomAttribute<SchemaIgnoreAttribute>() == null)))
+            var anySchemaProps = type.GetProperties().Any(p => p.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute);
+            foreach (var p in (type.GetProperties().Where(p => p.GetCustomAttribute<SchemaIgnoreAttribute>() == null)))
             {
                 if (Create(p) is Control control)
                 {
                     controls.Add(control);
+                    if (!anySchemaProps)
+                    {
+                        ///如果实体未标识任何SchemaColumn属性
+                        control.ColumnSetting = new SchemaColumnAttribute();             
+                    }
                     if (control.ColumnSetting?.DisplayExpression != null)
                     {
                         expands.Add(control.ColumnSetting?.DisplayExpression.Split('.').First());
@@ -137,8 +142,6 @@ namespace X.Data.Model.Control
                 }
                 if (prop.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute schemaColumnAttribute)
                 {
-
-                    if (!new SchemaColumnAttribute().Equals(schemaColumnAttribute))
                         control.ColumnSetting = schemaColumnAttribute;
                 }
 

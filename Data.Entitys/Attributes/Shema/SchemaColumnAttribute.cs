@@ -41,5 +41,6 @@ namespace X.Data.Attributes
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
         [DefaultValue(true)]
         public bool Editable { get; set; } = true;
+
     }
 }
