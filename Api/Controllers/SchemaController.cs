@@ -10,21 +10,26 @@ using X.Data.Model;
 using X.Data.Entitys;
 using Microsoft.Extensions.Configuration;
 using X.Data.Model.Control;
+using CacheCow.Server.Core.Mvc;
+using EasyCaching.Core;
 
 namespace Ew.Api.Controllers
 {
     public class SchemaController : Controller
     {
         private IConfiguration _configuration;
-        public SchemaController(IConfiguration configuration)
+        private readonly IEasyCachingProvider _provider;
+        public SchemaController(IConfiguration configuration, IEasyCachingProvider provider)
         {
             _configuration = configuration;
+            _provider = provider;
         }
         /// <summary>
         /// 构建一个JSON Schema 供前端调用生成Form
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
+        [HttpCacheFactory(300)]
         [HttpGet("api/jsonschema/{type}")]
         public ActionResult Get(string type = "")
         {

@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNet.OData.Routing;
+using CacheCow.Server.Core.Mvc;
+using EasyCaching.InMemory;
 
 namespace Ew.Api
 {
@@ -48,6 +50,12 @@ namespace Ew.Api
                 });
 
             });
+            // github.com/aliostad/CacheCow
+            services.AddHttpCachingMvc(); 
+
+            // github.com/dotnetcore/EasyCaching
+            services.AddDefaultInMemoryCache();
+
             DependencyConfig.Config(services, Configuration);
             services.AddCors();
             services.AddOData();

@@ -15,6 +15,7 @@ using Microsoft.Data.Edm;
 using ODataPath = Microsoft.AspNet.OData.Routing.ODataPath;
 using Microsoft.OData.UriParser;
 using System.Reflection;
+using CacheCow.Server.Core.Mvc;
 
 namespace Ew.Api.Controllers
 {

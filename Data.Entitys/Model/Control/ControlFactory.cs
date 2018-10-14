@@ -49,6 +49,12 @@ namespace X.Data.Model.Control
                     {
                         expands.Add(control.ColumnSetting?.DisplayExpression.Split('.').First());
                     }
+                    if(control.ColumnSetting!=null && p.GetCustomAttributes<NotMappedAttribute>() is NotMappedAttribute)
+                    {
+                        control.ColumnSetting.Editable = false;
+                        control.ColumnSetting.Searchable = false;
+                        control.ColumnSetting.Sortable = false;
+                    }
                 }
             }
             return Tuple.Create(controls, expands);
