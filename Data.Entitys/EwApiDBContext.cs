@@ -10,16 +10,15 @@ namespace X.Data
         {
 
         }
-        public DbSet<User> Users { get; set; }
-
-        public DbSet<Employees> Employees { get; set; }
-
-        public DbSet<Product> Products { get; set; }
-
-        public DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            foreach (var type in typeof(EntityBase).Assembly.GetTypes()){
+                if (type.BaseType == typeof(EntityBase))
+                {
+                    modelBuilder.Entity(type);
+                }
+            }
             base.OnModelCreating(modelBuilder);
         }
 
