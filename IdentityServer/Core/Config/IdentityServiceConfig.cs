@@ -4,7 +4,7 @@ using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 
-namespace Ew.IdentityServer.Core.Config
+namespace IdentityServer.Core.Config
 {
     public class IdentityServiceConfig
     {

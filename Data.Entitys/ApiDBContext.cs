@@ -4,9 +4,9 @@ using System;
 
 namespace Data
 {
-    public class EwApiDBContext : DbContext
+    public class ApiDBContext : DbContext
     {
-        public EwApiDBContext(DbContextOptions options) : base(options)
+        public ApiDBContext(DbContextOptions options) : base(options)
         {
 
         }

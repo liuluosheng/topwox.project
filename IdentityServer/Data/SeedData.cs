@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
-using Ew.IdentityServer.Model;
+using IdentityServer.Model;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ew.IdentityServer.Data
+namespace IdentityServer.Data
 {
     /// <summary>
     /// 创建种子数据

@@ -41,7 +41,7 @@ namespace Ew.Api
                     .AddAuthorization()
                     .AddJsonFormatters();
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
-            services.AddDbContext<EwApiDBContext>(options =>
+            services.AddDbContext<ApiDBContext>(options =>
             {
                 options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b =>
                 {

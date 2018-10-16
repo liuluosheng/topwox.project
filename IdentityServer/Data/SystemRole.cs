@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace Ew.IdentityServer.Model
+namespace IdentityServer.Model
 {
     public enum SystemRole
     {

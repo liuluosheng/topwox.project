@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Data;
-using Ew.IdentityServer.Core.Config;
-using Ew.IdentityServer.Model;
+using IdentityServer.Core.Config;
+using IdentityServer.Model;
 using IdentityServer4.AspNetIdentity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,7 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Ew.IdentityServer
+namespace IdentityServer
 {
     public class Startup
     {

@@ -18,7 +18,7 @@ using IdentityModel;
 using System.Linq;
 using System;
 using System.Collections.Generic;
-using Ew.IdentityServer.Model;
+using IdentityServer.Model;
 
 namespace IdentityServer4.Quickstart.UI
 {

@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Ew.IdentityServer": {
+    "IdentityServer": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",

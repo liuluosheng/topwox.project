@@ -47,7 +47,10 @@
     <ProjectReference Include="..\Data.Entitys\Data.csproj" />
     <ProjectReference Include="..\Data.Enum\Core.Utility.csproj" />
     <ProjectReference Include="..\Data.Repository\Core.Repository.csproj" />
-    <ProjectReference Include="..\IdentityServer\Ew.IdentityServer.csproj" />
+    <ProjectReference Include="..\IdentityServer\IdentityServer.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

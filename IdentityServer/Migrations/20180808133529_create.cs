@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace Ew.IdentityServer.Migrations
+namespace IdentityServer.Migrations
 {
     public partial class create : Migration
     {

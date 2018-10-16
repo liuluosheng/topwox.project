@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Ew.IdentityServer.Model;
+using IdentityServer.Model;
 using Data.Model;
 
 
-namespace Ew.IdentityServer.Controllers
+namespace IdentityServer.Controllers
 {
     [Produces("application/json")]
     public class UserController : Controller

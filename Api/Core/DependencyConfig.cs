@@ -18,7 +18,7 @@ namespace Ew.Api.Core
 
         public static void Config(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<DbContext, EwApiDBContext>();
+            services.AddScoped<DbContext, ApiDBContext>();
             services.AddScoped<IBaseRepository, BaseRepository>();
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddSingleton(typeof(MongoClient), new MongoClient(configuration["AppSettings:Mongo"]));
