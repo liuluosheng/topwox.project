@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Migrations
 {
     [DbContext(typeof(ApiDBContext))]
-    partial class ApiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20181016135446_AddSystemMenu")]
+    partial class AddSystemMenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,21 +138,17 @@ namespace Api.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
-
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.Property<Guid?>("ParentMenuId");
 
-                    b.Property<bool>("Root");
-
                     b.Property<byte[]>("Timestamp")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<string>("Url");
+                    b.Property<string>("Url")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
