@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using X.Data;
+using Data;
 
 namespace Ew.Api.Migrations
 {
@@ -21,7 +21,7 @@ namespace Ew.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("X.Data.Entitys.Employees", b =>
+            modelBuilder.Entity("Data.Entitys.Employees", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -63,7 +63,7 @@ namespace Ew.Api.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("X.Data.Entitys.Product", b =>
+            modelBuilder.Entity("Data.Entitys.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -90,7 +90,7 @@ namespace Ew.Api.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("X.Data.Entitys.Supplier", b =>
+            modelBuilder.Entity("Data.Entitys.Supplier", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -115,7 +115,7 @@ namespace Ew.Api.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("X.Data.Entitys.User", b =>
+            modelBuilder.Entity("Data.Entitys.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -139,9 +139,9 @@ namespace Ew.Api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("X.Data.Entitys.Product", b =>
+            modelBuilder.Entity("Data.Entitys.Product", b =>
                 {
-                    b.HasOne("X.Data.Entitys.Employees", "Purchasing")
+                    b.HasOne("Data.Entitys.Employees", "Purchasing")
                         .WithMany()
                         .HasForeignKey("PurchasingId");
                 });

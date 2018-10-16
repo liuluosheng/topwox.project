@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using X.Data.Dto;
+using Data.Dto;
 
 namespace Ew.Api.Core
 {

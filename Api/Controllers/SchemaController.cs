@@ -6,10 +6,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CsToTs;
-using X.Data.Model;
-using X.Data.Entitys;
+using Data.Model;
+using Data.Entitys;
 using Microsoft.Extensions.Configuration;
-using X.Data.Model.Control;
+using Data.Model.Control;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.Core;
 

@@ -1,11 +1,11 @@
-﻿using X.Data.Entitys;
+﻿using Data.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace X.Repository
+namespace Core.Repository
 {
     /// <summary>
     /// 实体仓储模型的数据标准操作

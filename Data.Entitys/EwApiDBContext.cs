@@ -1,8 +1,8 @@
-﻿using X.Data.Entitys;
+﻿using Data.Entitys;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace X.Data
+namespace Data
 {
     public class EwApiDBContext : DbContext
     {

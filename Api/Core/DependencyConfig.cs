@@ -1,13 +1,13 @@
-﻿using X.Core.IServices;
-using X.Core.Service;
+﻿using Core.IServices;
+using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using X.Data;
-using X.Repository;
+using Data;
+using Core.Repository;
 using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 

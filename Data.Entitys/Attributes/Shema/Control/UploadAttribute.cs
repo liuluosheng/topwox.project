@@ -8,7 +8,7 @@ using Newtonsoft.Json.Serialization;
 using System.ComponentModel;
 using Newtonsoft.Json.Converters;
 
-namespace X.Data.Attributes.Shema
+namespace Data.Attributes.Shema
 {
 
     /// <summary>

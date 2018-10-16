@@ -1,4 +1,4 @@
-﻿using X.Core.IServices;
+﻿using Core.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.JsonPatch;
-using X.Data.Entitys;
+using Data.Entitys;
 using Microsoft.EntityFrameworkCore;
-using X.Repository;
+using Core.Repository;
 
-namespace X.Core.Service
+namespace Core.Service
 {
     /// <summary>
     /// Service基类

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
-using X.Data;
+using Data;
 using Ew.Api.Core;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;

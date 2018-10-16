@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace X.Data.Attributes.Shema
+namespace Data.Attributes.Shema
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class PlaceHolderAttribute : Attribute

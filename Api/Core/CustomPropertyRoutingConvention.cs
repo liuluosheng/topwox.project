@@ -15,8 +15,8 @@ using Microsoft.Data.Edm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using Microsoft.OData.UriParser;
-using X.Data.Attributes;
-using X.Data.Entitys;
+using Data.Attributes;
+using Data.Entitys;
 
 namespace Ew.Api.Core
 {

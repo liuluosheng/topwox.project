@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using X.Data;
+using Data;
 
 namespace Ew.Api.Migrations
 {
@@ -21,7 +21,7 @@ namespace Ew.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("X.Data.Entitys.Employees", b =>
+            modelBuilder.Entity("Data.Entitys.Employees", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -60,7 +60,7 @@ namespace Ew.Api.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("X.Data.Entitys.User", b =>
+            modelBuilder.Entity("Data.Entitys.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();

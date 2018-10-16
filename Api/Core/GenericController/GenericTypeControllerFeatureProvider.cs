@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using X.Data.Entitys;
+using Data.Entitys;
 using System.Reflection;
-using X.Data.Attributes;
+using Data.Attributes;
 
 namespace Ew.Api.Core
 {

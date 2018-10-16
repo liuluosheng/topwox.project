@@ -1,4 +1,4 @@
-﻿using X.Data.Entitys;
+﻿using Data.Entitys;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace X.Core.IServices
+namespace Core.IServices
 {
     public interface IBaseService<TEntity> where TEntity : EntityBase
     {

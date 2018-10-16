@@ -7,11 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using X.Data.Attributes;
-using X.Data.Attributes.Shema;
-using X.Data.Entitys;
+using Data.Attributes;
+using Data.Attributes.Shema;
+using Data.Entitys;
 
-namespace X.Data.Model.Control
+namespace Data.Model.Control
 {
     public class ControlFactory
     {

@@ -1,10 +1,10 @@
-﻿using X.Core.IServices;
+﻿using Core.IServices;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace X.Core.Services
+namespace Core.Services
 {
     public class EmailService : IEmail
     {

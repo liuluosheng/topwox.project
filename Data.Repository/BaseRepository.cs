@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using X.Data.Entitys;
+using Data.Entitys;
 using Microsoft.EntityFrameworkCore;
 
-namespace X.Repository
+namespace Core.Repository
 {
     /// <summary>
     /// EntityFramework的仓储实现

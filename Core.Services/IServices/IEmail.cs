@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace X.Core.IServices
+namespace Core.IServices
 {
     public interface IEmail
     {

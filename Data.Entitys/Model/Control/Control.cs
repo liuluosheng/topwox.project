@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using X.Data.Attributes;
+using Data.Attributes;
 
-namespace X.Data.Model.Control
+namespace Data.Model.Control
 {
     [JsonObject(
         NamingStrategyType = typeof(CamelCaseNamingStrategy),

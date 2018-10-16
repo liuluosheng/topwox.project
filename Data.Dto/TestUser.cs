@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using X.Data.Entitys;
+using Data.Entitys;
 
-namespace X.Data.Dto
+namespace Data.Dto
 {
     public class TestUser : EntityBase
     {

@@ -144,8 +144,9 @@
     <None Include="wwwroot\lib\jquery-validation\src\localization\methods_nl.js" />
     <None Include="wwwroot\lib\jquery-validation\src\localization\methods_pt.js" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Data.Entitys\X.Data.csproj" />
+    <ProjectReference Include="..\Data.Entitys\Data.csproj" />
   </ItemGroup>
 
 </Project>

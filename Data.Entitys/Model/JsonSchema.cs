@@ -7,13 +7,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
 using System.Linq;
-using X.Data.Attributes;
+using Data.Attributes;
 using Microsoft.Extensions.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using X.Data.Entitys;
-using X.Data.Attributes.Shema;
+using Data.Entitys;
+using Data.Attributes.Shema;
 
-namespace X.Data.Model
+namespace Data.Model
 {
 
     /// <summary>
