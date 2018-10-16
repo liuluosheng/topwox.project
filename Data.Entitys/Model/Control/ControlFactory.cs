@@ -43,7 +43,7 @@ namespace Data.Model.Control
                     if (!anySchemaProps)
                     {
                         ///如果实体未标识任何SchemaColumn属性
-                        control.ColumnSetting = new SchemaColumnAttribute();             
+                        control.ColumnSetting = new SchemaColumnAttribute() { Editable = p.CanWrite };
                     }
                     if (control.ColumnSetting?.DisplayExpression != null)
                     {
@@ -148,7 +148,9 @@ namespace Data.Model.Control
                 }
                 if (prop.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute schemaColumnAttribute)
                 {
-                        control.ColumnSetting = schemaColumnAttribute;
+                    control.ColumnSetting = schemaColumnAttribute;
+                    if (!prop.CanWrite)
+                        control.ColumnSetting.Editable = false;
                 }
 
                 control.Name = prop.Name;
