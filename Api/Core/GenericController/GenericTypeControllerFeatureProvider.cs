@@ -21,7 +21,7 @@ namespace Ew.Api.Core
             foreach (var candidate in candidates)
             {
                 feature.Controllers.Add(
-                    typeof(BaseController<>).MakeGenericType(candidate).GetTypeInfo()
+                    typeof(BaseOdataController<>).MakeGenericType(candidate).GetTypeInfo()
                 );
             }
         }

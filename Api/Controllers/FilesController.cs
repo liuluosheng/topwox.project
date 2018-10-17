@@ -56,7 +56,7 @@ namespace Ew.Api.Controllers
             var obj = checkId ? g.DownloadAsBytes(objectId) : g.DownloadAsBytesByName(name);
             if (obj != null)
             {
-                return File(obj, "application/pdf", name);
+                return File(obj, "application/octet-stream", name);
             }
             return BadRequest("Not Find!");
         }
