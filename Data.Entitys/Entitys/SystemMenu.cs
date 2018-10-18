@@ -26,7 +26,6 @@ namespace Data.Entitys
         public string Url { get; set; }
 
         [Display(Name = "描述")]
-        [SchemaColumn]
         [Required]
         public string Description { get; set; }
 
