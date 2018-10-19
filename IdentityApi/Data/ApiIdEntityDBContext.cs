@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace WebService.IdentityApi.Data
+namespace WebService.Identity.Api.Data
 {
     public class ApiIdEntityDBContext : IdentityDbContext<SysUser, SysRole, Guid>
     {

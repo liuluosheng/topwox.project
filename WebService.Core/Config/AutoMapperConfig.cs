@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Data.Dto;
 
-namespace WebService.Api.Core
+namespace WebService.Core
 {
     public static class AutoMapperConfig
     {

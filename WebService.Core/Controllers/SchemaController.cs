@@ -13,7 +13,7 @@ using Data.Model.Control;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.Core;
 
-namespace WebService.Api.Controllers
+namespace WebService.Core.Controllers
 {
     [ApiController]
     public class SchemaController : ControllerBase

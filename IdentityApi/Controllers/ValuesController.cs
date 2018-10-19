@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebService.IdentityApi.Controllers
+namespace WebService.Identity.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

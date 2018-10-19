@@ -4,7 +4,7 @@ using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 
-namespace WebService.IdentityApi
+namespace WebService.Identity.Api
 {
     public class IdentityServiceConfig
     {

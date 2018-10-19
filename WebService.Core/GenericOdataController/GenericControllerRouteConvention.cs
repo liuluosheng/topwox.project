@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Data.Attributes;
 
-namespace WebService.Api.Core
+namespace WebService.Core
 {
 
     public class GenericControllerRouteConvention : IControllerModelConvention

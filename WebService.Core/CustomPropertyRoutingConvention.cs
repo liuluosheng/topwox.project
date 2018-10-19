@@ -18,7 +18,7 @@ using Microsoft.OData.UriParser;
 using Data.Attributes;
 using Data.Entitys;
 
-namespace WebService.Api.Core
+namespace WebService.Core
 {
     public class CustomPropertyRoutingConvention : NavigationSourceRoutingConvention
     {

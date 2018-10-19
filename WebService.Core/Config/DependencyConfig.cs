@@ -11,14 +11,13 @@ using Core.Repository;
 using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 
-namespace WebService.Api.Core
+namespace WebService.Core
 {
     public static class DependencyConfig
     {
 
         public static void Config(IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddScoped<DbContext, ApiDBContext>();
+        {    
             services.AddScoped<IBaseRepository, BaseRepository>();
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddSingleton(typeof(MongoClient), new MongoClient(configuration["AppSettings:Mongo"]));

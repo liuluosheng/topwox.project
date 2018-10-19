@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebService.IdentityApi.Data
+namespace WebService.Identity.Api.Data
 {
     public class SysUser : IdentityUser<Guid>
     {

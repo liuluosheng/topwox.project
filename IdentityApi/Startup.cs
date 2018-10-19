@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using CacheCow.Server.Core.Mvc;
+using EasyCaching.InMemory;
 using IdentityServer4.AspNetIdentity;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,15 +19,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WebService.IdentityApi.Data;
+using WebService.Api.Core;
+using WebService.Core;
+using WebService.Identity.Api.Data;
 
-namespace WebService.IdentityApi
+namespace WebService.Identity.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+             .SetBasePath(env.ContentRootPath)
+            .AddEnvironmentVariables()
+            .AddJsonFile("appsettings.json")
+            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -30,9 +42,14 @@ namespace WebService.IdentityApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                 .ConfigureApplicationPartManager(m => m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider()))
+                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddScoped<DbContext, ApiIdEntityDBContext>();
+
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
+
             services.AddDbContext<ApiIdEntityDBContext>(options =>
             {
                 options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b =>
@@ -41,6 +58,16 @@ namespace WebService.IdentityApi
                     b.UseRowNumberForPaging(); //server 2008  
                 });
             });
+
+            // github.com/aliostad/CacheCow
+            services.AddHttpCachingMvc();
+
+            // github.com/dotnetcore/EasyCaching
+            services.AddDefaultInMemoryCache();
+            services.AddScoped<DbContext, ApiIdEntityDBContext>();
+            DependencyConfig.Config(services, Configuration);
+            services.AddCors();
+            services.AddOData();
             services.AddIdentity<SysUser, SysRole>(options =>
             {
                 options.Tokens.ChangePhoneNumberTokenProvider = "Phone";
@@ -86,8 +113,22 @@ namespace WebService.IdentityApi
             }
             //app.UseHttpsRedirection();   
             app.UseCors(police => police.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-            app.UseIdentityServer();    
-            app.UseMvc();
+            app.UseIdentityServer();
+            app.UseMvcWithDefaultRoute();
+            app.UseMvc(b =>
+            {
+                b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
+                IList<IODataRoutingConvention> conventions = ODataRoutingConventions.CreateDefault();
+                conventions.Insert(0, new MatchRoutingConvention());
+                b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel(), new DefaultODataPathHandler(), conventions);
+
+                //b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel());
+
+                b.EnableDependencyInjection();
+                b.MapRoute(
+                   name: "default",
+                   template: "api/{controller}/{action}/{id?}");
+            });
         }
     }
 }

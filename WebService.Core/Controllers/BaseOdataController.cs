@@ -8,7 +8,6 @@ using Data.Entitys;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
-using Data.Dto;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.Data.Edm;
@@ -17,7 +16,7 @@ using Microsoft.OData.UriParser;
 using System.Reflection;
 using CacheCow.Server.Core.Mvc;
 
-namespace WebService.Api.Controllers
+namespace WebService.Core
 {
     public class BaseOdataController<T> : ODataController
         where T : EntityBase

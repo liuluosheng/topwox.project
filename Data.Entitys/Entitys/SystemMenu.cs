@@ -27,6 +27,7 @@ namespace Data.Entitys
 
         [Display(Name = "描述")]
         [Required]
+        [SchemaColumn]
         public string Description { get; set; }
 
         [Display(Name = "上级菜单")]

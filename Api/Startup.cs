@@ -16,6 +16,7 @@ using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNet.OData.Routing;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.InMemory;
+using WebService.Core;
 
 namespace WebService.Api
 {
@@ -55,7 +56,7 @@ namespace WebService.Api
 
             // github.com/dotnetcore/EasyCaching
             services.AddDefaultInMemoryCache();
-
+            services.AddScoped<DbContext, ApiDBContext>();
             DependencyConfig.Config(services, Configuration);
             services.AddCors();
             services.AddOData();

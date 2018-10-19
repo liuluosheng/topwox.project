@@ -7,13 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebService.Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
         // GET api/values
         [HttpGet]
-        [Authorize(Roles ="administroator")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

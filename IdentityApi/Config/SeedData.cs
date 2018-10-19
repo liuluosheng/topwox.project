@@ -5,9 +5,9 @@ using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using WebService.IdentityApi.Data;
+using WebService.Identity.Api.Data;
 
-namespace WebService.IdentityApi
+namespace WebService.Identity.Api
 {
     /// <summary>
     /// 创建种子数据
