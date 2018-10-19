@@ -10,11 +10,12 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 
-namespace Ew.Api.Controllers
+namespace WebService.Api.Controllers
 {
 
     [Route("api/[controller]")]
-    public class FilesController : Controller
+    [ApiController]
+    public class FilesController : ControllerBase
     {
         private MongoClient _client;
         public FilesController(MongoClient client)

@@ -6,14 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Controllers
+namespace WebService.Api.Controllers
 {
     /// <summary>
     /// api controller 基类
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [Route("api/[controller]")]
-    public abstract class BaseController<T> : Controller
+    [ApiController]
+    public abstract class BaseController<T> : ControllerBase
         where T : EntityBase
     {
         protected readonly IBaseService<T> _service;

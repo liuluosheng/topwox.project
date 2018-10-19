@@ -17,7 +17,7 @@ using Microsoft.OData.UriParser;
 using System.Reflection;
 using CacheCow.Server.Core.Mvc;
 
-namespace Ew.Api.Controllers
+namespace WebService.Api.Controllers
 {
     public class BaseOdataController<T> : ODataController
         where T : EntityBase
@@ -50,13 +50,7 @@ namespace Ew.Api.Controllers
         [HttpPatch]
         public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok(await _service.Patch(key, doc));
 
-        [EnableQuery]
-        [HttpGet]
-        [ODataRoute("Excel()")]
-        public IActionResult Excel()
-        {
-            return Ok("Exprot");
-        }
+
         public IActionResult GetNavigation(Guid key, string navigation)
         {
             ODataPath path = Request.ODataFeature().Path;

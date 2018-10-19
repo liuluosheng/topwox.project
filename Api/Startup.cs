@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using Data;
-using Ew.Api.Core;
+using WebService.Api.Core;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,7 +17,7 @@ using Microsoft.AspNet.OData.Routing;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.InMemory;
 
-namespace Ew.Api
+namespace WebService.Api
 {
     public class Startup
     {

@@ -17,13 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Dto", "Data.Dto\Data.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utility", "Data.Enum\Core.Utility.csproj", "{7C06DCE6-E7A4-41C0-B516-5F08AEF9BB06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{46AE05DD-9384-403F-9D7C-755515E9A44E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebService.Api", "Api\WebService.Api.csproj", "{46AE05DD-9384-403F-9D7C-755515E9A44E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{807672A6-724F-46A5-86B0-2B393D044EE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data.Entitys\Data.csproj", "{4E62760C-4339-4E4D-AE55-3D09BAC98967}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Repository", "Data.Repository\Core.Repository.csproj", "{19090AA0-298F-4483-9248-904B3AB74036}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebService.IdentityApi", "IdentityApi\WebService.IdentityApi.csproj", "{BF273AE9-760B-4EE0-9984-1239FB6426B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{19090AA0-298F-4483-9248-904B3AB74036}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19090AA0-298F-4483-9248-904B3AB74036}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19090AA0-298F-4483-9248-904B3AB74036}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF273AE9-760B-4EE0-9984-1239FB6426B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF273AE9-760B-4EE0-9984-1239FB6426B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF273AE9-760B-4EE0-9984-1239FB6426B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF273AE9-760B-4EE0-9984-1239FB6426B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{807672A6-724F-46A5-86B0-2B393D044EE2} = {62C99B90-9484-47B7-B921-F2D07D7F1BF1}
 		{4E62760C-4339-4E4D-AE55-3D09BAC98967} = {3044D102-E03E-4421-BD3C-16C3DEEF982C}
 		{19090AA0-298F-4483-9248-904B3AB74036} = {00425353-0152-4595-80DA-B862F35CD922}
+		{BF273AE9-760B-4EE0-9984-1239FB6426B7} = {62C99B90-9484-47B7-B921-F2D07D7F1BF1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D811D61-1551-46EA-987D-C0B97FA57AC1}

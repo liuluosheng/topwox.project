@@ -1,4 +1,4 @@
-﻿using Ew.Api.Controllers;
+﻿using WebService.Api.Controllers;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System;
@@ -9,7 +9,7 @@ using Data.Entitys;
 using System.Reflection;
 using Data.Attributes;
 
-namespace Ew.Api.Core
+namespace WebService.Api.Core
 {
     public class GenericTypeControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {
