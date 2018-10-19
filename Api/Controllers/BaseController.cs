@@ -13,7 +13,8 @@ namespace Api.Controllers
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [Route("api/[controller]")]
-    public abstract class BaseController<T> : Controller
+    [ApiController]
+    public abstract class BaseController<T> : ControllerBase
         where T : EntityBase
     {
         protected readonly IBaseService<T> _service;

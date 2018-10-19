@@ -15,7 +15,8 @@ using EasyCaching.Core;
 
 namespace Ew.Api.Controllers
 {
-    public class SchemaController : Controller
+    [ApiController]
+    public class SchemaController : ControllerBase
     {
         private IConfiguration _configuration;
         private readonly IEasyCachingProvider _provider;
@@ -36,7 +37,7 @@ namespace Ew.Api.Controllers
             var types = typeof(EntityBase).Assembly.GetTypes();
             var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
             if (targetType == null) return NotFound();
-            return Json(new ControlFactory(_configuration).CreateSchema(targetType));
+            return Ok(new ControlFactory(_configuration).CreateSchema(targetType));
         } 
                 
         [HttpGet("api/ts/{type}")]
