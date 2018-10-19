@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Data.Dto;
 
-namespace Ew.Api.Core
+namespace WebService.Api.Core
 {
     public static class AutoMapperConfig
     {

@@ -11,7 +11,7 @@ using Core.Repository;
 using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 
-namespace Ew.Api.Core
+namespace WebService.Api.Core
 {
     public static class DependencyConfig
     {

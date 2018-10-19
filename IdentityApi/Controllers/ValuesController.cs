@@ -5,34 +5,36 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebService.Api.Controllers
+namespace WebService.IdentityApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
         // GET api/values
         [HttpGet]
-        [Authorize(Roles ="administroator")]
-        public IEnumerable<string> Get()
+  
+        public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
         }
-        [Authorize(Roles ="Admin")]
-        public string Apis()
+
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public ActionResult<string> Get(int id)
         {
-            return "api";
+            return "value";
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 

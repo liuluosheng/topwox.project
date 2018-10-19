@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace Data
+namespace WebService.Api
 {
     public class ApiDBContext : DbContext
     {

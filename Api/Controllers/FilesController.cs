@@ -10,7 +10,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 
-namespace Ew.Api.Controllers
+namespace WebService.Api.Controllers
 {
 
     [Route("api/[controller]")]
