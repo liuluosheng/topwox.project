@@ -34,20 +34,30 @@ namespace WebService.Core.Controllers
         [HttpGet("api/jsonschema/{type}")]
         public ActionResult Get(string type = "")
         {
-            var types = typeof(EntityBase).Assembly.GetTypes();
-            var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
+            var targetType = GetType(type);
             if (targetType == null) return NotFound();
             return Ok(new ControlFactory(_configuration).CreateSchema(targetType));
-        } 
-                
+        }
+
         [HttpGet("api/ts/{type}")]
         public ActionResult GetTS(string type = "")
         {
-            var types = typeof(EntityBase).Assembly.GetTypes();
-            var targetType = types.FirstOrDefault(p => p.Name.ToLower() == type.ToLower());
+
+            var targetType = GetType(type);
             if (targetType == null) return NotFound();
-            return Content(Generator.GenerateTypeScript(targetType,
-                new TypeScriptOptions { UseInterfaceForClasses = p => true }));
+            return Content(Generator.GenerateTypeScript(targetType,new TypeScriptOptions { UseInterfaceForClasses = p => true }));
+        }
+
+        private Type GetType(string type)
+        {
+            foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (ass.GetTypes().FirstOrDefault(p => p.Name.ToLower() == type.ToLower()) is Type t)
+                {
+                    return t;
+                }
+            }
+            return null;
         }
     }
 
