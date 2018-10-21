@@ -14,7 +14,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Data.Attributes;
 
-namespace WebService.Api.Core
+namespace WebService.Api
 {
     public static class ODataConfig
     {
