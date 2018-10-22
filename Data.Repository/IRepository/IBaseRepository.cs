@@ -15,7 +15,7 @@ namespace Core.Repository
     {
         Task<T> Update<T>(T entity, bool isCommit = true) where T : EntityBase;
         IQueryable<T> Get<T>() where T : EntityBase;
-        IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : EntityBase;
+        IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate, params string[] include) where T : EntityBase;
         Task<int> Delete<T>(Expression<Func<T, bool>> predicate) where T : EntityBase;
         Task<T> Put<T>(T entity, bool isCommit = true) where T : EntityBase;
         Task<int> Commit();

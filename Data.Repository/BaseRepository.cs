@@ -22,7 +22,7 @@ namespace Core.Repository
         }
         public async Task<T> Update<T>(T entity, bool isCommit = true) where T : EntityBase
         {
-             _context.Entry(entity).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
             if (isCommit)
                 await Commit();
             return entity;
@@ -31,9 +31,14 @@ namespace Core.Repository
         {
             return _context.Set<T>();
         }
-        public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
+        public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate, params string[] include) where T : EntityBase
         {
-            return _context.Set<T>().Where(predicate);
+            var source = _context.Set<T>().Where(predicate);
+            foreach (var path in include)
+            {
+                source = source.Include(path);
+            }
+            return source;
         }
         public async Task<int> Delete<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
         {

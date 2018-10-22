@@ -27,7 +27,10 @@ namespace WebService.Identity.Api
                 {
                     alice = new SysUser
                     {
-                        UserName = "alice"
+                        UserName = "alice",
+                        Email = "alice@163.com",
+                        Department = "HR",
+                        PhoneNumber = "13534134226"
                     };
                     var result = userMgr.CreateAsync(alice, "Pass123$").Result;
                     if (!result.Succeeded)
@@ -60,7 +63,10 @@ namespace WebService.Identity.Api
                 {
                     bob = new SysUser
                     {
-                        UserName = "bob"
+                        UserName = "bob",
+                         Email="bob@163.com",
+                         Department="HR",
+                         PhoneNumber="13534138226"
                     };
                     var result = userMgr.CreateAsync(bob, "Pass123$").Result;
                     if (!result.Succeeded)

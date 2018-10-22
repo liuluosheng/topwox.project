@@ -37,13 +37,13 @@ namespace Core.Service
         {
             return _repository.Get<TEntity>();
         }
-        public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate, params string[] include)
         {
-            return Get<TEntity>(predicate);
+            return Get<TEntity>(predicate, include);
         }
-        public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
+        public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate, params string[] include) where T : EntityBase
         {
-            return _repository.Get<T>(predicate);
+            return _repository.Get<T>(predicate, include);
         }
 
         public async Task<T> Create<T>(T entity, bool isCommit = true) where T : EntityBase

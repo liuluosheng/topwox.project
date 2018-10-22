@@ -32,22 +32,25 @@ namespace WebService.Core.Controllers
         /// <returns></returns>
         [HttpCacheFactory(300)]
         [HttpGet("api/jsonschema/{type}")]
-        public ActionResult Get(string type = "")
+        public IActionResult Get(string type = "")
         {
             var targetType = GetType(type);
             if (targetType == null) return NotFound();
             return Ok(new ControlFactory(_configuration).CreateSchema(targetType));
         }
-
+        /// <summary>
+        /// 返回指定类的Typescript定义
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         [HttpGet("api/ts/{type}")]
-        public ActionResult GetTS(string type = "")
+        public IActionResult GetTS(string type = "")
         {
 
             var targetType = GetType(type);
             if (targetType == null) return NotFound();
-            return Content(Generator.GenerateTypeScript(targetType,new TypeScriptOptions { UseInterfaceForClasses = p => true }));
+            return Ok(Generator.GenerateTypeScript(targetType,new TypeScriptOptions { UseInterfaceForClasses = p => true }));
         }
-
         private Type GetType(string type)
         {
             foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
