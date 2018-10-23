@@ -42,6 +42,5 @@ namespace Data.Entitys
         [ForeignKey("ParentMenuId")]
         public SystemMenu Parent { get; set; }
 
-        public virtual ICollection<SystemMenu> Items { get; set; }
     }
 }
