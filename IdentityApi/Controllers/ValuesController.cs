@@ -23,6 +23,7 @@ namespace WebService.Identity.Api.Controllers
         // GET api/values/5
         [HttpGet("{id}")]
         [Api("测试一号")]
+
         public ActionResult<string> Get(int id)
         {
             return "value";
