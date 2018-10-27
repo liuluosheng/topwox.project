@@ -24,6 +24,7 @@ namespace WebService.Core
                 new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
         }
         [HttpGet]
+        [Api("获取菜单数据")]
         public IActionResult Get()
         {
             return Ok(JsonConvert.SerializeObject(_service.Get(p => p.Root).Select(p => new Menu(_service, p)),

@@ -12,6 +12,10 @@ using Microsoft.Extensions.Configuration;
 using Data.Model.Control;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.Core;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebService.Core.Controllers
 {
@@ -49,18 +53,49 @@ namespace WebService.Core.Controllers
 
             var targetType = GetType(type);
             if (targetType == null) return NotFound();
-            return Ok(Generator.GenerateTypeScript(targetType,new TypeScriptOptions { UseInterfaceForClasses = p => true }));
+            return Ok(Generator.GenerateTypeScript(targetType, new TypeScriptOptions { UseInterfaceForClasses = p => true }));
+        }
+        private IEnumerable<Type> GetTypes()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(p => p.GetTypes());
         }
         private Type GetType(string type)
         {
-            foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
+            if (GetTypes().FirstOrDefault(p => p.Name.ToLower() == type.ToLower()) is Type t)
             {
-                if (ass.GetTypes().FirstOrDefault(p => p.Name.ToLower() == type.ToLower()) is Type t)
-                {
-                    return t;
-                }
+                return t;
             }
             return null;
+        }
+        /// <summary>
+        /// 返回接口的定义信息
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [HttpGet("api/getapidescription")]
+        public IActionResult GetApiInfo()
+        {
+            var actionCollectionProvider = HttpContext.RequestServices.GetRequiredService<IActionDescriptorCollectionProvider>();
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            foreach(var api in actionCollectionProvider.ActionDescriptors.Items.OfType<ControllerActionDescriptor>())
+            {
+                if(api.MethodInfo.GetCustomAttribute<ApiAttribute>() is ApiAttribute t)
+                {
+                    string displayname = api.ControllerName;
+                    var generic = api.ControllerTypeInfo.IsGenericType
+                        ? api.ControllerTypeInfo.GenericTypeArguments.FirstOrDefault()
+                        :  api.ControllerTypeInfo.BaseType.GenericTypeArguments.FirstOrDefault();
+                    if (generic!=null)
+                    {
+                      displayname=  generic.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName
+                            ?? generic.GetCustomAttribute<DisplayAttribute>()?.Name
+                            ?? generic.Name;
+                    }              
+                    result.Add($"{api.ControllerName}.{api.ActionName}", $"{displayname} - {t.Description}");
+                    
+                }
+            }
+            return Ok(result);
         }
     }
 
