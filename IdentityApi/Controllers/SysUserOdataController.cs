@@ -30,7 +30,7 @@ namespace WebService.Identity.Api.Controllers
 
         [EnableQuery]
         [HttpPost]
-        public  async Task<IActionResult> Post([FromBody]SysUser model)
+        public async Task<IActionResult> Post([FromBody]SysUser model)
         {
             if (TryValidateModel(model))
             {
@@ -38,29 +38,40 @@ namespace WebService.Identity.Api.Controllers
                 {
                     return BadRequest("user already exists！");
                 }
-                return Ok(await _userManager.CreateAsync(model));
+                var result = await _userManager.CreateAsync(model, model.PassWord);
+                if (result.Succeeded)
+                    return Ok(model);
+                return BadRequest(result);
             }
             return BadRequest("model validation fails!");
         }
         [EnableQuery]
         [HttpDelete]
-        public  async Task<IActionResult> Delete([FromODataUri] string key)
+        public async Task<IActionResult> Delete([FromODataUri] Guid key)
         {
-            if (await _userManager.FindByIdAsync(key) is SysUser user)
+            if (await _userManager.FindByIdAsync(key.ToString()) is SysUser user)
             {
-                return Ok(await _userManager.DeleteAsync(user));
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                    return Ok();
+                return BadRequest(result);
             }
             return BadRequest("not find user by key.");
         }
 
         [EnableQuery]
         [HttpPatch]
-        public  async Task<IActionResult> Patch(string key, [FromBody]JsonPatchDocument<SysUser> doc)
+        public async Task<IActionResult> Patch(string key, [FromBody]JsonPatchDocument<SysUser> doc)
         {
             if (await _userManager.FindByIdAsync(key) is SysUser user)
             {
                 doc.ApplyTo(user, p => { });
-                return Ok(await _userManager.UpdateAsync(user));
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return Ok(user);
+                }
+                return BadRequest(result);
             }
             return BadRequest("not find user by key.");
         }

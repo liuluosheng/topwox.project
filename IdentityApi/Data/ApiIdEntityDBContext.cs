@@ -18,7 +18,7 @@ namespace WebService.Identity.Api.Data
                 if (type.BaseType == typeof(EntityBase))
                 {
                     modelBuilder.Entity(type);
-                }
+                }        
             }
             base.OnModelCreating(modelBuilder);
         }

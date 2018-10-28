@@ -35,7 +35,7 @@ namespace Data.Model.Control
             var controls = new List<Control>();
             var expands = new List<string>();
             var anySchemaProps = type.GetProperties().Any(p => p.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute);
-            foreach (var p in (type.GetProperties().Where(p => p.GetCustomAttribute<SchemaIgnoreAttribute>() == null)))
+            foreach (var p in type.GetProperties().Where(p => p.GetCustomAttribute<SchemaIgnoreAttribute>() == null))
             {
                 if (Create(p) is Control control)
                 {
@@ -127,7 +127,7 @@ namespace Data.Model.Control
             {
 
                 var displayAttribute = prop.GetCustomAttribute<DisplayAttribute>();
-                control.Title = displayAttribute?.Name ?? null;
+                control.Title = displayAttribute?.Name ?? prop.Name;
                 control.Description = displayAttribute?.Description ?? null;
                 if (control.Description == null)
                 {

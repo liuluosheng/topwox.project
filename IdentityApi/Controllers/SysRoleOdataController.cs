@@ -38,7 +38,12 @@ namespace WebService.Identity.Api.Controllers
                 {
                     return BadRequest("role already exists！");
                 }
-                return Ok(await _roleManager.CreateAsync(model));
+                var result = await _roleManager.CreateAsync(model);
+                if (result.Succeeded)
+                {
+                    return Ok(model);
+                }
+                return BadRequest(result);
             }
             return BadRequest("model validation fails!");
         }
@@ -46,9 +51,14 @@ namespace WebService.Identity.Api.Controllers
         [HttpDelete]
         public  async Task<IActionResult> Delete([FromODataUri] string key)
         {
-            if (await _roleManager.FindByIdAsync(key) is SysRole user)
+            if (await _roleManager.FindByIdAsync(key) is SysRole role)
             {
-                return Ok(await _roleManager.DeleteAsync(user));
+                var result = await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return Ok(role);
+                }
+                return BadRequest(result);
             }
             return BadRequest("not find role by key.");
         }
@@ -57,10 +67,15 @@ namespace WebService.Identity.Api.Controllers
         [HttpPatch]
         public  async Task<IActionResult> Patch(string key, [FromBody]JsonPatchDocument<SysRole> doc)
         {
-            if (await _roleManager.FindByIdAsync(key) is SysRole user)
+            if (await _roleManager.FindByIdAsync(key) is SysRole role)
             {
-                doc.ApplyTo(user, p => { });
-                return Ok(await _roleManager.UpdateAsync(user));
+                doc.ApplyTo(role, p => { });
+                var result = await _roleManager.UpdateAsync(role);
+                if (result.Succeeded)
+                {
+                    return Ok(role);
+                }
+                return BadRequest(result);
             }
             return BadRequest("not find role by key.");
         }

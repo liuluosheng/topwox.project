@@ -16,6 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.ComponentModel.DataAnnotations;
+using WebService.Core.Authorization;
+using EnumsNET;
+using Module = WebService.Core.Authorization.Module;
 
 namespace WebService.Core.Controllers
 {
@@ -76,26 +79,44 @@ namespace WebService.Core.Controllers
         public IActionResult GetApiInfo()
         {
             var actionCollectionProvider = HttpContext.RequestServices.GetRequiredService<IActionDescriptorCollectionProvider>();
-            Dictionary<string, string> result = new Dictionary<string, string>();
-            foreach(var api in actionCollectionProvider.ActionDescriptors.Items.OfType<ControllerActionDescriptor>())
+            List<Module> modules = new List<Module>();
+            foreach (var api in actionCollectionProvider.ActionDescriptors.Items.OfType<ControllerActionDescriptor>())
             {
-                if(api.MethodInfo.GetCustomAttribute<ApiAttribute>() is ApiAttribute t)
+                if (api.MethodInfo.GetCustomAttribute<ApiAttribute>() is ApiAttribute t)
                 {
-                    string displayname = api.ControllerName;
-                    var generic = api.ControllerTypeInfo.IsGenericType
-                        ? api.ControllerTypeInfo.GenericTypeArguments.FirstOrDefault()
-                        :  api.ControllerTypeInfo.BaseType.GenericTypeArguments.FirstOrDefault();
-                    if (generic!=null)
+                    string module = api.ControllerName;
+                    string descripions = api.ControllerName;
+                    if (api.ControllerTypeInfo.IsGenericType)
                     {
-                      displayname=  generic.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName
-                            ?? generic.GetCustomAttribute<DisplayAttribute>()?.Name
-                            ?? generic.Name;
-                    }              
-                    result.Add($"{api.ControllerName}.{api.ActionName}", $"{displayname} - {t.Description}");
-                    
+                        var genericType = api.ControllerTypeInfo.GenericTypeArguments.FirstOrDefault() ?? api.ControllerTypeInfo.BaseType.GenericTypeArguments.FirstOrDefault();
+                        if (genericType != null)
+                        {
+                            module = genericType.Name;
+                            descripions = genericType.GetCustomAttribute<DescriptionAttribute>()?.Description
+                               ?? genericType.Name;
+                        }
+                    }
+                    var m = modules.FirstOrDefault(p => p.Key == module) ?? new Module { Key = module, Descripton = descripions };
+                    if (m.Operations.Any(p => p.Operation == t.Operation)) continue;
+                    var member = t.Operation.GetMember();
+                    IEnumerable<Operation> data = member != null ? data = new List<Operation> { t.Operation } : null;
+                    foreach (var flag in data ?? t.Operation.GetFlags())
+                    {
+                        if (m.Operations.Any(p => p.Operation == flag)) continue;
+                        string desc = flag.ToString();
+                        var description = Enums.GetMember(flag).Attributes.FirstOrDefault(p => p is DescriptionAttribute);
+                        if (description != null)
+                            desc = ((DescriptionAttribute)description).Description;
+                        m.Operations.Add(new OperationDescription { Description = desc, Operation = flag });
+                    }
+
+                    if (modules.All(p => p.Key != m.Key))
+                    {
+                        modules.Add(m);
+                    }
                 }
             }
-            return Ok(result);
+            return Ok(modules);
         }
     }
 

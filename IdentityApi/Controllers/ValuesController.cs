@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebService.Core;
+using WebService.Core.Authorization;
 
 namespace WebService.Identity.Api.Controllers
 {
@@ -22,7 +23,7 @@ namespace WebService.Identity.Api.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        [Api("测试一号")]
+        [Api(Operation.Read | Operation.Export)]
 
         public ActionResult<string> Get(int id)
         {
@@ -30,7 +31,7 @@ namespace WebService.Identity.Api.Controllers
         }
 
         // POST api/values
-        [Api("测试二号")]
+        [Api(Operation.DataAdmin)]
         [HttpPost]
         public void Post([FromBody] string value)
         {

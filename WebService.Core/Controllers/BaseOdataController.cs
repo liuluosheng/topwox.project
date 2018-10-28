@@ -15,6 +15,7 @@ using ODataPath = Microsoft.AspNet.OData.Routing.ODataPath;
 using Microsoft.OData.UriParser;
 using System.Reflection;
 using CacheCow.Server.Core.Mvc;
+using WebService.Core.Authorization;
 
 namespace WebService.Core
 {
@@ -27,26 +28,32 @@ namespace WebService.Core
             _service = service;
         }
         [EnableQuery]
+        [Api(Operation.Read)]
         public virtual IActionResult Get(Guid key) => Ok(_service.Get(p => p.Id == key));
 
         [EnableQuery]
         [HttpGet]
+        [Api(Operation.Read)]
         public virtual IActionResult Get() => Ok(_service.Get());
 
         [EnableQuery]
         [HttpPost]
+        [Api(Operation.Create)]
         public virtual async Task<IActionResult> Post([FromBody]T model) => Ok(await _service.Create(model));
 
         [EnableQuery]
         [HttpPut]
+        [Api(Operation.Update)]
         public virtual async Task<IActionResult> Put([FromBody]T model) => Ok(await _service.Update(model));
 
         [EnableQuery]
         [HttpDelete]
+        [Api(Operation.Delete)]
         public virtual async Task<IActionResult> Delete([FromODataUri] Guid key) => Ok((await _service.Delete(p => p.Id == key)) > 0);
 
         [EnableQuery]
         [HttpPatch]
+        [Api(Operation.Update)]
         public virtual async Task<IActionResult> Patch(Guid key, [FromBody]JsonPatchDocument<T> doc) => Ok(await _service.Patch(key, doc));
 
 

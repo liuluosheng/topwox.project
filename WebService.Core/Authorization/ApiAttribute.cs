@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WebService.Core.Authorization;
 
 namespace WebService.Core
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class ApiAttribute : Attribute
     {
-        public ApiAttribute(string description)
+        public ApiAttribute(Operation operation)
         {
-            Description = description;
+            Operation = operation;
         }
-        public string Description { get; set; }
-        public  Type T { get; set; }
+        public Operation Operation { get; set; }     
     }
 
 }
