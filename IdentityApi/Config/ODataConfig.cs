@@ -38,7 +38,8 @@ namespace WebService.Identity.Api
                     }
                 }
             }
-            builder.EntitySet<SysUser>("SysUser");
+            builder.EntitySet<SysUser>("SysUser")
+                .EntityType.Property(p => p.Password);
             builder.EntitySet<SysRole>("SysRole");
 
             return builder.GetEdmModel();

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace WebService.Identity.Api.Data
 {
-
     public class SysUser : IdentityUser<Guid>
     {
         [SchemaColumn]
@@ -43,11 +43,10 @@ namespace WebService.Identity.Api.Data
         public string Department { get; set; }
 
         [SchemaColumn]
-        [Required]    
-        [DataMember]
         [NotMapped]
+        [DataMember]
+        [Description("将重置用户的密码！")]
         [Display(Name = "密码")]
-        public string PassWord { get; set; }
-
+        public  string Password { get; set; }
     }
 }
