@@ -10,6 +10,8 @@ using Data;
 using Core.Repository;
 using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
+using WebService.Core.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebService.Core
 {
@@ -22,6 +24,7 @@ namespace WebService.Core
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddSingleton(typeof(MongoClient), new MongoClient(configuration["AppSettings:Mongo"]));
             services.AddSingleton<IConfiguration>(configuration);
+          
         }
     }
 }

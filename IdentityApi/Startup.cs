@@ -9,6 +9,7 @@ using IdentityServer4.AspNetIdentity;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNet.OData.Routing.Conventions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -20,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebService.Core;
+using WebService.Core.Authorization;
 using WebService.Identity.Api.Data;
 
 namespace WebService.Identity.Api
@@ -64,6 +66,7 @@ namespace WebService.Identity.Api
             // github.com/dotnetcore/EasyCaching
             services.AddDefaultInMemoryCache();
             services.AddScoped<DbContext, ApiIdEntityDBContext>();
+            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler<SysUser>>();
             DependencyConfig.Config(services, Configuration);
             services.AddCors();
             services.AddOData();
@@ -94,8 +97,8 @@ namespace WebService.Identity.Api
              .AddInMemoryIdentityResources(IdentityServiceConfig.GetIdentityResources())
              .AddInMemoryApiResources(IdentityServiceConfig.GetApiResources())
              .AddInMemoryClients(IdentityServiceConfig.GetClients())
-             .AddProfileService<ProfileService<SysUser>>()
-             .AddAspNetIdentity<SysUser>();
+             .AddAspNetIdentity<SysUser>()
+             .AddProfileService<CustomProfileService<SysUser,SysRole>>();
             builder.AddDeveloperSigningCredential(filename: "tempkey.rsa");
         }
 
@@ -108,7 +111,7 @@ namespace WebService.Identity.Api
             }
             else
             {
-               // app.UseHsts();
+                // app.UseHsts();
             }
             //app.UseHttpsRedirection();   
             app.UseCors(police => police.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

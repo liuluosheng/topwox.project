@@ -26,8 +26,7 @@ namespace WebService.Identity.Api
                 {
                     JwtClaimTypes.Role,
                     JwtClaimTypes.Email
-                }),
-                new ApiResource("share")
+                })
             };
         }
 

@@ -94,6 +94,38 @@ namespace WebService.Identity.Api
                 {
                     Console.WriteLine("bob already exists");
                 }
+                var liuluosheng = userMgr.FindByNameAsync("liuluosheng").Result;
+                if (liuluosheng == null)
+                {
+                    liuluosheng = new SysUser
+                    {
+                        UserName = "liuluosheng",
+                        Email = "liuluosheng@163.com",
+                        Department = "HR",
+                        PhoneNumber = "13534134226"
+                    };
+                    var result = userMgr.CreateAsync(liuluosheng, "Pass123$").Result;
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception(result.Errors.First().Description);
+                    }
+
+                    result = userMgr.AddClaimsAsync(alice, new Claim[]{
+                        new Claim("operation","SystemMenu.Read" ),
+                        new Claim("operation","SystemMenu.Update" ),
+                        new Claim(JwtClaimTypes.GivenName, "Alice"),
+
+                    }).Result;
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception(result.Errors.First().Description);
+                    }
+                    Console.WriteLine("alice created");
+                }
+                else
+                {
+                    Console.WriteLine("alice already exists");
+                }
             }
         }
     }
