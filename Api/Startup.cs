@@ -57,7 +57,7 @@ namespace WebService.Api
             // github.com/dotnetcore/EasyCaching
             services.AddDefaultInMemoryCache();
             services.AddScoped<DbContext, ApiDBContext>();
-            DependencyConfig.Config(services, Configuration);
+            StartupServiceConfig.Config(services, Configuration);
             services.AddCors();
             services.AddOData();
             services.AddAutoMapper();

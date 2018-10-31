@@ -5,29 +5,19 @@ using System.Text;
 using EnumsNET;
 namespace WebService.Core.Authorization
 {
-    //定义模块中的所有操作项
+
+    /// <summary>
+    ///定义所有模块中的所有操作项
+    ///名称约定：模块名称_操作名称
+    ///模块名称的Description 请定义在模块对应实体类的[Description]属性中
+    /// </summary>
     [Flags]
     public enum Operation
     {
-        [Description("查询数据")]
-        Read = 1 << 1,
-
-        [Description("新建")]
-        Create = 1 << 2,
-
-        [Description("更新")]
-        Update = 1 << 3,
-
-        [Description("删除")]
-        Delete = 1 << 4,
-
-        [Description("上传")]
-        Upload = 1 << 5,
-
-        [Description("下载")]
-        Export = 1 << 6,
-
-        [Description("数据管理")]
-        DataAdmin = Read | Update | Create | Delete | Upload | Export
+        [Description("查询")] SystemMenu_Read = 1,
+        [Description("新建")] SystemMenu_Create = SystemMenu_Read | 2,
+        [Description("更新")] SystemMenu_Update = SystemMenu_Read | 3,
+        [Description("删除")] SystemMenu_Delete = SystemMenu_Read | 4,
+        [Description("编辑")] SystemMenu_Edit = SystemMenu_Create | SystemMenu_Update | SystemMenu_Delete,
     }
 }

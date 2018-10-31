@@ -19,6 +19,7 @@ using System.ComponentModel.DataAnnotations;
 using WebService.Core.Authorization;
 using EnumsNET;
 using Module = WebService.Core.Authorization.Module;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebService.Core.Controllers
 {
@@ -38,6 +39,8 @@ namespace WebService.Core.Controllers
         /// <param name="type"></param>
         /// <returns></returns>
         [HttpCacheFactory(300)]
+        [Authorize]
+        //[ApiAuthorize(Operation.SystemMenu_Read)]
         [HttpGet("api/jsonschema/{type}")]
         public IActionResult Get(string type = "")
         {

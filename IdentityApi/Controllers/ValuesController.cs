@@ -15,7 +15,7 @@ namespace WebService.Identity.Api.Controllers
     {
         // GET api/values
         [HttpGet]
-  
+       
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
@@ -23,7 +23,7 @@ namespace WebService.Identity.Api.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        [Api(Operation.Read | Operation.Export)]
+
 
         public ActionResult<string> Get(int id)
         {
@@ -31,7 +31,7 @@ namespace WebService.Identity.Api.Controllers
         }
 
         // POST api/values
-        [Api(Operation.DataAdmin)]
+
         [HttpPost]
         public void Post([FromBody] string value)
         {
