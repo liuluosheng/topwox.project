@@ -15,7 +15,7 @@ namespace WebService.Identity.Api.Controllers
     {
         // GET api/values
         [HttpGet]
-       
+        [ApiAuthorize(Operation.SystemMenu_Read)]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };

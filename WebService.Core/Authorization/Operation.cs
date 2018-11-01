@@ -20,4 +20,10 @@ namespace WebService.Core.Authorization
         [Description("删除")] SystemMenu_Delete = SystemMenu_Read | 4,
         [Description("编辑")] SystemMenu_Edit = SystemMenu_Create | SystemMenu_Update | SystemMenu_Delete,
     }
+
+    [Flags]
+    public enum BaseOperation
+    {
+        [Description("查询")] Read = 10000,
+    }
 }

@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-
+using EnumsNET;
 namespace WebService.Core.Authorization
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
@@ -22,6 +22,7 @@ namespace WebService.Core.Authorization
         public Operation Operation { get; set; }
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
+           
             var authorizationService = context.HttpContext.RequestServices.GetRequiredService<IAuthorizationService>();
             var authorizationResult = await authorizationService.AuthorizeAsync(context.HttpContext.User, null, new PermissionAuthorizationRequirement(Operation));
             if (!authorizationResult.Succeeded)

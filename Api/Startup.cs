@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using Data;
-using WebService.Api.Core;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

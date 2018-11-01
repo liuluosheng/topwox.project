@@ -46,18 +46,10 @@ namespace WebService.Identity.Api
             services.AddMvc()
                  .ConfigureApplicationPartManager(m => m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider()))
                  .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddAuthentication("Bearer")
-      .AddIdentityServerAuthentication(options =>
-      {
-          options.Authority = "http://localhost:4500";
-          options.RequireHttpsMetadata = false;
-          options.ApiName = "api";
-          options.ApiSecret = "secret";
-      });
+
             services.AddScoped<DbContext, ApiIdEntityDBContext>();
 
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
-
             services.AddDbContext<ApiIdEntityDBContext>(options =>
             {
                 options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b =>
@@ -72,11 +64,12 @@ namespace WebService.Identity.Api
 
             // github.com/dotnetcore/EasyCaching
             services.AddDefaultInMemoryCache();
-            services.AddScoped<DbContext, ApiIdEntityDBContext>();
 
+            services.AddScoped<DbContext, ApiIdEntityDBContext>();
             StartupServiceConfig.Config(services, Configuration);
             services.AddCors();
             services.AddOData();
+
             services.AddIdentity<SysUser, SysRole>(options =>
             {
                 options.Tokens.ChangePhoneNumberTokenProvider = "Phone";
@@ -86,14 +79,13 @@ namespace WebService.Identity.Api
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
 
             })
               .AddEntityFrameworkStores<ApiIdEntityDBContext>()
               .AddDefaultTokenProviders();
-        
+
             var builder = services.AddIdentityServer()
              .AddInMemoryIdentityResources(IdentityServiceConfig.GetIdentityResources())
              .AddInMemoryApiResources(IdentityServiceConfig.GetApiResources())
@@ -101,7 +93,15 @@ namespace WebService.Identity.Api
              .AddAspNetIdentity<SysUser>()
              .AddProfileService<CustomProfileService<SysUser, SysRole>>();
             builder.AddDeveloperSigningCredential(filename: "tempkey.rsa");
-        
+
+            services.AddAuthentication("Bearer").AddIdentityServerAuthentication(options =>
+            {
+                options.Authority = "http://localhost:4500";
+                options.RequireHttpsMetadata = false;
+                options.ApiName = "api";
+                options.ApiSecret = "secret";
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,10 +117,10 @@ namespace WebService.Identity.Api
             }
             //app.UseHttpsRedirection();   
             app.UseCors(police => police.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-          
+
             app.UseMvcWithDefaultRoute();
             app.UseAuthentication();
-           // app.UseIdentityServer();
+            app.UseIdentityServer();
             app.UseMvc(b =>
             {
                 b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
@@ -135,6 +135,7 @@ namespace WebService.Identity.Api
                    name: "default",
                    template: "api/{controller}/{action}/{id?}");
             });
+            DynamicOperation.CreateDynamicOperation();
         }
     }
 }
