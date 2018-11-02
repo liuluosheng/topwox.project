@@ -9,7 +9,7 @@ namespace WebService.Core
     public static class AutoMapperConfig
     {
         //添加你的实体映射关系.
-        public static void InitAutoMapperConfig()
+        public static void MapperConfig()
         {
            // Mapper.Initialize(cfg => { cfg.CreateMap<TestUser, User>().ReverseMap(); });
         }

@@ -147,6 +147,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data.Entitys\Data.csproj" />
+    <ProjectReference Include="..\WebService.Core\WebService.Core.csproj" />
   </ItemGroup>
 
 </Project>

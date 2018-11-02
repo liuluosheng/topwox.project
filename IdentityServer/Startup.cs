@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebService.Core;
 
 namespace IdentityServer
 {
@@ -72,9 +73,8 @@ namespace IdentityServer
              .AddInMemoryIdentityResources(IdentityServiceConfig.GetIdentityResources())
              .AddInMemoryApiResources(IdentityServiceConfig.GetApiResources())
              .AddInMemoryClients(IdentityServiceConfig.GetClients())
-             .AddProfileService<ProfileService<User>>()
+             .AddProfileService<CustomProfileService<User, Role>>()
              .AddAspNetIdentity<User>();
-
 
             builder.AddDeveloperSigningCredential(filename: "tempkey.rsa");
 

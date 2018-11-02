@@ -66,8 +66,8 @@ namespace WebService.Identity.Api
             // github.com/dotnetcore/EasyCaching
             services.AddDefaultInMemoryCache();
             services.AddScoped<DbContext, ApiIdEntityDBContext>();
-            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler<SysUser>>();
-            DependencyConfig.Config(services, Configuration);
+            //services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler<SysUser>>();
+            //DependencyConfig.Config(services, Configuration);
             services.AddCors();
             services.AddOData();
             services.AddIdentity<SysUser, SysRole>(options =>

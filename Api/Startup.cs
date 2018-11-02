@@ -103,7 +103,7 @@ namespace WebService.Api
                    name: "default",
                    template: "api/{controller}/{action}/{id?}");
             });
-            AutoMapperConfig.InitAutoMapperConfig();
+            AutoMapperConfig.MapperConfig();
             DynamicOperation.CreateDynamicOperation();
         }
     }
