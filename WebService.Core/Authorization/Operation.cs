@@ -7,23 +7,24 @@ namespace WebService.Core.Authorization
 {
 
     /// <summary>
-    ///定义所有模块中的所有操作项
+    ///定义模块中的所特有的操作项
     ///名称约定：模块名称_操作名称
-    ///模块名称的Description 请定义在模块对应实体类的[Description]属性中
     /// </summary>
     [Flags]
-    public enum Operation
+    public enum PrivateOperation
     {
-        [Description("查询")] SystemMenu_Read = 1,
-        [Description("新建")] SystemMenu_Create = SystemMenu_Read | 2,
-        [Description("更新")] SystemMenu_Update = SystemMenu_Read | 3,
-        [Description("删除")] SystemMenu_Delete = SystemMenu_Read | 4,
-        [Description("编辑")] SystemMenu_Edit = SystemMenu_Create | SystemMenu_Update | SystemMenu_Delete,
+        [Description("系统菜单项管理")] SystemMenu_DataAdmin = 1000,
     }
-
+    /// <summary>
+    /// 定义所有模块都会具有的操作
+    /// </summary>
     [Flags]
-    public enum BaseOperation
+    public enum PublicOperation
     {
-        [Description("查询")] Read = 10000,
+        [Description("查询")] Read = 2000,
+        [Description("新建")] Create = Read | 2001,
+        [Description("更新")] Update = Read | 2002,
+        [Description("删除")] Delete = Read | 2003,
+        [Description("编辑")] Edit = Create | Update | Delete,
     }
 }

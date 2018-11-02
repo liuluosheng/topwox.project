@@ -119,8 +119,10 @@ namespace WebService.Identity.Api
             app.UseCors(police => police.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseMvcWithDefaultRoute();
-            app.UseAuthentication();
+            
             app.UseIdentityServer();
+            app.UseAuthentication();
+
             app.UseMvc(b =>
             {
                 b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
