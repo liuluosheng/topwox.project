@@ -11,12 +11,12 @@ namespace WebService.Core.Authorization
 
     public class PermissionAuthorizationRequirement : IAuthorizationRequirement
     {
-        public PermissionAuthorizationRequirement(Operation operation)
+        public PermissionAuthorizationRequirement(PrivateOperation operation)
         {
             Operation = operation;
         }
 
-        public Operation Operation { get; set; }
+        public PrivateOperation Operation { get; set; }
     }
     public class PermissionAuthorizationHandler: AuthorizationHandler<PermissionAuthorizationRequirement> 
     {

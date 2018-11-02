@@ -8,11 +8,11 @@ namespace WebService.Core
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class ApiAttribute : Attribute
     {
-        public ApiAttribute(Operation operation)
+        public ApiAttribute(PrivateOperation operation)
         {
             Operation = operation;
         }
-        public Operation Operation { get; set; }     
+        public PrivateOperation Operation { get; set; }     
     }
 
 }

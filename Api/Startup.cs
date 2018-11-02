@@ -16,6 +16,7 @@ using Microsoft.AspNet.OData.Routing;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.InMemory;
 using WebService.Core;
+using WebService.Core.Authorization;
 
 namespace WebService.Api
 {
@@ -99,6 +100,7 @@ namespace WebService.Api
                    template: "api/{controller}/{action}/{id?}");
             });
             AutoMapperConfig.InitAutoMapperConfig();
+            DynamicOperation.CreateDynamicOperation();
         }
     }
 }

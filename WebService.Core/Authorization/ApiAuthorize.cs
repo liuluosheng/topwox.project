@@ -15,11 +15,11 @@ namespace WebService.Core.Authorization
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public class ApiAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
     {
-        public ApiAuthorizeAttribute(Operation operation)
+        public ApiAuthorizeAttribute(PrivateOperation operation)
         {
             Operation = operation;
         }
-        public Operation Operation { get; set; }
+        public PrivateOperation Operation { get; set; }
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
            

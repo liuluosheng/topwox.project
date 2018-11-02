@@ -4,20 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Logging;
 namespace WebService.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ILogger<ValuesController> _logger;
+        public ValuesController(ILogger<ValuesController> logger)
+        {
+            _logger = logger;
+        }
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            _logger.LogInformation("Index page get action");
             return new string[] { "value1", "value2" };
         }
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public string Apis()
         {
             return "api";

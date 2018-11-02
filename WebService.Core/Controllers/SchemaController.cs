@@ -102,7 +102,7 @@ namespace WebService.Core.Controllers
                     var m = modules.FirstOrDefault(p => p.Key == module) ?? new Module { Key = module, Descripton = descripions };
                     if (m.Operations.Any(p => p.Operation == t.Operation)) continue;
                     var member = t.Operation.GetMember();
-                    IEnumerable<Operation> data = member != null ? data = new List<Operation> { t.Operation } : null;
+                    IEnumerable<PrivateOperation> data = member != null ? data = new List<PrivateOperation> { t.Operation } : null;
                     foreach (var flag in data ?? t.Operation.GetFlags())
                     {
                         if (m.Operations.Any(p => p.Operation == flag)) continue;

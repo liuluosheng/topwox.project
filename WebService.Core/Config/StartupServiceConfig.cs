@@ -27,9 +27,9 @@ namespace WebService.Core
             services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(Operation.SystemMenu_Create.ToString(), policy => policy.AddRequirements(new PermissionAuthorizationRequirement(Operation.SystemMenu_Create)));
-                options.AddPolicy(Operation.SystemMenu_Delete.ToString(), policy => policy.AddRequirements(new PermissionAuthorizationRequirement(Operation.SystemMenu_Delete)));
-                options.AddPolicy(Operation.SystemMenu_Edit.ToString(), policy => policy.AddRequirements(new PermissionAuthorizationRequirement(Operation.SystemMenu_Edit)));
+                //options.AddPolicy(Operation.SystemMenu_Create.ToString(), policy => policy.AddRequirements(new PermissionAuthorizationRequirement(Operation.SystemMenu_Create)));
+               // options.AddPolicy(Operation.SystemMenu_Delete.ToString(), policy => policy.AddRequirements(new PermissionAuthorizationRequirement(Operation.SystemMenu_Delete)));
+                //options.AddPolicy(Operation.SystemMenu_Edit.ToString(), policy => policy.AddRequirements(new PermissionAuthorizationRequirement(Operation.SystemMenu_Edit)));
             });
         }
     }
