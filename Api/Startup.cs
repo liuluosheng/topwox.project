@@ -17,6 +17,8 @@ using CacheCow.Server.Core.Mvc;
 using EasyCaching.InMemory;
 using WebService.Core;
 using WebService.Core.Authorization;
+using Autofac;
+using WebService.Core.Config;
 
 namespace WebService.Api
 {
@@ -68,6 +70,11 @@ namespace WebService.Api
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "api";
                 });
+           
+        }
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new AutofacModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
