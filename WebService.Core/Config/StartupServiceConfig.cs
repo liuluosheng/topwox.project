@@ -20,11 +20,6 @@ namespace WebService.Core
 
         public static void Config(IServiceCollection services, IConfiguration configuration)
         {    
-            services.AddScoped<IBaseRepository, BaseRepository>();
-            services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
-            services.AddSingleton(typeof(MongoClient), new MongoClient(configuration["AppSettings:Mongo"]));
-            services.AddSingleton<IConfiguration>(configuration);
-            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
             services.AddAuthorization(options =>
             {
                 //options.AddPolicy(Operation.SystemMenu_Create.ToString(), policy => policy.AddRequirements(new PermissionAuthorizationRequirement(Operation.SystemMenu_Create)));

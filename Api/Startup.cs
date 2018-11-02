@@ -19,6 +19,7 @@ using WebService.Core;
 using WebService.Core.Authorization;
 using Autofac;
 using WebService.Core.Config;
+using Autofac.Extensions.DependencyInjection;
 
 namespace WebService.Api
 {
@@ -37,7 +38,7 @@ namespace WebService.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvcCore()
                     .ConfigureApplicationPartManager(m => m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider()))
@@ -54,7 +55,7 @@ namespace WebService.Api
 
             });
             // github.com/aliostad/CacheCow
-            services.AddHttpCachingMvc(); 
+            services.AddHttpCachingMvc();
 
             // github.com/dotnetcore/EasyCaching
             services.AddDefaultInMemoryCache();
@@ -70,11 +71,7 @@ namespace WebService.Api
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "api";
                 });
-           
-        }
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.RegisterModule(new AutofacModule());
+            return AutofacModule.Register(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
