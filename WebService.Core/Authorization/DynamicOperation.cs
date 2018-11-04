@@ -8,17 +8,21 @@ using System.Text;
 
 namespace WebService.Core.Authorization
 {
+    public class DynamicOperationTypeInfo
+    {
+        public TypeInfo TypeInfo { get; set; }
+    }
+
     public static class DynamicOperation
     {
-
-        public static void CreateDynamicOperation()
+        public static string DynamicNameSpace = $"{typeof(Operation).Namespace}.Dynamic";
+        public static DynamicOperationTypeInfo CreateDynamicOperation()
         {
-            AssemblyName asmName = new AssemblyName("public.operation");
-            var assembly = Assembly.GetAssembly(typeof(PublicOperation));
+            AssemblyName asmName = new AssemblyName("dynamic.operation");
             AssemblyBuilder asmBuilder = AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
             ModuleBuilder mb = asmBuilder.DefineDynamicModule(asmName.Name + ".dll");
 
-            string enumTypeName = string.Format("{0}.{1}", typeof(PublicOperation).Namespace, "PublicOperation");
+            string enumTypeName = string.Format("{0}.{1}", DynamicNameSpace, "DynamicOperation");
             EnumBuilder eb = mb.DefineEnum(enumTypeName, TypeAttributes.Public, typeof(int));
 
             Type flagAttrType = typeof(FlagsAttribute);
@@ -30,14 +34,20 @@ namespace WebService.Core.Authorization
                 if (type.BaseType == typeof(EntityBase))
                 {
                     short flag = 9000;
-                    foreach (var e in Enums.GetMembers<PublicOperation>())
+                    foreach (var e in Enums.GetMembers<Operation>())
                     {
-                        eb.DefineLiteral($"{type.Name}_{e.AsString()}", e.ToInt16() | flag);
-                        flag++;
+                        if (e.Attributes.Get<PublicAttribute>() is PublicAttribute)
+                        {
+                            eb.DefineLiteral($"{type.Name}_{e.AsString()}", e.ToInt16() | flag);
+                            flag++;
+                        }
                     }
                 }
             }
-            var typeinfo = eb.CreateTypeInfo();
+            return new DynamicOperationTypeInfo
+            {
+                TypeInfo = eb.CreateTypeInfo()
+            };
         }
     }
 }

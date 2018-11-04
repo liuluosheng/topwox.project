@@ -18,6 +18,6 @@ namespace WebService.Core.Authorization
        public string Description;
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public PrivateOperation Operation;
+        public Operation Operation;
     }
 }

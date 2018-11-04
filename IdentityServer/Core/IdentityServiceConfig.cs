@@ -4,7 +4,7 @@ using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 
-namespace IdentityServer.Core.Config
+namespace IdentityServer.Config
 {
     public class IdentityServiceConfig
     {
@@ -26,8 +26,7 @@ namespace IdentityServer.Core.Config
                 {
                     JwtClaimTypes.Role,
                     JwtClaimTypes.Email
-                }),
-                new ApiResource("share")
+                })
             };
         }
 

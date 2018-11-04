@@ -18,14 +18,18 @@ namespace WebService.Core.Config
 {
     public class AutofacModule
     {
-
+        /// <summary>
+        /// 注册公共的服务
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceProvider Register(IServiceCollection services, IConfiguration configuration)
         {
             //实例化Autofac容器
             var builder = new ContainerBuilder();
             //将Services中的服务填充到Autofac中
             builder.Populate(services);
-            builder.RegisterInstance(new MongoClient(configuration["AppSettings:Mongo"])).SingleInstance();
             builder.RegisterInstance(configuration).SingleInstance();
             builder.RegisterType<BaseRepository>().AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(BaseService<>)).As(typeof(IBaseService<>));

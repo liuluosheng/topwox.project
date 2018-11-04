@@ -10,7 +10,7 @@ using IdentityServer4.Test;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-namespace WebService.Core
+namespace IdentityServer
 {
     public class CustomProfileService<T,R> : IProfileService 
         where T : IdentityUser<Guid> 

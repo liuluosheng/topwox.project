@@ -15,20 +15,27 @@ namespace WebService.Core.Authorization
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public class ApiAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
     {
-        public ApiAuthorizeAttribute(PrivateOperation operation)
+        public ApiAuthorizeAttribute(Operation operation)
         {
             Operation = operation;
         }
-        public PrivateOperation Operation { get; set; }
+        public ApiAuthorizeAttribute(Type entityType,  Operation operation)
+        {
+            Operation = operation;
+            EntityType = entityType;
+        }
+        public Operation Operation { get; set; }
+        public Type EntityType { get; set; }
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
            
             var authorizationService = context.HttpContext.RequestServices.GetRequiredService<IAuthorizationService>();
-            var authorizationResult = await authorizationService.AuthorizeAsync(context.HttpContext.User, null, new PermissionAuthorizationRequirement(Operation));
+            var authorizationResult = await authorizationService.AuthorizeAsync(context.HttpContext.User, null, new PermissionAuthorizationRequirement(Operation, EntityType));
             if (!authorizationResult.Succeeded)
             {         
                 context.Result = new UnauthorizedResult();
             }
         }
     }
+
 }

@@ -20,6 +20,8 @@ using WebService.Core.Authorization;
 using Autofac;
 using WebService.Core.Config;
 using Autofac.Extensions.DependencyInjection;
+using MongoDB.Driver;
+
 
 namespace WebService.Api
 {
@@ -60,6 +62,8 @@ namespace WebService.Api
             // github.com/dotnetcore/EasyCaching
             services.AddDefaultInMemoryCache();
             services.AddScoped<DbContext, ApiDBContext>();
+            services.AddSingleton(new MongoClient(Configuration["AppSettings:Mongo"]));
+            //  services.AddSingleton(DynamicOperation.CreateDynamicOperation());
             StartupServiceConfig.Config(services, Configuration);
             services.AddCors();
             services.AddOData();
@@ -104,7 +108,6 @@ namespace WebService.Api
                    template: "api/{controller}/{action}/{id?}");
             });
             AutoMapperConfig.MapperConfig();
-            DynamicOperation.CreateDynamicOperation();
         }
     }
 }

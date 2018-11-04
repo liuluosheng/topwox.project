@@ -134,7 +134,4 @@ namespace WebService.Identity.Api
         }
     }
 }
-         DynamicOperation.CreateDynamicOperation();
-        }
-    }
-}
+     

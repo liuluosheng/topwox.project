@@ -4,9 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Data;
-using IdentityServer.Core.Config;
+using IdentityServer.Config;
 using IdentityServer.Model;
 using IdentityServer4.AspNetIdentity;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebService.Core;
+using ODataConfig = IdentityServer.Config.ODataConfig;
 
 namespace IdentityServer
 {
@@ -73,9 +77,9 @@ namespace IdentityServer
              .AddInMemoryIdentityResources(IdentityServiceConfig.GetIdentityResources())
              .AddInMemoryApiResources(IdentityServiceConfig.GetApiResources())
              .AddInMemoryClients(IdentityServiceConfig.GetClients())
-             .AddProfileService<CustomProfileService<User, Role>>()
-             .AddAspNetIdentity<User>();
-
+             .AddAspNetIdentity<User>()
+             .AddProfileService<CustomProfileService<User, Role>>();
+            services.AddOData();
             builder.AddDeveloperSigningCredential(filename: "tempkey.rsa");
 
         }
@@ -90,11 +94,19 @@ namespace IdentityServer
             app.UseCors(police => police.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseIdentityServer();
             app.UseStaticFiles();
-            app.UseMvc(routes =>
+            app.UseMvc(b =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
+                IList<IODataRoutingConvention> conventions = ODataRoutingConventions.CreateDefault();
+                conventions.Insert(0, new MatchRoutingConvention());
+                b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel(), new DefaultODataPathHandler(), conventions);
+
+                //b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel());
+
+                b.EnableDependencyInjection();
+                b.MapRoute(
+                   name: "default",
+                   template: "api/{controller}/{action}/{id?}");
             });
         }
     }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 namespace WebService.Api.Controllers
@@ -12,9 +14,11 @@ namespace WebService.Api.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly ILogger<ValuesController> _logger;
+ 
         public ValuesController(ILogger<ValuesController> logger)
         {
             _logger = logger;
+        
         }
         // GET api/values
         [HttpGet]
