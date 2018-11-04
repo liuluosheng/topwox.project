@@ -1,4 +1,4 @@
-﻿using Core.IServices;
+﻿using Topwox.Core.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.JsonPatch;
-using Data.Entitys;
+using Topwox.Data.Entitys;
 using Microsoft.EntityFrameworkCore;
-using Core.Repository;
+using Topwox.Core.Repository;
 
-namespace Core.Service
+namespace Topwox.Core.Service
 {
     /// <summary>
     /// Service基类

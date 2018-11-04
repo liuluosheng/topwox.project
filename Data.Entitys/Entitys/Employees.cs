@@ -1,14 +1,14 @@
-﻿using Data.Enums;
+﻿using Topwox.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using Data.Attributes;
-using Data.Attributes.Shema;
-using Data.Entitys;
+using Topwox.Data.Attributes;
+using Topwox.Data.Attributes.Shema;
+using Topwox.Data.Entitys;
 
-namespace Data.Entitys
+namespace Topwox.Data.Entitys
 {
     [GeneratedOdataController]
     [Description("员工信息")]

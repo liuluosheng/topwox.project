@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Data.Attributes
+namespace Topwox.Data.Attributes
 {
     /// <summary>
     //标识实体添加为Odata的edm的entityType

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     public static class Clone
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using EnumsNET;
-namespace WebService.Core.Authorization
+namespace Topwox.WebService.Core.Authorization
 {
 
     /// <summary>

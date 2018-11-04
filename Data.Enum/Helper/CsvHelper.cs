@@ -5,7 +5,7 @@ using System.Data;
 using System.IO;
 using System.Reflection;
 
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     /// <summary>
     ///普通aspx页面用法

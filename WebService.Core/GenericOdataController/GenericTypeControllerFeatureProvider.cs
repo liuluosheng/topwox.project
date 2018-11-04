@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Entitys;
+using Topwox.Data.Entitys;
 using System.Reflection;
-using Data.Attributes;
+using Topwox.Data.Attributes;
 
-namespace WebService.Core
+namespace Topwox.WebService.Core
 {
     public class GenericTypeControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {

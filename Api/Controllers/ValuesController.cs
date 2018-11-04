@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer.Model;
+using Topwox.IdentityServer.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-namespace WebService.Api.Controllers
+namespace Topwox.WebService.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

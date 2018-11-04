@@ -1,12 +1,12 @@
-﻿using Core.IServices;
-using Data.Entitys;
+﻿using Topwox.Core.IServices;
+using Topwox.Data.Entitys;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebService.Core.Controllers
+namespace Topwox.WebService.Core.Controllers
 {
     /// <summary>
     /// api controller 基类

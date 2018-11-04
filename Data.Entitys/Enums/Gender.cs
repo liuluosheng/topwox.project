@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data.Enums
+namespace Topwox.Data.Enums
 {
     public enum Gender
     {

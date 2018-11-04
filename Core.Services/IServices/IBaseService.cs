@@ -1,4 +1,4 @@
-﻿using Data.Entitys;
+﻿using Topwox.Data.Entitys;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Core.IServices
+namespace Topwox.Core.IServices
 {
     public interface IBaseService<TEntity> where TEntity : EntityBase
     {

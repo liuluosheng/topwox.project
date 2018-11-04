@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.IServices;
-using Data.Entitys;
+using Topwox.Core.IServices;
+using Topwox.Data.Entitys;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +14,8 @@ using Microsoft.Data.Edm;
 using ODataPath = Microsoft.AspNet.OData.Routing.ODataPath;
 using Microsoft.OData.UriParser;
 using System.Reflection;
-using CacheCow.Server.Core.Mvc;
-using WebService.Core.Authorization;
 
-namespace WebService.Core
+namespace Topwox.WebService.Core
 {
     public class BaseOdataController<T> : ODataController
         where T : EntityBase

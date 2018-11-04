@@ -1,4 +1,4 @@
-﻿namespace YT.Core.DomainModel
+﻿namespace Topwox.Core.Utility
 {
     public class MailSetting
     {

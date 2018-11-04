@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Attributes
+namespace Topwox.Data.Attributes
 {
     /// <summary>
     /// 添加到实体属性上，标识排除该属性生成JSON Schema

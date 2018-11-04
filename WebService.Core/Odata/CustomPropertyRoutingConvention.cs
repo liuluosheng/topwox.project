@@ -15,10 +15,10 @@ using Microsoft.Data.Edm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using Microsoft.OData.UriParser;
-using Data.Attributes;
-using Data.Entitys;
+using Topwox.Data.Attributes;
+using Topwox.Data.Entitys;
 
-namespace WebService.Core
+namespace Topwox.WebService.Core
 {
     public class CustomPropertyRoutingConvention : NavigationSourceRoutingConvention
     {

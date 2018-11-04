@@ -1,5 +1,5 @@
 ﻿
-using Data.Entitys;
+using Topwox.Data.Entitys;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.OData.Edm;
 using System;
@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNet.OData.Routing;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using Data.Attributes;
+using Topwox.Data.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 

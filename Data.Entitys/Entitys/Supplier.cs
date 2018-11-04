@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using Data.Attributes;
+using Topwox.Data.Attributes;
 
-namespace Data.Entitys
+namespace Topwox.Data.Entitys
 {
     [GeneratedOdataController]
    public class Supplier :EntityBase

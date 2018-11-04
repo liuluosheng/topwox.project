@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using Data.Attributes;
+using Topwox.Data.Attributes;
 
-namespace Data.Model.Control
+namespace Topwox.Data.Model.Control
 {
     [JsonObject(
         NamingStrategyType = typeof(CamelCaseNamingStrategy),

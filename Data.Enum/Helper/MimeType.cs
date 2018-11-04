@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     public static class MimeType
     {

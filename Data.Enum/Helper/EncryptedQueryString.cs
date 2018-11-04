@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Net;
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     public class EncryptedQueryString : Dictionary<string, string>
     {

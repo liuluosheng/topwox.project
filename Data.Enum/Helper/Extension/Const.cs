@@ -1,4 +1,4 @@
-﻿namespace X.Utility
+﻿namespace Topwox.Core.Utility
 {
     /// <summary>
     /// 常量

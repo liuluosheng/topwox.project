@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Attributes.Shema
+namespace Topwox.Data.Attributes.Shema
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class PlaceHolderAttribute : Attribute

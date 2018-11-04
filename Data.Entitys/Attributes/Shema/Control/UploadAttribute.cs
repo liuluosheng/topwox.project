@@ -8,7 +8,7 @@ using Newtonsoft.Json.Serialization;
 using System.ComponentModel;
 using Newtonsoft.Json.Converters;
 
-namespace Data.Attributes.Shema
+namespace Topwox.Data.Attributes.Shema
 {
 
     /// <summary>

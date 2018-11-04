@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.IServices
+namespace Topwox.Core.IServices
 {
     public interface IEmail
     {

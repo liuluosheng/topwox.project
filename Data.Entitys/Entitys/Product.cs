@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using Data.Attributes;
-using Data.Attributes.Shema;
+using Topwox.Data.Attributes;
+using Topwox.Data.Attributes.Shema;
 
-namespace Data.Entitys
+namespace Topwox.Data.Entitys
 {
     [GeneratedOdataController]
     public class Product : EntityBase

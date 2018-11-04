@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using EnumsNET;
-namespace WebService.Core.Authorization
+namespace Topwox.WebService.Core.Authorization
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public class ApiAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter

@@ -6,22 +6,22 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CsToTs;
-using Data.Model;
-using Data.Entitys;
+using Topwox.Data.Model;
+using Topwox.Data.Entitys;
 using Microsoft.Extensions.Configuration;
-using Data.Model.Control;
+using Topwox.Data.Model.Control;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.ComponentModel.DataAnnotations;
-using WebService.Core.Authorization;
+using Topwox.WebService.Core.Authorization;
 using EnumsNET;
-using Module = WebService.Core.Authorization.Module;
+using Module = Topwox.WebService.Core.Authorization.Module;
 using Microsoft.AspNetCore.Authorization;
 
-namespace WebService.Core.Controllers
+namespace Topwox.WebService.Core.Controllers
 {
     [ApiController]
     public class SchemaController : ControllerBase

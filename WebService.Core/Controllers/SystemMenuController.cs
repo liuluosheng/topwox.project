@@ -1,15 +1,15 @@
-﻿using Core.IServices;
-using Data.Entitys;
+﻿using Topwox.Core.IServices;
+using Topwox.Data.Entitys;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using WebService.Core.Controllers;
+using Topwox.WebService.Core.Controllers;
 using Newtonsoft.Json;
-using WebService.Core.Authorization;
+using Topwox.WebService.Core.Authorization;
 
-namespace WebService.Core
+namespace Topwox.WebService.Core
 {
   
     public class SystemMenuController : BaseController<SystemMenu>

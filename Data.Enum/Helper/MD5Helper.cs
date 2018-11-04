@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     public class MD5Helper
     {

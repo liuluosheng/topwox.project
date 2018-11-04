@@ -1,5 +1,5 @@
-﻿using Data.Attributes;
-using Data.Attributes.Shema;
+﻿using Topwox.Data.Attributes;
+using Topwox.Data.Attributes.Shema;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Data.Entitys
+namespace Topwox.Data.Entitys
 {
     [GeneratedOdataController]
     [DisplayName("系统菜单")]

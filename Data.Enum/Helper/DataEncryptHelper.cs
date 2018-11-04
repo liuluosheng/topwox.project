@@ -3,7 +3,7 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     /// <summary>
     /// 使用des算法加密解密字符串

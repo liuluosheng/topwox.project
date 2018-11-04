@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Data.Entitys;
+using Topwox.Data.Entitys;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Repository
+namespace Topwox.Core.Repository
 {
     /// <summary>
     /// EntityFramework的仓储实现

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Model.Control
+namespace Topwox.Data.Model.Control
 {
     public enum ControlType
     {

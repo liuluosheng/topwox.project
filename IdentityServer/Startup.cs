@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Data;
-using IdentityServer.Config;
-using IdentityServer.Model;
+using Topwox.Data;
+using Topwox.IdentityServer.Config;
+using Topwox.IdentityServer.Model;
 using IdentityServer4.AspNetIdentity;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Routing;
@@ -17,12 +17,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using WebService.Core;
-using ODataConfig = IdentityServer.Config.ODataConfig;
+using Topwox.WebService.Core;
 
-namespace IdentityServer
+namespace Topwox.IdentityServer
 {
     public class Startup
     {
@@ -39,9 +36,9 @@ namespace IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddMvc();
-            services.AddScoped<DbContext, EwIdentityDBContext>();
+            services.AddScoped<DbContext, TopwoxIdentityDBContext>();
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
-            services.AddDbContext<EwIdentityDBContext>(options =>
+            services.AddDbContext<TopwoxIdentityDBContext>(options =>
             {
                 options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b =>
                 {
@@ -63,7 +60,7 @@ namespace IdentityServer
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
 
             })
-              .AddEntityFrameworkStores<EwIdentityDBContext>()
+              .AddEntityFrameworkStores<TopwoxIdentityDBContext>()
               .AddDefaultTokenProviders();
 
             services.AddMvc();
@@ -74,9 +71,9 @@ namespace IdentityServer
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
             })
-             .AddInMemoryIdentityResources(IdentityServiceConfig.GetIdentityResources())
-             .AddInMemoryApiResources(IdentityServiceConfig.GetApiResources())
-             .AddInMemoryClients(IdentityServiceConfig.GetClients())
+             .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+             .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
+             .AddInMemoryClients(IdentityServerConfig.GetClients())
              .AddAspNetIdentity<User>()
              .AddProfileService<CustomProfileService<User, Role>>();
             services.AddOData();
@@ -99,7 +96,7 @@ namespace IdentityServer
                 b.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
                 IList<IODataRoutingConvention> conventions = ODataRoutingConventions.CreateDefault();
                 conventions.Insert(0, new MatchRoutingConvention());
-                b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel(), new DefaultODataPathHandler(), conventions);
+                b.MapODataServiceRoute("odata", "odata", IdentityServerODataConfig.GetEdmModel(), new DefaultODataPathHandler(), conventions);
 
                 //b.MapODataServiceRoute("odata", "odata", ODataConfig.GetEdmModel());
 

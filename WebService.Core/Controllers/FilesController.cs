@@ -10,7 +10,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 
-namespace WebService.Core.Controllers
+namespace Topwox.WebService.Core.Controllers
 {
 
     [Route("api/[controller]")]

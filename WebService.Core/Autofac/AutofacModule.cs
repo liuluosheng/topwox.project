@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Core.IServices;
-using Core.Repository;
-using Core.Service;
+using Topwox.Core.IServices;
+using Topwox.Core.Repository;
+using Topwox.Core.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,10 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using WebService.Core.Authorization;
+using Topwox.WebService.Core.Authorization;
 using Module = Autofac.Module;
 
-namespace WebService.Core.Config
+namespace Topwox.WebService.Core.Config
 {
     public class AutofacModule
     {

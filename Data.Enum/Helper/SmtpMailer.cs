@@ -2,11 +2,10 @@
 using MailKit.Net.Smtp;
 using MailKit;
 using MimeKit;
-using YT.Core.DomainModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     public class SmtpMailer
     {

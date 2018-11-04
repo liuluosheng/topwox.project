@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Model
+namespace Topwox.Data.Model
 {
     public class Page
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
-using Data;
+using Topwox.Data;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,15 +15,13 @@ using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNet.OData.Routing;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.InMemory;
-using WebService.Core;
-using WebService.Core.Authorization;
 using Autofac;
-using WebService.Core.Config;
-using Autofac.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using Topwox.WebService.Core;
+using Topwox.WebService.Core.Config;
+using WebService.Core;
 
-
-namespace WebService.Api
+namespace Topwox.WebService.Api
 {
     public class Startup
     {
@@ -47,7 +45,7 @@ namespace WebService.Api
                     .AddAuthorization()
                     .AddJsonFormatters();
             var assemblyName = Assembly.GetExecutingAssembly().FullName;
-            services.AddDbContext<ApiDBContext>(options =>
+            services.AddDbContext<TopwoxApiDBContext>(options =>
             {
                 options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"], b =>
                 {
@@ -61,7 +59,7 @@ namespace WebService.Api
 
             // github.com/dotnetcore/EasyCaching
             services.AddDefaultInMemoryCache();
-            services.AddScoped<DbContext, ApiDBContext>();
+            services.AddScoped<DbContext, TopwoxApiDBContext>();
             services.AddSingleton(new MongoClient(Configuration["AppSettings:Mongo"]));
             //  services.AddSingleton(DynamicOperation.CreateDynamicOperation());
             StartupServiceConfig.Config(services, Configuration);

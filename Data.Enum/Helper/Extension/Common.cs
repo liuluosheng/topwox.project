@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     /// <summary>
     /// 常用公共操作

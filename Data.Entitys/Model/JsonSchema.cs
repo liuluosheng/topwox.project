@@ -7,13 +7,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
 using System.Linq;
-using Data.Attributes;
+using Topwox.Data.Attributes;
 using Microsoft.Extensions.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using Data.Entitys;
-using Data.Attributes.Shema;
+using Topwox.Data.Entitys;
+using Topwox.Data.Attributes.Shema;
 
-namespace Data.Model
+namespace Topwox.Data.Model
 {
 
     /// <summary>

@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace Data.Model
+namespace Topwox.Data.Model
 {
     [JsonObject(
      NamingStrategyType = typeof(CamelCaseNamingStrategy),

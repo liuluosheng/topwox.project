@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 
-namespace WebService.Core
+namespace Topwox.WebService.Core
 {
     public static class AutoMapperConfig
     {

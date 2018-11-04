@@ -1,4 +1,4 @@
-﻿using Data.Entitys;
+﻿using Topwox.Data.Entitys;
 using EnumsNET;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 
-namespace WebService.Core.Authorization
+namespace Topwox.WebService.Core.Authorization
 {
     public class DynamicOperationTypeInfo
     {

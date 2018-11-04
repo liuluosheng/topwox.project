@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using EnumsNET;
-namespace WebService.Core.Authorization
+namespace Topwox.WebService.Core.Authorization
 {
 
     public class PermissionAuthorizationRequirement : IAuthorizationRequirement

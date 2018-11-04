@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
-using IdentityServer.Model;
+using Topwox.IdentityServer.Model;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace IdentityServer.Data
+namespace Topwox.IdentityServer.Data
 {
     /// <summary>
     /// 创建种子数据
@@ -19,7 +19,7 @@ namespace IdentityServer.Data
         {
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var context = scope.ServiceProvider.GetService<EwIdentityDBContext>();
+                var context = scope.ServiceProvider.GetService<TopwoxIdentityDBContext>();
                 context.Database.Migrate();
 
                 var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<User>>();

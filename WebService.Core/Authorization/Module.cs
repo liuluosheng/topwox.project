@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebService.Core.Authorization
+namespace Topwox.WebService.Core.Authorization
 {
    public class Module
     {

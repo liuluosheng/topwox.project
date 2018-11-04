@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace X.Utility
+namespace Topwox.Core.Utility
 {
     /// <summary>
     /// 系统扩展 - 类型转换
