@@ -40,7 +40,7 @@ namespace Topwox.WebService.Core.Controllers
         /// <returns></returns>
         [HttpCacheFactory(300)]
         [Authorize]
-        [ApiAuthorize(typeof(Employees), Operation.Update | Operation.Delete)]//权限测试
+        //[ApiAuthorize(typeof(Employees), Operation.Update | Operation.Delete)]//权限测试
         [HttpGet("api/jsonschema/{type}")]
         public IActionResult Get(string type = "")
         {
