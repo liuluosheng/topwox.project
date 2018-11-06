@@ -56,7 +56,7 @@ namespace Topwox.Core.Service
             return await Create<TEntity>(entity, isCommit);
         }
 
-        public async Task<TEntity> Patch(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true)
+        public async Task<TEntity> Patch(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true) 
         {
             var model = await Get(p => p.Id == id).FirstOrDefaultAsync();
             doc.ApplyTo(model, p => { });
