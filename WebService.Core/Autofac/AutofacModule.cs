@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Text;
 using Topwox.WebService.Core.Authorization;
 using Module = Autofac.Module;
+using Microsoft.AspNetCore.Http;
 
 namespace Topwox.WebService.Core.Config
 {
@@ -34,6 +35,7 @@ namespace Topwox.WebService.Core.Config
             builder.RegisterType<BaseRepository>().AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(BaseService<>)).As(typeof(IBaseService<>));
             builder.RegisterType<PermissionAuthorizationHandler>().As<IAuthorizationHandler>();
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().PropertiesAutowired();
             //创建容器
             var Container = builder.Build();
             //第三方IOC接管 core内置DI容器 

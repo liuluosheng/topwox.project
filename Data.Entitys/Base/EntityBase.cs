@@ -44,6 +44,7 @@ namespace Topwox.Data.Entitys
         [Timestamp]
         [Display(Name = "版本号"), Column(Order = 100), SchemaIgnore]
         public byte[] Timestamp { get; set; }
+
         #endregion
 
         /// <summary>

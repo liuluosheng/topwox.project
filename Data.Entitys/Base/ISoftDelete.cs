@@ -1,19 +1,21 @@
-﻿using Topwox.Data.Entitys;
-using Microsoft.EntityFrameworkCore;
-using System;
-using Topwox.Data.Entitys.Base;
-using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Topwox.WebService.Api
+namespace Topwox.Data.Entitys.Base
 {
-    public class TopwoxApiDBContext : DbContext
+    /// <summary>
+    /// 继承此接口实现软删除
+    /// </summary>
+    public class ISoftDelete
     {
-        public TopwoxApiDBContext(DbContextOptions options) : base(options)
-        {
+        public bool IsDeleted { get; set; }
+    }
+}
 
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+/*
+ * 在DbContext类中做如下定义，以实现软删除
+ protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var type in typeof(EntityBase).Assembly.GetTypes())
             {
@@ -21,7 +23,7 @@ namespace Topwox.WebService.Api
                 {
 
                     modelBuilder.Entity(type);
-                    if (typeof(ISoftDelete).IsAssignableFrom(type))
+                    if (typeof(ISoftDelete).IsAssignableFrom(t))
                     {
                         var columnName = "IsDeleted";
                         modelBuilder.Entity(type).Property<bool>(columnName);
@@ -32,8 +34,5 @@ namespace Topwox.WebService.Api
             }
             base.OnModelCreating(modelBuilder);
         }
-
-
-    }
-}
-
+     
+ */
