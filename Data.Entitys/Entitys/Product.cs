@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using System.Text;
 using Topwox.Data.Attributes;
 using Topwox.Data.Attributes.Shema;
@@ -11,10 +12,10 @@ namespace Topwox.Data.Entitys
     [GeneratedOdataController]
     public class Product : EntityBase
     {
-        [Display(Name = "产品名称"), SchemaColumn]
+        [Display(Name = "产品名称")]
         [Required]
         public string Name { get; set; }
-        [Display(Name = "单重"), SchemaColumn(Searchable = false)]
+        [Display(Name = "单重")]
         [Required]
         public decimal Weight { get; set; }
         [Display(Name = "产品描述")]
@@ -22,7 +23,7 @@ namespace Topwox.Data.Entitys
 
         [Display(Name = "采购人员")]
         [AutoComplete(DataType = "Employees", Search = "Name,PhoneNumber", Label = "Name"), PlaceHolder("搜索名称，联系电话")]
-        [SchemaColumn(DisplayExpression = "Purchasing.Name")]
+        [NavigationExpression("Purchasing.Name")]
         public Guid? PurchasingId { get; set; }
 
 

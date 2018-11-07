@@ -6,10 +6,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CsToTs;
-using Topwox.Data.Model;
-using Topwox.Data.Entitys;
 using Microsoft.Extensions.Configuration;
-using Topwox.Data.Model.Control;
+using Topwox.Data.Shema.Control;
 using CacheCow.Server.Core.Mvc;
 using EasyCaching.Core;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,7 +37,7 @@ namespace Topwox.WebService.Core.Controllers
         /// <param name="type"></param>
         /// <returns></returns>
         [HttpCacheFactory(300)]
-        [Authorize]
+        //[Authorize]
         //[ApiAuthorize(typeof(Employees), Operation.Update | Operation.Delete)]//权限测试
         [HttpGet("api/jsonschema/{type}")]
         public IActionResult Get(string type = "")

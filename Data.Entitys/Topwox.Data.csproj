@@ -9,7 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Shema\Control\ControlType.cs~RF54463efd.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.8.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />

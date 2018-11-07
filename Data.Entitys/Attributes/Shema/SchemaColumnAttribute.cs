@@ -21,27 +21,7 @@ namespace Topwox.Data.Attributes
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string DisplayExpression  { get; set; }
 
-        /// <summary>
-        ///指定列是否可搜索  [NonFilterable],[NotFilterable]
-        /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        [DefaultValue(true)]
-        public bool Searchable { get; set; } = true;
 
-        /// <summary>
-        ///指定列是否可排序[NotSortable], [Unsortable]
-
-        /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        [DefaultValue(true)]
-        public bool Sortable { get; set; } = true;
-
-        /// <summary>
-        ///指定列是否可编辑
-        /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        [DefaultValue(true)]
-        public bool Editable { get; set; } = true;
 
     }
 }

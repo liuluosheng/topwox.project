@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace Topwox.Data.Model
+namespace Topwox.Data.Shema
 {
     [JsonObject(
      NamingStrategyType = typeof(CamelCaseNamingStrategy),
@@ -11,7 +11,7 @@ namespace Topwox.Data.Model
   ]
     public class Schema
     {
-        public List<Control.Control> Properties { get; set; }
+        public List<Control.ControlBase> Properties { get; set; }
         public string Type { get; set; }
         public List<string> Expand { get; set; }
     }

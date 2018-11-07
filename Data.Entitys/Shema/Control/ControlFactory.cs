@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNet.OData.Query;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,12 +7,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using Topwox.Data.Attributes;
 using Topwox.Data.Attributes.Shema;
 using Topwox.Data.Entitys;
 
-namespace Topwox.Data.Model.Control
+namespace Topwox.Data.Shema.Control
 {
     public class ControlFactory
     {
@@ -30,29 +32,26 @@ namespace Topwox.Data.Model.Control
                 Type = type.Name
             };
         }
-        private Tuple<List<Control>, List<string>> Create(Type type)
+        private Tuple<List<ControlBase>, List<string>> Create(Type type)
         {
-            var controls = new List<Control>();
+            var controls = new List<ControlBase>();
             var expands = new List<string>();
-            var anySchemaProps = type.GetProperties().Any(p => p.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute);
-            foreach (var p in type.GetProperties().Where(p => p.GetCustomAttribute<SchemaIgnoreAttribute>() == null))
+            var schemaProps = type.GetProperties().Where(p => p.GetCustomAttribute<DataMemberAttribute>() is DataMemberAttribute);
+            if (!schemaProps.Any())
+                schemaProps = type.GetProperties().Where(p => p.GetCustomAttribute<SchemaIgnoreAttribute>() == null);
+            foreach (var p in schemaProps)
             {
-                if (Create(p) is Control control)
+                if (Create(p) is ControlBase control)
                 {
                     controls.Add(control);
-                    if (!anySchemaProps)
+                    if (control.ColumnSetting?.NavigationExpression != null)
                     {
-                        ///如果实体未标识任何SchemaColumn属性
-                        control.ColumnSetting = new SchemaColumnAttribute() { Editable = p.CanWrite };
+                        expands.Add(control.ColumnSetting?.NavigationExpression.Split('.').First());
                     }
-                    if (control.ColumnSetting?.DisplayExpression != null)
-                    {
-                        expands.Add(control.ColumnSetting?.DisplayExpression.Split('.').First());
-                    }
-                    if(control.ColumnSetting!=null && p.GetCustomAttributes<NotMappedAttribute>() is NotMappedAttribute)
+                    if (control.ColumnSetting != null && p.GetCustomAttributes<NotMappedAttribute>() is NotMappedAttribute)
                     {
                         control.ColumnSetting.Editable = false;
-                        control.ColumnSetting.Searchable = false;
+                        control.ColumnSetting.Filterable = false;
                         control.ColumnSetting.Sortable = false;
                     }
                 }
@@ -60,9 +59,9 @@ namespace Topwox.Data.Model.Control
             return Tuple.Create(controls, expands);
         }
 
-        private Control Create(PropertyInfo prop)
+        private ControlBase Create(PropertyInfo prop)
         {
-            Control control = null;
+            ControlBase control = null;
             if (GetPropType(prop) is ControlType controlType)
             {
                 switch (controlType)
@@ -98,7 +97,7 @@ namespace Topwox.Data.Model.Control
                         break;
                     case ControlType.Switch:
                     case ControlType.DateTime:
-                        control = new Control { Type = controlType };
+                        control = new ControlBase { Type = controlType };
                         break;
                 }
             }
@@ -146,13 +145,22 @@ namespace Topwox.Data.Model.Control
                 {
                     control.Required = true;
                 }
-                if (prop.GetCustomAttribute<SchemaColumnAttribute>() is SchemaColumnAttribute schemaColumnAttribute)
+                if (prop.GetCustomAttribute<NotFilterableAttribute>() is NotFilterableAttribute || prop.GetCustomAttribute<NonFilterableAttribute>() is NonFilterableAttribute)
                 {
-                    control.ColumnSetting = schemaColumnAttribute;
-                    if (!prop.CanWrite)
-                        control.ColumnSetting.Editable = false;
+                    control.ColumnSetting.Filterable = false;
                 }
-
+                if (prop.GetCustomAttribute<UnsortableAttribute>() is UnsortableAttribute || prop.GetCustomAttribute<NotSortableAttribute>() is NotSortableAttribute)
+                {
+                    control.ColumnSetting.Sortable = false;
+                }
+                if (prop.GetCustomAttribute<NotEditableAttribute>() is NotEditableAttribute || !prop.CanWrite)
+                {
+                    control.ColumnSetting.Editable = false;
+                }
+                if (prop.GetCustomAttribute<NavigationExpressionAttribute>() is NavigationExpressionAttribute navigationExpression)
+                {
+                    control.ColumnSetting.NavigationExpression = navigationExpression.Expression;
+                }
                 control.Name = prop.Name;
             }
             return control;

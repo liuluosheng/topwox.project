@@ -13,7 +13,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Topwox.Data.Entitys;
 using Topwox.Data.Attributes.Shema;
 
-namespace Topwox.Data.Model
+namespace Topwox.Data.Shema
 {
 
     /// <summary>
