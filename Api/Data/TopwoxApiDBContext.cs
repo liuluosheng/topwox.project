@@ -25,8 +25,8 @@ namespace Topwox.WebService.Api
                     {
                         var columnName = "IsDeleted";
                         modelBuilder.Entity(type).Property<bool>(columnName);
-                        Expression<Func<ISoftDelete, bool>> expression = e => !e.IsDeleted;
-                        modelBuilder.Entity(type).HasQueryFilter(expression);
+                        var param = Expression.Parameter(type, "p");
+                        modelBuilder.Entity(type).HasQueryFilter(Expression.Lambda(Expression.NotEqual(Expression.Property(param, columnName), Expression.Constant(false)), param));
                     }
                 }
             }
