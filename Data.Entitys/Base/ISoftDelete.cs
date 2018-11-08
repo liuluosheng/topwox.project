@@ -7,9 +7,9 @@ namespace Topwox.Data.Entitys.Base
     /// <summary>
     /// 继承此接口实现软删除
     /// </summary>
-    public class ISoftDelete
+    public interface ISoftDelete
     {
-        public bool IsDeleted { get; set; }
+         bool IsDeleted { get; set; }
     }
 }
 

@@ -7,12 +7,13 @@ using System.Text;
 using Topwox.Data.Attributes;
 using Topwox.Data.Attributes.Shema;
 using Topwox.Data.Entitys;
+using Topwox.Data.Entitys.Base;
 
 namespace Topwox.Data.Entitys
 {
     [GeneratedOdataController]
     [Description("员工信息")]
-    public class Employees : EntityBase
+    public class Employees : EntityBase, ISoftDelete
     {
 
         [Display(Name = "姓名")]
@@ -53,5 +54,6 @@ namespace Topwox.Data.Entitys
         [Display(Name = "系统ID"), SchemaIgnore]
         public Guid? IdentityUserId { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
     }
 }
