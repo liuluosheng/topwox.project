@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Topwox.Data.Entitys;
 using Microsoft.EntityFrameworkCore;
 using Topwox.Core.Repository;
+using Topwox.Data.Entitys.Base;
 
 namespace Topwox.Core.Service
 {
@@ -25,7 +26,17 @@ namespace Topwox.Core.Service
 
         public async Task<int> Delete<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
         {
-            return await _repository.Delete<T>(predicate);
+            if (typeof(ISoftDelete).IsAssignableFrom(typeof(T)))
+            {
+                foreach (var item in _repository.Get(predicate))
+                {
+                    (item as ISoftDelete).IsDeleted = true;
+                    await Update(item, false);
+                }
+                return await _repository.Commit();
+            }
+            else
+                return await _repository.Delete(predicate);
         }
 
         public async Task<int> Delete(Expression<Func<TEntity, bool>> predicate)
@@ -56,7 +67,7 @@ namespace Topwox.Core.Service
             return await Create<TEntity>(entity, isCommit);
         }
 
-        public async Task<TEntity> Patch(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true) 
+        public async Task<TEntity> Patch(Guid id, JsonPatchDocument<TEntity> doc, bool isCommit = true)
         {
             var model = await Get(p => p.Id == id).FirstOrDefaultAsync();
             doc.ApplyTo(model, p => { });
